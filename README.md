@@ -11,3 +11,7 @@ the [authors'](http://di.uoa.gr/~pothitos)
 
 The journal paper should comply with IJAIT [typesetting
 instructions](http://worldscientific.com/sda/1037/ws-ijait.pdf).
+
+---
+
+An [Open Research](https://gist.github.com/pothitos/ec5f4f66ddd113aea6bac4094690d72e) work: Collaborators welcome :smile:
