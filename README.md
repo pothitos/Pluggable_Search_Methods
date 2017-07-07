@@ -8,3 +8,6 @@ the [authors'](http://di.uoa.gr/~pothitos)
 > Pie Search: Confidently exploiting heuristics. In _SETN
 > 2016_, pages 8:1–8:8, New York, 2016. ACM.
 > [[BibTeX](http://cgi.di.uoa.gr/~pothitos/papers/Pothitos2016-PoPS.bib)]
+
+The journal paper should comply with IJAIT [typesetting
+instructions](http://worldscientific.com/sda/1037/ws-ijait.pdf).
