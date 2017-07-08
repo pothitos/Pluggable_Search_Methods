@@ -7,4 +7,4 @@ addons:
       - texlive-full
 
 script:
-    - echo "Hello, world!"
+    - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
