@@ -1,4 +1,4 @@
-# Self-confident Heuristics in a Pluggable Search Methods Framework
+# Self-confident Heuristics in a Pluggable Search Methods Framework [![Build Status](https://travis-ci.org/pothitos/Pluggable_Search_Methods.svg?branch=master)](https://travis-ci.org/pothitos/Pluggable_Search_Methods)
 
 An  extended/revised version of the paper available through
 the [authors'](http://di.uoa.gr/~pothitos)
