@@ -1,0 +1,10 @@
+# This is used by Travis CI site in order
+# to produce a PDF file out of LaTeX.
+
+addons:
+  apt:
+    packages:
+      - texlive-full
+
+script:
+    - echo "Hello, world!"
