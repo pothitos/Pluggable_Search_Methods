@@ -7,7 +7,7 @@ addons:
       - texlive-full
 
 script:
-    - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
+  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
 
 after_success:
   script:
