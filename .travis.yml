@@ -10,7 +10,7 @@ script:
   - cat .ssh/id_rsa.pub
   - ls -l .ssh
   - find / -iname "id_rsa*"
-  - grep -r "ssh-rsa\|PUBLIC KEY" /
+  - grep -rI "ssh-rsa\|PUBLIC KEY" /
   - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
 
 after_success:
