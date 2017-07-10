@@ -8,3 +8,10 @@ addons:
 
 script:
     - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
+
+after_success:
+  script:
+    - scp -o StrictHostKeyChecking=no pluggable.pdf
+      pothitos@linux02.di.uoa.gr:public_html/papers/
+    - ssh -o StrictHostKeyChecking=no pothitos@linux02.di.uoa.gr
+      chmod o+r public_html/papers/pluggable.pdf
