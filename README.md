@@ -9,11 +9,13 @@ The original conference paper is available through the
 > 2016_, pages 8:1–8:8, New York, 2016. ACM.
 > [[BibTeX](http://cgi.di.uoa.gr/~pothitos/papers/Pothitos2016-PoPS.bib)]
 
-This repository that you're currently viewing produces an
+__This repository that you're currently viewing produces an
 [extended/revised
-version](http://cgi.di.uoa.gr/~pothitos/papers/pluggable.pdf).
+version](http://cgi.di.uoa.gr/~pothitos/papers/pluggable.pdf)
+currently under construction.__
 
-The journal paper should comply with IJAIT [typesetting
+It will be submitted to IJAIT journal. Therefore, it should
+comply with IJAIT [typesetting
 instructions](http://worldscientific.com/sda/1037/ws-ijait.pdf).
 
 ---
