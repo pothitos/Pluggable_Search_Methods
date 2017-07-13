@@ -1,0 +1,164 @@
+% GNUPLOT: LaTeX picture with Postscript
+\begingroup
+  \makeatletter
+  \providecommand\color[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package color not loaded in conjunction with
+      terminal option `colourtext'%
+    }{See the gnuplot documentation for explanation.%
+    }{Either use 'blacktext' in gnuplot or load the package
+      color.sty in LaTeX.}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\includegraphics[2][]{%
+    \GenericError{(gnuplot) \space\space\space\@spaces}{%
+      Package graphicx or graphics not loaded%
+    }{See the gnuplot documentation for explanation.%
+    }{The gnuplot epslatex terminal needs graphicx.sty or graphics.sty.}%
+    \renewcommand\includegraphics[2][]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \@ifundefined{ifGPcolor}{%
+    \newif\ifGPcolor
+    \GPcolortrue
+  }{}%
+  \@ifundefined{ifGPblacktext}{%
+    \newif\ifGPblacktext
+    \GPblacktexttrue
+  }{}%
+  % define a \g@addto@macro without @ in the name:
+  \let\gplgaddtomacro\g@addto@macro
+  % define empty templates for all commands taking text:
+  \gdef\gplbacktext{}%
+  \gdef\gplfronttext{}%
+  \makeatother
+  \ifGPblacktext
+    % no textcolor at all
+    \def\colorrgb#1{}%
+    \def\colorgray#1{}%
+  \else
+    % gray or color?
+    \ifGPcolor
+      \def\colorrgb#1{\color[rgb]{#1}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color[rgb]{1,0,0}}%
+      \expandafter\def\csname LT1\endcsname{\color[rgb]{0,1,0}}%
+      \expandafter\def\csname LT2\endcsname{\color[rgb]{0,0,1}}%
+      \expandafter\def\csname LT3\endcsname{\color[rgb]{1,0,1}}%
+      \expandafter\def\csname LT4\endcsname{\color[rgb]{0,1,1}}%
+      \expandafter\def\csname LT5\endcsname{\color[rgb]{1,1,0}}%
+      \expandafter\def\csname LT6\endcsname{\color[rgb]{0,0,0}}%
+      \expandafter\def\csname LT7\endcsname{\color[rgb]{1,0.3,0}}%
+      \expandafter\def\csname LT8\endcsname{\color[rgb]{0.5,0.5,0.5}}%
+    \else
+      % gray
+      \def\colorrgb#1{\color{black}}%
+      \def\colorgray#1{\color[gray]{#1}}%
+      \expandafter\def\csname LTw\endcsname{\color{white}}%
+      \expandafter\def\csname LTb\endcsname{\color{black}}%
+      \expandafter\def\csname LTa\endcsname{\color{black}}%
+      \expandafter\def\csname LT0\endcsname{\color{black}}%
+      \expandafter\def\csname LT1\endcsname{\color{black}}%
+      \expandafter\def\csname LT2\endcsname{\color{black}}%
+      \expandafter\def\csname LT3\endcsname{\color{black}}%
+      \expandafter\def\csname LT4\endcsname{\color{black}}%
+      \expandafter\def\csname LT5\endcsname{\color{black}}%
+      \expandafter\def\csname LT6\endcsname{\color{black}}%
+      \expandafter\def\csname LT7\endcsname{\color{black}}%
+      \expandafter\def\csname LT8\endcsname{\color{black}}%
+    \fi
+  \fi
+  \setlength{\unitlength}{0.0500bp}%
+  \begin{picture}(4750.00,4750.00)%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(660,3910){\makebox(0,0)[r]{\strut{}$\scriptstyle{280000}$}}%
+      \put(660,4150){\makebox(0,0)[r]{\strut{}$\scriptstyle{300000}$}}%
+      \put(660,4389){\makebox(0,0)[r]{\strut{}$\scriptstyle{320000}$}}%
+      \put(660,4629){\makebox(0,0)[r]{\strut{}$\scriptstyle{340000}$}}%
+      \put(792,3690){\makebox(0,0){\strut{}}}%
+      \put(1380,3690){\makebox(0,0){\strut{}}}%
+      \put(1969,3690){\makebox(0,0){\strut{}}}%
+      \put(2557,3690){\makebox(0,0){\strut{}}}%
+      \put(3146,3690){\makebox(0,0){\strut{}}}%
+      \put(3734,3690){\makebox(0,0){\strut{}}}%
+      \put(4323,3690){\makebox(0,0){\strut{}}}%
+      \put(3967,4204){\makebox(0,0)[l]{\strut{}\textsf{\scriptsize SCEN07}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(660,3100){\makebox(0,0)[r]{\strut{}$\scriptstyle{10000}$}}%
+      \put(660,3380){\makebox(0,0)[r]{\strut{}$\scriptstyle{11000}$}}%
+      \put(660,3659){\makebox(0,0)[r]{\strut{}$\scriptstyle{12000}$}}%
+      \put(792,2740){\makebox(0,0){\strut{}}}%
+      \put(1380,2740){\makebox(0,0){\strut{}}}%
+      \put(1969,2740){\makebox(0,0){\strut{}}}%
+      \put(2557,2740){\makebox(0,0){\strut{}}}%
+      \put(3146,2740){\makebox(0,0){\strut{}}}%
+      \put(3734,2740){\makebox(0,0){\strut{}}}%
+      \put(4323,2740){\makebox(0,0){\strut{}}}%
+      \put(3967,3212){\makebox(0,0)[l]{\strut{}\textsf{\scriptsize SCEN10}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(660,2010){\makebox(0,0)[r]{\strut{}$\scriptstyle{460}$}}%
+      \put(660,2220){\makebox(0,0)[r]{\strut{}$\scriptstyle{480}$}}%
+      \put(660,2430){\makebox(0,0)[r]{\strut{}$\scriptstyle{500}$}}%
+      \put(660,2639){\makebox(0,0)[r]{\strut{}$\scriptstyle{520}$}}%
+      \put(660,2849){\makebox(0,0)[r]{\strut{}$\scriptstyle{540}$}}%
+      \put(792,1790){\makebox(0,0){\strut{}}}%
+      \put(1380,1790){\makebox(0,0){\strut{}}}%
+      \put(1969,1790){\makebox(0,0){\strut{}}}%
+      \put(2557,1790){\makebox(0,0){\strut{}}}%
+      \put(3146,1790){\makebox(0,0){\strut{}}}%
+      \put(3734,1790){\makebox(0,0){\strut{}}}%
+      \put(4323,1790){\makebox(0,0){\strut{}}}%
+      \put(154,2429){\rotatebox{-270}{\makebox(0,0){\strut{}Solution Cost (thousands)}}}%
+      \put(3967,2346){\makebox(0,0)[l]{\strut{}\textsf{\scriptsize SCEN09}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(660,1200){\makebox(0,0)[r]{\strut{}$\scriptstyle{170}$}}%
+      \put(660,1480){\makebox(0,0)[r]{\strut{}$\scriptstyle{180}$}}%
+      \put(660,1760){\makebox(0,0)[r]{\strut{}$\scriptstyle{190}$}}%
+      \put(792,840){\makebox(0,0){\strut{}}}%
+      \put(1380,840){\makebox(0,0){\strut{}}}%
+      \put(1969,840){\makebox(0,0){\strut{}}}%
+      \put(2557,840){\makebox(0,0){\strut{}}}%
+      \put(3146,840){\makebox(0,0){\strut{}}}%
+      \put(3734,840){\makebox(0,0){\strut{}}}%
+      \put(4323,840){\makebox(0,0){\strut{}}}%
+      \put(3967,1354){\makebox(0,0)[l]{\strut{}\textsf{\scriptsize SCEN06}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplgaddtomacro\gplbacktext{%
+      \csname LTb\endcsname%
+      \put(660,568){\makebox(0,0)[r]{\strut{}$\scriptstyle{8.4}$}}%
+      \put(660,823){\makebox(0,0)[r]{\strut{}$\scriptstyle{8.6}$}}%
+      \put(792,220){\makebox(0,0){\strut{}$\scriptstyle{0}$}}%
+      \put(1380,220){\makebox(0,0){\strut{}$\scriptstyle{20}$}}%
+      \put(1969,220){\makebox(0,0){\strut{}$\scriptstyle{40}$}}%
+      \put(2557,220){\makebox(0,0){\strut{}$\scriptstyle{60}$}}%
+      \put(3146,220){\makebox(0,0){\strut{}$\scriptstyle{80}$}}%
+      \put(3734,220){\makebox(0,0){\strut{}$\scriptstyle{100}$}}%
+      \put(4323,220){\makebox(0,0){\strut{}$\scriptstyle{120}$}}%
+      \put(2704,-110){\makebox(0,0){\strut{}$\mathsf{conf}$}}%
+      \put(3967,823){\makebox(0,0)[l]{\strut{}\textsf{\scriptsize SCEN08}}}%
+    }%
+    \gplgaddtomacro\gplfronttext{%
+    }%
+    \gplbacktext
+    \put(0,0){\includegraphics{CELAR}}%
+    \gplfronttext
+  \end{picture}%
+\endgroup
