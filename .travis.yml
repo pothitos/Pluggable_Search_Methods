@@ -15,6 +15,7 @@ before_install:
   - chmod 600 key_for_uploading.pem
 
 script:
+  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" old.tex
   - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
 
 after_success:
