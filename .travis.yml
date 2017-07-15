@@ -6,18 +6,17 @@ addons:
     packages:
       - texlive-full
 
-# Decrypt private key for accessing web server
-before_install:
+script:
+  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
+
+after_success:
+  # Decrypt private key for accessing web server
   - openssl aes-256-cbc -K $encrypted_ee645c27a6fc_key
     -iv $encrypted_ee645c27a6fc_iv
     -in key_for_uploading.pem.enc
     -out key_for_uploading.pem -d
   - chmod 600 key_for_uploading.pem
-
-script:
-  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
-
-after_success:
+  # Upload to web server
   - scp -i key_for_uploading.pem -o StrictHostKeyChecking=no pluggable.pdf
     pothitos@linux02.di.uoa.gr:public_html/papers/
   - ssh -i key_for_uploading.pem -o StrictHostKeyChecking=no
