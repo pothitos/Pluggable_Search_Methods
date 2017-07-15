@@ -1,10 +1,20 @@
 \documentclass{ws-ijait}
 
+\graphicspath{{figures/}{figures/PoPS/}}
+\usepackage{algpseudocode}
+\usepackage{mathrsfs}
 \usepackage{mathabx}
+\usepackage{nicefrac}
+\usepackage[retainorgcmds]{IEEEtrantools}
 
 \usepackage{tikz}
+\usetikzlibrary{shadows,patterns}
 
-\newdef{problem}{Problem}
+%\theoremstyle{remark}
+\newtheorem{problem}{Problem}
+
+%\theoremstyle{remark}
+\newtheorem{property}{Property}
 
 % BibTeX Packages
 %\usepackage[super]{cite}
@@ -444,7 +454,6 @@ A direct derivation is that for $i = \max \equiv \arg\max_j h_j$, we have $\lim_
 %
 \item[2b.]
 Finally, the last prerequisite of Definition~\ref{balanced} involves $i \neq \max \Rightarrow h_i < h_{\max} \Rightarrow \frac{h_i}{h_{\max}} < 1$, which, combined with \eqref{final-limit}, gives $\lim_{\mathsf{conf} \to \infty}  P_\mathsf{conf} (i) = 0$, which had to be demonstrated.
-\qed
 \end{enumerate}
 \end{proof}
 The above function (in Lemma~\ref{exponential}) is balanced and it also moves smoothly from the random extreme to the deterministic one, because it is a \emph{continuous} function, with regard to $\mathsf{conf} \in \mathbb{R}^+$.
