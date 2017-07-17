@@ -59,18 +59,18 @@ Search is not a direct path to a solution. While searching for a solution to a p
 
 \section{Introduction}
 
-\emph{Artificial Intelligence} (AI) methodologies aim to tackle with difficult computational and real life problems, such as scheduling \cite{pinedo-scheduling}, radio frequency assignment \cite{radio-link}, other NP-hard problems, and also problems stemming from various disciplines, e.g.\ Bioinformatics \cite{bioinformatics}.
+\emph{Artificial Intelligence} (AI) methodologies aim to tackle with difficult computational and real life problems, such as scheduling,\cite{pinedo-scheduling} radio frequency assignment,\cite{radio-link} other NP-hard problems, and also problems stemming from various disciplines, e.g.\ Bioinformatics.\cite{bioinformatics}
 
 In these cases, naive algorithms have to explore the whole candidate solutions spectrum, in order to find a real solution. The issue here is that the candidate solution range is exponential in the problem instance parameters, and, as a consequence, an iteration through the candidate solutions becomes infeasible as the problem scales.
 
 \emph{Heuristics} role in this situation is to change the order of the candidate solutions, so as to favor the ``promising'' ones. In other words, heuristics make an estimation of the possibility of an incomplete or candidate solution being a real solution, and label it with a priority. A high priority means that the candidate solution should be examined soon.
 
-This reordering cannot make the search space tractable---this is most probably impossible \cite{p-np}---but it is able to dramatically decrease the time needed to guide a search method toward a real solution. In this direction, we study heuristic properties, such as reliability\slash confidence, and we propose a generic framework in order to exploit them by incorporating a randomness factor into them.
+This reordering cannot make the search space tractable---this is most probably impossible\cite{p-np}---but it is able to dramatically decrease the time needed to guide a search method toward a real solution. In this direction, we study heuristic properties, such as reliability\slash confidence, and we propose a generic framework in order to exploit them by incorporating a randomness factor into them.
 
 
 \section{Background and Related Work}
 
-We focus on \emph{constraint satisfaction problems} (CSPs) \cite{CSP} that can be faced via a plethora of available \emph{constraint programming} (CP) solvers \cite{eclipse,ilog}.
+We focus on \emph{constraint satisfaction problems} (CSPs)\cite{CSP} that can be faced via a plethora of available \emph{constraint programming} (CP) solvers.\cite{eclipse,ilog}
 
 
 \subsection{Constraint Satisfaction Problems}
@@ -81,12 +81,12 @@ In the attempt to find a solution to a CSP, we have to make assignments.
 \begin{definition}
 We say that a variable $X$ is \emph{assigned} a value $v \in D_X$, if its domain is made singleton, i.e.\ $D_X \leftsquigarrow \{v\}$.
 \end{definition}
-A \emph{solution} is an assignment that involves all variables and also satisfies all the constraints. The \emph{search} process leads a CSP after consecutive assignments into a solution. The strategic advantage of the overall paradigm is that the CSP description and search phases are independent \cite{grand-challenges}.
+A \emph{solution} is an assignment that involves all variables and also satisfies all the constraints. The \emph{search} process leads a CSP after consecutive assignments into a solution. The strategic advantage of the overall paradigm is that the CSP description and search phases are independent.\cite{grand-challenges}
 
 
 \subsection{Map-Coloring Problem}
 
-There exists a huge list of interesting CSPs \cite{CSPLib}. For example, \emph{map-coloring} is a CSP for assigning colors to each prefecture in a given map, so as no neighbouring prefectures have the same color. Figure~\ref{map-colored} illustrates a map of the Greek region ``Thessaly'', containing four prefectures; the colors in the figure form an indicative solution.
+There exists a huge list of interesting CSPs.\cite{CSPLib} For example, \emph{map-coloring} is a CSP for assigning colors to each prefecture in a given map, so as no neighbouring prefectures have the same color. Figure~\ref{map-colored} illustrates a map of the Greek region ``Thessaly'', containing four prefectures; the colors in the figure form an indicative solution.
 \begin{problem}
 \label{thessaly-coloring}
 Typically, \emph{``Thessaly-coloring''} is a CSP with:
@@ -251,21 +251,21 @@ In \emph{constructive search,} one can build a solution either with a determinis
 
 \subsubsection{Deterministic Search Methods\label{deterministic}}
 
-To our knowledge, existing search methods such as \emph{limited discrepancy search} (LDS) use heuristics only to \emph{order} the possible assignments and do not exploit the \emph{difference} of the one heuristic estimation to another, but only their \emph{rank}~\cite{lds}. For example, the \emph{iterative broadening} method explores only a limited children's number for each search tree node \cite{ibroad}. Of course, it chooses to visit only the children with the highest ranks. \emph{Credit search} \cite{dbs} and \emph{limited assignment number} (LAN) \cite{lan} are other deterministic methods that also take into account the rank of the heuristic estimations and not the heuristic values themselves.
+To our knowledge, existing search methods such as \emph{limited discrepancy search} (LDS) use heuristics only to \emph{order} the possible assignments and do not exploit the \emph{difference} of the one heuristic estimation to another, but only their \emph{rank}.\cite{lds} For example, the \emph{iterative broadening} method explores only a limited children's number for each search tree node.\cite{ibroad} Of course, it chooses to visit only the children with the highest ranks. \emph{Credit search}\cite{dbs} and \emph{limited assignment number} (LAN)\cite{lan} are other deterministic methods that also take into account the rank of the heuristic estimations and not the heuristic values themselves.
 
-Last but not least, there are also methods that make the assumption that \emph{the heuristic function is more reliable as the search tree node depth increases.} E.g., \emph{depth-bounded discrepancy search} (DDS) allows to override a heuristic estimation, only when we have not yet reached a specific search tree depth~\cite{dds}. Finally, there are some methodologies that take into account two or more heuristic functions and \emph{learn} as the search proceeds, which heuristic is the best to use~\cite{learn}.
+Last but not least, there are also methods that make the assumption that \emph{the heuristic function is more reliable as the search tree node depth increases.} E.g., \emph{depth-bounded discrepancy search} (DDS) allows to override a heuristic estimation, only when we have not yet reached a specific search tree depth.\cite{dds} Finally, there are some methodologies that take into account two or more heuristic functions and \emph{learn} as the search proceeds, which heuristic is the best to use.\cite{learn}
 
 
 \subsubsection{Random Search Methods\label{random}}
 
-On the other hand, stochastic search methods completely ignore heuristics, as they choose to make an assignment at random \cite{heuristics}. For example, \emph{depth first search with restarts} traverses the search tree making random choices, and when a specific time limit is reached, it re-starts from the beginning.
+On the other hand, stochastic search methods completely ignore heuristics, as they choose to make an assignment at random.\cite{heuristics} For example, \emph{depth first search with restarts} traverses the search tree making random choices, and when a specific time limit is reached, it re-starts from the beginning.
 
 
 \subsubsection{Heuristics and Probabilities}
 
-Thus, the well-known search methods either use heuristics as $\mathsf{Choices}$ ranks, or completely ignore them. In 1996, Bresina transformed the heuristic ranks into \emph{probabilities} via the so-called \emph{heuristic-biased stochastic sampling} (HBSS)~\cite{bresina-hbss}. He provided a set of various decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$ or $e^{-r}$ etc., that take a specific integer choice rank $r \in \{1, 2, \ldots\}$ and return a number that corresponds to the probability of the choice to be selected. Cicirello and Smith improved HBSS by introducing the \emph{value-biased stochastic sampling} (VBSS). The $\mathsf{bias}$ function now takes as argument the heuristic \emph{value} itself \cite{cicirello-vbss}.
+Thus, the well-known search methods either use heuristics as $\mathsf{Choices}$ ranks, or completely ignore them. In 1996, Bresina transformed the heuristic ranks into \emph{probabilities} via the so-called \emph{heuristic-biased stochastic sampling} (HBSS).\cite{bresina-hbss} He provided a set of various decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$ or $e^{-r}$ etc., that take a specific integer choice rank $r \in \{1, 2, \ldots\}$ and return a number that corresponds to the probability of the choice to be selected. Cicirello and Smith improved HBSS by introducing the \emph{value-biased stochastic sampling} (VBSS). The $\mathsf{bias}$ function now takes as argument the heuristic \emph{value} itself.\cite{cicirello-vbss}
 
-On the other hand, Gomes et al.\ exploit the so-called \emph{heuristic-equivalence} to equate the choices with the highest heuristic values. In this way, we can exclude the choices with the lower heuristic values and select at random amongst the choices with the most prevailing values \cite{equivalence}.
+On the other hand, Gomes et al.\ exploit the so-called \emph{heuristic-equivalence} to equate the choices with the highest heuristic values. In this way, we can exclude the choices with the lower heuristic values and select at random amongst the choices with the most prevailing values.\cite{equivalence}
 
 \begin{figure}
 \centering
@@ -388,7 +388,7 @@ Intuitively, $\mathsf{conf}$ is the link between random and deterministic search
 What happens for intermediate $\mathsf{conf}$ values? This depends on the precise parameterized heuristic distribution function instance. We define the following function that gently scales randomness.
 \begin{lemma}
 \label{exponential}
-The function $P_\mathsf{conf} (i) = \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}}$ is balanced.\footnote{For $\mathsf{conf} = 1$, the function $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the \emph{fitness proportionate selection} function---resembling a \emph{roulette wheel}---that is used in Genetic Algorithms \cite{roulette}.}
+The function $P_\mathsf{conf} (i) = \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}}$ is balanced.\footnote{For $\mathsf{conf} = 1$, the function $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the \emph{fitness proportionate selection} function---resembling a \emph{roulette wheel}---that is used in Genetic Algorithms.\cite{roulette}}
 \end{lemma}
 \begin{proof}
 We prove Definition~\ref{balanced} three requirements.
@@ -586,7 +586,7 @@ In this way, each $\mathsf{conf}_i$ is given the same opportunity (search space)
 
 \section{Empirical Evaluations}
 
-The gradual switch from randomness to determinism can boost search in demanding CSPs, such as course scheduling and the radio frequency assignment problems. With the help of our free constraint programming C++ library \textsc{Naxos Solver} \cite{naxos-solver}, we solved official instances of these problems for different heuristic distribution configurations.
+The gradual switch from randomness to determinism can boost search in demanding CSPs, such as course scheduling and the radio frequency assignment problems. With the help of our free constraint programming C++ library \textsc{Naxos Solver},\cite{naxos-solver} we solved official instances of these problems for different heuristic distribution configurations.
 
 The source code for our evaluations is freely available at \url{http://di.uoa.gr/~pothitos/PoPS} including the problem datasets. The experiments were conducted on an HP computer with an Intel dual-core E6750 processor clocked at 2.66\,GHz with 2\,GB of memory and a Xubuntu Linux 12.04 operating system.
 
@@ -612,9 +612,9 @@ For the following first three subsections, our $\mathsf{conf}$idence framework w
 
 \subsection{University Course Scheduling\label{ITC}}
 
-Automated timetabling is nowadays a crucial application, as many educational institutes still use ad hoc manual processes to schedule their courses. The International Time\-ta\-bl\-in\-g Competition (ITC) is an attempt to unify all these processes. We borrowed the fourteen instances of the latest contest track concerning \emph{universities} \cite{itc-agenda}.
+Automated timetabling is nowadays a crucial application, as many educational institutes still use ad hoc manual processes to schedule their courses. The International Time\-ta\-bl\-in\-g Competition (ITC) is an attempt to unify all these processes. We borrowed the fourteen instances of the latest contest track concerning \emph{universities}.\cite{itc-agenda}
 
-In these problems, we have to assign valid teaching periods and rooms to the curriculum lectures. The objective is to distribute them evenly during the week but without having gaps between them, if scheduled on the same day; each gap increases the solution cost \cite{pothitos-ictai2012}.
+In these problems, we have to assign valid teaching periods and rooms to the curriculum lectures. The objective is to distribute them evenly during the week but without having gaps between them, if scheduled on the same day; each gap increases the solution cost.\cite{pothitos-ictai2012}
 
 Due to ITC specifications, we had 333 seconds in our machine to solve each instance and minimize the solution cost as much as we could. Figures \ref{costsA} and \ref{costsB} display the minimum solution costs found per instance by \textsc{PopsSample} for various $\mathsf{conf}$ values. We observe that as $\mathsf{conf}$ increases the costs tend to a specific number, whilst for small $\mathsf{conf}$ values we have fluctuations because search becomes more random.
 
@@ -631,7 +631,7 @@ It is worth to mention that in Fig.~\ref{costsB} the only solution found for the
 
 Another important real problem is the frequency assignment, in which we have to assign a frequency to each radio transmitter with the objective to minimize the interference. The interference is minimized by assigning different frequencies to every two transmitters that are close to each other.
 
-The Centre Electronique de l'Armement (CELAR) provides a set of real datasets for this NP-hard problem \cite{radio-link}. We chose to solve the five so-called ``MAX'' problem instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in which, generally speaking, we try to maximize the number of the satisfied soft constraints.
+The Centre Electronique de l'Armement (CELAR) provides a set of real datasets for this NP-hard problem.\cite{radio-link} We chose to solve the five so-called ``MAX'' problem instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in which, generally speaking, we try to maximize the number of the satisfied soft constraints.
 
 For each of these instances, we had 15 minutes to explore the search space. We recorded the best (lowest) solution costs found so far in Fig.~\ref{CELAR} for several $\mathsf{conf}$ values. Approximately the same as in course scheduling, the lowest solution costs occur around $\mathsf{conf} \approx 10$, which gives better results on average than the marginal $\mathsf{conf}$ values.
 
@@ -740,7 +740,7 @@ In future, it will be challenging to parallelize it, as it supports a whole grid
 
 \section*{Acknowledgments}
 
-We want to thank Foivos Theocharis who initially built the search methods library \textsc{Amorgos}, which is available together with \textsc{Naxos} \cite{naxos-solver}.
+We want to thank Foivos Theocharis who initially built the search methods library \textsc{Amorgos}, which is available together with \textsc{Naxos}.\cite{naxos-solver}
 
 \bibliographystyle{ws-ijait}
 \bibliography{bibliography}
