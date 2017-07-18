@@ -121,7 +121,6 @@ We focus on \emph{constraint satisfaction problems}
 available \emph{constraint programming} (CP)
 solvers.\cite{eclipse,ilog}
 
-
 \subsection{Constraint Satisfaction Problems}
 
 Every single CSP can be stated using commonplace
@@ -147,7 +146,6 @@ variables and also satisfies all the constraints. The
 assignments into a solution. The strategic advantage of the
 overall paradigm is that the CSP description and search
 phases are independent.\cite{grand-challenges}
-
 
 \subsection{Map-Coloring Problem}
 
@@ -192,7 +190,6 @@ assignment
   \caption{The four Thessaly prefectures\label{map-colored}}
 \end{figure}
 
-
 \subsection{Search Tree Exploration}
 
 A \emph{search tree} is a descriptive way to depict every
@@ -207,7 +204,6 @@ ends up into a leaf (lowest node), we have a \emph{complete}
 assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
 is an alternative form of the solution assignment in
 \eqref{solution}.
-
 
 \subsection{Heuristic Estimation as a Real Number}
 
@@ -357,11 +353,9 @@ solution or not. Being a prediction, it implies an inherent
 \caption{The search tree for Thessaly-coloring\label{pruned-tree}}
 \end{figure}
 
-
 \subsection{Heuristics Exploitation in Related Work}
 
 In \emph{constructive search,} one can build a solution either with a deterministic\slash systematic search method, or by making one-by-one random assignments. Do these methods exploit heuristics and how?
-
 
 \subsubsection{Deterministic Search Methods\label{deterministic}}
 
@@ -369,11 +363,9 @@ To our knowledge, existing search methods such as \emph{limited discrepancy sear
 
 Last but not least, there are also methods that make the assumption that \emph{the heuristic function is more reliable as the search tree node depth increases.} E.g., \emph{depth-bounded discrepancy search} (DDS) allows to override a heuristic estimation, only when we have not yet reached a specific search tree depth.\cite{dds} Finally, there are some methodologies that take into account two or more heuristic functions and \emph{learn} as the search proceeds, which heuristic is the best to use.\cite{learn}
 
-
 \subsubsection{Random Search Methods\label{random}}
 
 On the other hand, stochastic search methods completely ignore heuristics, as they choose to make an assignment at random.\cite{heuristics} For example, \emph{depth first search with restarts} traverses the search tree making random choices, and when a specific time limit is reached, it re-starts from the beginning.
-
 
 \subsubsection{Heuristics and Probabilities}
 
@@ -410,7 +402,6 @@ On the other hand, Gomes et al.\ exploit the so-called \emph{heuristic-equivalen
 
 Our contribution lies in the mathematical foundation of a framework that covers the above heuristic categories. In contrast to existing methodologies, we leverage on the \emph{smooth} transition from the total randomness to determinism.
 
-
 %\subsection{Heuristics Linearization}
 %
 %In order to assign a probability to a specific choice, its heuristic estimation must be a real number. This is not always the case, because in general, heuristics are vectors of positive real numbers.
@@ -438,7 +429,6 @@ Our contribution lies in the mathematical foundation of a framework that covers 
 %It can be proven that $\mathbf{h_1}$ is stronger than $\mathbf{h_2}$, iff $\mathsf{linear} (\mathbf{h_1}) > \mathsf{linear} (\mathbf{h_2})$.
 %\end{proposition}
 %Having transformed heuristic vectors into plain real numbers, we can now use them as probabilities.
-
 
 \subsection{Heuristics Probabilistic Foundations}
 
@@ -471,7 +461,6 @@ Formally, in deterministic search methods, if $i = \arg\max_j h_j$, then $P(i) =
 The greatest heuristic value in Example~\ref{distribution} is $h_2 = 5$. Hence, a deterministic search method would select $v_2$ with a certain probability $P(v_2) = 1$. Consequently, the rest of the probabilities are zero, as in Fig.~\ref{systematic}.
 \end{example}
 If there is more than one maximum heuristic value, deterministic methods arbitrarily concern only one of them as maximum. To simplify the following equations we will make the assumption that there is only one maximum. Without loss of generality, we also assume that heuristic values are non-zero.
-
 
 \subsection{Bridging the Two Opposites}
 
@@ -572,7 +561,6 @@ Hence, the overall function is a transition from the total randomness to the alm
 
 The probabilistic framework founded in the previous section, naturally complies with existing search methods; it affects only the heuristic function and not the methods themselves. But in order to fully exploit the introduced heuristics framework, we built the new constructive search method \emph{Piece of Pie Search} (\textsc{PoPS}).
 
-
 \subsection{The Algorithm Core}
 
 Figure~\ref{PopsSample} describes \textsc{PopsSample}, which is the \textsc{PoPS} core. It is called inside \textsc{PoPS} in order to solve a CSP by providing a complete and valid $\mathsf{Assignments}$ set, which is initially empty.
@@ -651,7 +639,6 @@ The exponent in the heuristic values has to do with the $\mathsf{conf}$idence se
 \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}}) Method\label{pops}}
 \end{figure}
 
-
 \subsection{Heuristic Confidence vs.\ Node Level}
 
 An important detail in \textsc{PopsSample} appearing in Fig.~\ref{PopsSample}, is the increase in $\mathsf{conf}$ as the current search tree node level deepens.
@@ -662,13 +649,11 @@ Each subsequent recursive call deepens search by $1$, until the current depth re
 
 In the deepest node levels, heuristics are usually more accurate, because even more variables have been instantiated and we have a clearer picture of the problem. In our framework, more accuracy means more confidence, that's why we increase $\mathsf{conf}$ as the search method proceeds with the assignments.
 
-
 %\subsection{Computation of the Covered Piece of Pie}
 %
 %A special detail is that in each iteration, $\frac{h_{X \gets \mathsf{value}}}{\sum_{v \in D_X} h_{X \gets v}}$ is added to the existing $\mathsf{CoveredPiece}$, multiplied by a factor $1.0 - \mathsf{CoveredPiece}$. Why is this factor needed?
 %
 %After each iteration, $D_X$ is shrunk, so the $\sum_{v \in D_X} h_{X \gets v}$ is altered. The \emph{initial} $D_X$ refers to the complete pie $1.0$, whilst the \emph{current} $D_X$ refers to the \emph{remaining} proportion of the overall piece, which is $1.0 - \mathsf{CoveredPiece}$.
-
 
 \newcommand{\PoPS}{\textbf{\large P\normalsize O\large PS}}
 \newcommand{\PopsSample}{\textbf{\large P\normalsize OPS\large S\normalsize AMPLE}}
@@ -687,7 +672,6 @@ Thus, to reach the pie proportion $A = \mathsf{PieceToCover} \cdot \sum_{v \in D
 The total time needed is $T_1 = \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_2$, where $T_2$ is the time for the \textsc{PopsSample} call \emph{inside} the loop. It also holds that $T_2 = \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_3$, etc., and finally $T_n = \mathcal{O}(\mathsf{PieceToCover} \cdot d)$. In conclusion, the aggregate complexity is $\mathcal{O}(\mathsf{PieceToCover}^n \cdot d^n)$ for the initial call.
 \end{proof}
 We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$ is equivalent to a complete search space exploration, which has an $\mathcal{O}(d^n)$ time complexity.
-
 
 \subsection{The Motivation Behind \PoPS\label{sampling}}
 
@@ -723,7 +707,6 @@ For the following first three subsections, our $\mathsf{conf}$idence framework w
 \caption{Solutions for the rest of the ITC instances\label{costsB}}
 \end{figure}
 
-
 \subsection{University Course Scheduling\label{ITC}}
 
 Automated timetabling is nowadays a crucial application, as many educational institutes still use ad hoc manual processes to schedule their courses. The International Time\-ta\-bl\-in\-g Competition (ITC) is an attempt to unify all these processes. We borrowed the fourteen instances of the latest contest track concerning \emph{universities}.\cite{itc-agenda}
@@ -740,7 +723,6 @@ In practice, as shown in Fig.\ \ref{costsA} and \ref{costsB}, a $\mathsf{conf}$ 
 
 It is worth to mention that in Fig.~\ref{costsB} the only solution found for the \textsf{Let0405-1} instance, depicted with an asterisk~\textcolor{blue}{$*$}, was for $\mathsf{conf} = 10$.
 
-
 \subsection{Radio Link Frequency Assignment}
 
 Another important real problem is the frequency assignment, in which we have to assign a frequency to each radio transmitter with the objective to minimize the interference. The interference is minimized by assigning different frequencies to every two transmitters that are close to each other.
@@ -754,7 +736,6 @@ For each of these instances, we had 15 minutes to explore the search space. We r
 \input{figures/CELAR}
 \caption{Unsatisfied soft constraints increase cost\label{CELAR}}
 \end{figure}
-
 
 \subsection{\PopsSample{} during Hard Optimization\label{PoPS}}
 
@@ -771,7 +752,6 @@ In order to solve the first university course timetabling instance (\textsf{Fis0
 In the same graphs we include some of the well-known search methods results, such as DFS, LDS, and Iterative Broadening, implementesd in the same solver, with only their best solution cost depicted as a plane grid, in order to make comparisons easily.
 
 %In the first two instances, \textsc{PoPS} outperforms the other systematic search methods. In the third instance \textsc{PoPS} comes second to DBS, but approximates it; generally speaking, with regard to the rest of the instances, the best parameters for \textsc{PoPS} are inside the area around the spot $(\mathsf{PieceToCover}, \mathsf{conf}) = (60, 0.4)$.
-
 
 \subsection{\PoPS{} vs.\ Other Search Methods}
 
