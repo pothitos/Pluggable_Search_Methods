@@ -25,7 +25,8 @@
 \begin{document}
 
 \markboth{Nikolaos Pothitos and Panagiotis Stamatopoulos}
-{Self-confident Heuristics in a Pluggable Search Methods Framework}
+{Self-confident Heuristics in a Pluggable Search Methods
+ Framework}
 
 %%%%%%%%%%%%%%%%%%%%% Publisher's Area please ignore %%%%%%%%%%%%%%%
 %
@@ -33,14 +34,15 @@
 %
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\title{Self-confident Heuristics in a Pluggable Search Methods Framework}
+\title{Self-confident Heuristics in a Pluggable Search
+       Methods Framework}
 
 \author{Nikolaos Pothitos \and Panagiotis Stamatopoulos}
 
-\address{Department of Informatics and Telecommunications\\
-National and Kapodistrian University of Athens\\
-Panepistimiopolis, 157\,84 Athens, Greece\\
-\{pothitos,takis\}@di.uoa.gr}
+\address{Department of Informatics and Telecommunications \\
+         National and Kapodistrian University of Athens \\
+         Panepistimiopolis, 157\,84 Athens, Greece \\
+         \{pothitos,takis\}@di.uoa.gr}
 
 \maketitle
 
@@ -53,42 +55,108 @@ Panepistimiopolis, 157\,84 Athens, Greece\\
 
 % Abstract should be less than 200 words
 \begin{abstract}
-Search is not a direct path to a solution. While searching for a solution to a problem, \emph{heuristics} consult us to avoid paths with dead ends, but they are not infallible. Many popular search methodologies ``disobey'' them during critical points of the search. In this work, we found an efficient stochastic methods framework that smoothly combines randomness with normal heuristics. We consider a factor of disobedience to the heuristics and we fine-tune it each time, according to our estimation of heuristic-reliability. We prove mathematically that while the disobedience factor falls, the stochastic methods approximate deterministic methods. Our algebraic evidence is supported by empirical evaluations on real life problems, such as course scheduling and frequency assignment. In this context, we exploit our proposed heuristic-reliability semantics in order to produce a \emph{piece of pie search} (\textsc{PoPS}) method that can outperform other known constructive search processes in hard optimization problems.
+Search is not a direct path to a solution. While searching
+for a solution to a problem, \emph{heuristics} consult us to
+avoid paths with dead ends, but they are not infallible.
+Many popular search methodologies ``disobey'' them during
+critical points of the search. In this work, we found an
+efficient stochastic methods framework that smoothly
+combines randomness with normal heuristics. We consider a
+factor of disobedience to the heuristics and we fine-tune it
+each time, according to our estimation of
+heuristic-reliability. We prove mathematically that while
+the disobedience factor falls, the stochastic methods
+approximate deterministic methods. Our algebraic evidence is
+supported by empirical evaluations on real life problems,
+such as course scheduling and frequency assignment. In this
+context, we exploit our proposed heuristic-reliability
+semantics in order to produce a \emph{piece of pie search}
+(\textsc{PoPS}) method that can outperform other known
+constructive search processes in hard optimization problems.
 \end{abstract}
 
-\keywords{Randomness; stochastic methods; discrepancy; constructive search; confidence; CSP.}
+\keywords{Randomness; stochastic methods; discrepancy;
+          constructive search; confidence; CSP.}
 
 
 \section{Introduction}
 
-\emph{Artificial Intelligence} (AI) methodologies aim to tackle with difficult computational and real life problems, such as scheduling,\cite{pinedo-scheduling} radio frequency assignment,\cite{radio-link} other NP-hard problems, and also problems stemming from various disciplines, e.g.\ Bioinformatics.\cite{bioinformatics}
+\emph{Artificial Intelligence} (AI) methodologies aim to
+tackle with difficult computational and real life problems,
+such as scheduling,\cite{pinedo-scheduling} radio frequency
+assignment,\cite{radio-link} other NP-hard problems, and
+also problems stemming from various disciplines, e.g.\ 
+Bioinformatics.\cite{bioinformatics}
 
-In these cases, naive algorithms have to explore the whole candidate solutions spectrum, in order to find a real solution. The issue here is that the candidate solution range is exponential in the problem instance parameters, and, as a consequence, an iteration through the candidate solutions becomes infeasible as the problem scales.
+In these cases, naive algorithms have to explore the whole
+candidate solutions spectrum, in order to find a real
+solution. The issue here is that the candidate solution
+range is exponential in the problem instance parameters,
+and, as a consequence, an iteration through the candidate
+solutions becomes infeasible as the problem scales.
 
-\emph{Heuristics} role in this situation is to change the order of the candidate solutions, so as to favor the ``promising'' ones. In other words, heuristics make an estimation of the possibility of an incomplete or candidate solution being a real solution, and label it with a priority. A high priority means that the candidate solution should be examined soon.
+\emph{Heuristics} role in this situation is to change the
+order of the candidate solutions, so as to favor the
+``promising'' ones. In other words, heuristics make an
+estimation of the possibility of an incomplete or candidate
+solution being a real solution, and label it with a
+priority. A high priority means that the candidate solution
+should be examined soon.
 
-This reordering cannot make the search space tractable---this is most probably impossible\cite{p-np}---but it is able to dramatically decrease the time needed to guide a search method toward a real solution. In this direction, we study heuristic properties, such as reliability\slash confidence, and we propose a generic framework in order to exploit them by incorporating a randomness factor into them.
+This reordering cannot make the search space
+tractable---this is most probably
+impossible\cite{p-np}---but it is able to dramatically
+decrease the time needed to guide a search method toward a
+real solution. In this direction, we study heuristic
+properties, such as reliability\slash confidence, and we
+propose a generic framework in order to exploit them by
+incorporating a randomness factor into them.
 
 
 \section{Background and Related Work}
 
-We focus on \emph{constraint satisfaction problems} (CSPs)\cite{CSP} that can be faced via a plethora of available \emph{constraint programming} (CP) solvers.\cite{eclipse,ilog}
+We focus on \emph{constraint satisfaction problems}
+(CSPs)\cite{CSP} that can be faced via a plethora of
+available \emph{constraint programming} (CP)
+solvers.\cite{eclipse,ilog}
 
 
 \subsection{Constraint Satisfaction Problems}
 
-Every single CSP can be stated using commonplace formalizations. It is a triplet of (i) \emph{variables} $X_1, \ldots, X_n$, (ii) their corresponding \emph{domains} $D_{X_1}, \ldots, D_{X_n}$, which are ordinarily finite sets of integers, and (iii) the \emph{constraints} between variables; a constraint contains the tuples of all the valid assignments for a specific pair\slash set of variables. To put it differently, a constraint is a relation between the variables, such as $X_1 < X_2$.
+Every single CSP can be stated using commonplace
+formalizations. It is a triplet of (i) \emph{variables}
+$X_1, \ldots, X_n$, (ii) their corresponding \emph{domains}
+$D_{X_1}, \ldots, D_{X_n}$, which are ordinarily finite sets
+of integers, and (iii) the \emph{constraints} between
+variables; a constraint contains the tuples of all the valid
+assignments for a specific pair\slash set of variables. To
+put it differently, a constraint is a relation between the
+variables, such as $X_1 < X_2$.
 
-In the attempt to find a solution to a CSP, we have to make assignments.
+In the attempt to find a solution to a CSP, we have to make
+assignments.
 \begin{definition}
-We say that a variable $X$ is \emph{assigned} a value $v \in D_X$, if its domain is made singleton, i.e.\ $D_X \leftsquigarrow \{v\}$.
+We say that a variable $X$ is \emph{assigned} a value $v \in
+D_X$, if its domain is made singleton, i.e.\ $D_X
+\leftsquigarrow \{v\}$.
 \end{definition}
-A \emph{solution} is an assignment that involves all variables and also satisfies all the constraints. The \emph{search} process leads a CSP after consecutive assignments into a solution. The strategic advantage of the overall paradigm is that the CSP description and search phases are independent.\cite{grand-challenges}
+A \emph{solution} is an assignment that involves all
+variables and also satisfies all the constraints. The
+\emph{search} process leads a CSP after consecutive
+assignments into a solution. The strategic advantage of the
+overall paradigm is that the CSP description and search
+phases are independent.\cite{grand-challenges}
 
 
 \subsection{Map-Coloring Problem}
 
-There exists a huge list of interesting CSPs.\cite{CSPLib} For example, \emph{map-coloring} is a CSP for assigning colors to each prefecture in a given map, so as no neighbouring prefectures have the same color. Figure~\ref{map-colored} illustrates a map of the Greek region ``Thessaly'', containing four prefectures; the colors in the figure form an indicative solution.
+There exists a huge list of interesting CSPs.\cite{CSPLib}
+For example, \emph{map-coloring} is a CSP for assigning
+colors to each prefecture in a given map, so as no
+neighbouring prefectures have the same color.
+Figure~\ref{map-colored} illustrates a map of the Greek
+region ``Thessaly'', containing four prefectures; the colors
+in the figure form an indicative solution.
 \begin{problem}
 \label{thessaly-coloring}
 Typically, \emph{``Thessaly-coloring''} is a CSP with:
