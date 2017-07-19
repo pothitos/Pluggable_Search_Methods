@@ -365,28 +365,76 @@ solution or not. Being a prediction, it implies an inherent
     (GBG)   edge [pruned]  (GBGB)
     ;
 \end{tikzpicture}
-\caption{The search tree for Thessaly-coloring\label{pruned-tree}}
+\caption{The search tree for
+         Thessaly-coloring\label{pruned-tree}}
 \end{figure}
 
 \subsection{Heuristics exploitation in related work}
 
-In \emph{constructive search,} one can build a solution either with a deterministic\slash systematic search method, or by making one-by-one random assignments. Do these methods exploit heuristics and how?
+In \emph{constructive search,} one can build a solution
+either with a deterministic\slash systematic search method,
+or by making one-by-one random assignments. Do these methods
+exploit heuristics and how?
 
-\subsubsection{Deterministic search methods\label{deterministic}}
+\subsubsection{Deterministic search
+               methods\label{deterministic}}
 
-To our knowledge, existing search methods such as \emph{limited discrepancy search} (LDS) use heuristics only to \emph{order} the possible assignments and do not exploit the \emph{difference} of the one heuristic estimation to another, but only their \emph{rank}.\cite{lds} For example, the \emph{iterative broadening} method explores only a limited children's number for each search tree node.\cite{ibroad} Of course, it chooses to visit only the children with the highest ranks. \emph{Credit search}\cite{dbs} and \emph{limited assignment number} (LAN)\cite{lan} are other deterministic methods that also take into account the rank of the heuristic estimations and not the heuristic values themselves.
+To our knowledge, existing search methods such as
+\emph{limited discrepancy search} (LDS) use heuristics only
+to \emph{order} the possible assignments and do not exploit
+the \emph{difference} of the one heuristic estimation to
+another, but only their \emph{rank}.\cite{lds} For example,
+the \emph{iterative broadening} method explores only a
+limited children's number for each search tree
+node.\cite{ibroad} Of course, it chooses to visit only the
+children with the highest ranks. \emph{Credit
+search}\cite{dbs} and \emph{limited assignment number}
+(LAN)\cite{lan} are other deterministic methods that also
+take into account the rank of the heuristic estimations and
+not the heuristic values themselves.
 
-Last but not least, there are also methods that make the assumption that \emph{the heuristic function is more reliable as the search tree node depth increases.} E.g., \emph{depth-bounded discrepancy search} (DDS) allows to override a heuristic estimation, only when we have not yet reached a specific search tree depth.\cite{dds} Finally, there are some methodologies that take into account two or more heuristic functions and \emph{learn} as the search proceeds, which heuristic is the best to use.\cite{learn}
+Last but not least, there are also methods that make the
+assumption that \emph{the heuristic function is more
+reliable as the search tree node depth increases.} E.g.,
+\emph{depth-bounded discrepancy search} (DDS) allows to
+override a heuristic estimation, only when we have not yet
+reached a specific search tree depth.\cite{dds} Finally,
+there are some methodologies that take into account two or
+more heuristic functions and \emph{learn} as the search
+proceeds, which heuristic is the best to use.\cite{learn}
 
 \subsubsection{Random search methods\label{random}}
 
-On the other hand, stochastic search methods completely ignore heuristics, as they choose to make an assignment at random.\cite{heuristics} For example, \emph{depth first search with restarts} traverses the search tree making random choices, and when a specific time limit is reached, it re-starts from the beginning.
+On the other hand, stochastic search methods completely
+ignore heuristics, as they choose to make an assignment at
+random.\cite{heuristics} For example, \emph{depth first
+search with restarts} traverses the search tree making
+random choices, and when a specific time limit is reached,
+it re-starts from the beginning.
 
 \subsubsection{Heuristics and probabilities}
 
-Thus, the well-known search methods either use heuristics as $\mathsf{Choices}$ ranks, or completely ignore them. In 1996, Bresina transformed the heuristic ranks into \emph{probabilities} via the so-called \emph{heuristic-biased stochastic sampling} (HBSS).\cite{bresina-hbss} He provided a set of various decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$ or $e^{-r}$ etc., that take a specific integer choice rank $r \in \{1, 2, \ldots\}$ and return a number that corresponds to the probability of the choice to be selected. Cicirello and Smith improved HBSS by introducing the \emph{value-biased stochastic sampling} (VBSS). The $\mathsf{bias}$ function now takes as argument the heuristic \emph{value} itself.\cite{cicirello-vbss}
+Thus, the well-known search methods either use heuristics as
+$\mathsf{Choices}$ ranks, or completely ignore them. In
+1996, Bresina transformed the heuristic ranks into
+\emph{probabilities} via the so-called
+\emph{heuristic-biased stochastic sampling}
+(HBSS).\cite{bresina-hbss} He provided a set of various
+decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$
+or $e^{-r}$ etc., that take a specific integer choice rank
+$r \in \{1, 2, \ldots\}$ and return a number that
+corresponds to the probability of the choice to be selected.
+Cicirello and Smith improved HBSS by introducing the
+\emph{value-biased stochastic sampling} (VBSS). The
+$\mathsf{bias}$ function now takes as argument the heuristic
+\emph{value} itself.\cite{cicirello-vbss}
 
-On the other hand, Gomes et al.\ exploit the so-called \emph{heuristic-equivalence} to equate the choices with the highest heuristic values. In this way, we can exclude the choices with the lower heuristic values and select at random amongst the choices with the most prevailing values.\cite{equivalence}
+On the other hand, Gomes et al.\ exploit the so-called
+\emph{heuristic-equivalence} to equate the choices with the
+highest heuristic values. In this way, we can exclude the
+choices with the lower heuristic values and select at random
+amongst the choices with the most prevailing
+values.\cite{equivalence}
 
 \begin{figure}
 \centering
