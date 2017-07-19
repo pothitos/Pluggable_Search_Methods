@@ -172,19 +172,20 @@ in the figure form an indicative solution.
   \label{thessaly-coloring}
   Typically, \emph{``Thessaly-coloring''} is a CSP with:
   \begin{enumerate}
-    \item Four constrained variables: $X_1$, $X_2$, $X_3$,
-          $X_4$. Each one of them designates the prefecture
-          color.
-    \item The corresponding domains are $D_{X_1} = D_{X_3} =
-          \{1,2\}$ and $D_{X_2} = D_{X_4} = \{1,3\}$.
-          Numbers \textcolor{red}{$1$}
-          \textcolor{green}{$2$} \textcolor{blue}{$3$}
-          represent respectively red, green,
-          blue.\footnote{We could initially set all the
-          domains equal to $\{1, 2, 3\}$. We used smaller
-          initial domains just to simplify the problem.}
-    \item The constraints are $X_1 \neq X_2$, $X_1 \neq
-          X_3$, $X_2 \neq X_3$, and $X_2 \neq X_4$.
+    \item[1.] Four constrained variables: $X_1$, $X_2$,
+              $X_3$, $X_4$. Each one of them designates the
+              prefecture color.
+    \item[2.] The corresponding domains are $D_{X_1} =
+              D_{X_3} = \{1,2\}$ and $D_{X_2} = D_{X_4} =
+              \{1,3\}$. Numbers \textcolor{red}{$1$}
+              \textcolor{green}{$2$} \textcolor{blue}{$3$}
+              represent respectively red, green,
+              blue.\footnote{We could initially set all the
+              domains equal to $\{1, 2, 3\}$. We used
+              smaller initial domains just to simplify the
+              problem.}
+    \item[3.] The constraints are $X_1 \neq X_2$, $X_1 \neq
+              X_3$, $X_2 \neq X_3$, and $X_2 \neq X_4$.
   \end{enumerate}
 \end{problem}
 The solution in Fig.~\ref{map-colored} is represented by the
@@ -481,7 +482,7 @@ We extend our previous formulation of the heuristic distribution function (Defin
 \label{balanced}
 A parameterized heuristic distribution function $P_\mathsf{conf} (i)$ is \emph{balanced} if and only if:
 \begin{enumerate}
-\item
+\item[1.]
 $\forall \, i$,
 ${\displaystyle \lim_{\mathsf{conf} \to 0} }  \!\!
 P_\mathsf{conf} (i) = \frac{1}{|\mathsf{Choices}|}$, and
@@ -508,7 +509,7 @@ The function $P_\mathsf{conf} (i) = \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{
 \begin{proof}
 We prove Definition~\ref{balanced} three requirements.
 \begin{enumerate}
-\item
+\item[1.]
 ${\displaystyle \lim_{\mathsf{conf} \to 0} }  \!\!  P_\mathsf{conf} (i) =
 \frac{h_i^0}{\sum\limits_{j \in \mathsf{Choices}} \!\!\!\! h_j^0} =
 \frac{1}{\sum\limits_{j \in \mathsf{Choices}} \!\!\!\!\! 1} =
