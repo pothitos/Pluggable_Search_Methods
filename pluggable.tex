@@ -133,7 +133,7 @@ We focus on \emph{constraint satisfaction problems}
 available \emph{constraint programming} (CP)
 solvers.\cite{eclipse,ilog}
 
-\subsection{Constraint Satisfaction Problems}
+\subsection{Constraint satisfaction problems}
 
 Every single CSP can be stated using commonplace
 formalizations. It is a triplet of (i) \emph{variables}
@@ -159,7 +159,7 @@ assignments into a solution. The strategic advantage of the
 overall paradigm is that the CSP description and search
 phases are independent.\cite{grand-challenges}
 
-\subsection{Map-Coloring Problem}
+\subsection{Map-coloring problem}
 
 There exists a huge list of interesting CSPs.\cite{CSPLib}
 For example, \emph{map-coloring} is a CSP for assigning
@@ -202,7 +202,7 @@ assignment
   \caption{The four Thessaly prefectures\label{map-colored}}
 \end{figure}
 
-\subsection{Search Tree Exploration}
+\subsection{Search tree exploration}
 
 A \emph{search tree} is a descriptive way to depict every
 possible assignment in a CSP, such as map-coloring.
@@ -217,7 +217,7 @@ assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
 is an alternative form of the solution assignment in
 \eqref{solution}.
 
-\subsection{Heuristic Estimation as a Real Number}
+\subsection{Heuristic estimation as a real number}
 
 A heuristic function maps every possible choice in the
 search tree to a number that corresponds to the estimation
@@ -365,21 +365,21 @@ solution or not. Being a prediction, it implies an inherent
 \caption{The search tree for Thessaly-coloring\label{pruned-tree}}
 \end{figure}
 
-\subsection{Heuristics Exploitation in Related Work}
+\subsection{Heuristics exploitation in related work}
 
 In \emph{constructive search,} one can build a solution either with a deterministic\slash systematic search method, or by making one-by-one random assignments. Do these methods exploit heuristics and how?
 
-\subsubsection{Deterministic Search Methods\label{deterministic}}
+\subsubsection{Deterministic search methods\label{deterministic}}
 
 To our knowledge, existing search methods such as \emph{limited discrepancy search} (LDS) use heuristics only to \emph{order} the possible assignments and do not exploit the \emph{difference} of the one heuristic estimation to another, but only their \emph{rank}.\cite{lds} For example, the \emph{iterative broadening} method explores only a limited children's number for each search tree node.\cite{ibroad} Of course, it chooses to visit only the children with the highest ranks. \emph{Credit search}\cite{dbs} and \emph{limited assignment number} (LAN)\cite{lan} are other deterministic methods that also take into account the rank of the heuristic estimations and not the heuristic values themselves.
 
 Last but not least, there are also methods that make the assumption that \emph{the heuristic function is more reliable as the search tree node depth increases.} E.g., \emph{depth-bounded discrepancy search} (DDS) allows to override a heuristic estimation, only when we have not yet reached a specific search tree depth.\cite{dds} Finally, there are some methodologies that take into account two or more heuristic functions and \emph{learn} as the search proceeds, which heuristic is the best to use.\cite{learn}
 
-\subsubsection{Random Search Methods\label{random}}
+\subsubsection{Random search methods\label{random}}
 
 On the other hand, stochastic search methods completely ignore heuristics, as they choose to make an assignment at random.\cite{heuristics} For example, \emph{depth first search with restarts} traverses the search tree making random choices, and when a specific time limit is reached, it re-starts from the beginning.
 
-\subsubsection{Heuristics and Probabilities}
+\subsubsection{Heuristics and probabilities}
 
 Thus, the well-known search methods either use heuristics as $\mathsf{Choices}$ ranks, or completely ignore them. In 1996, Bresina transformed the heuristic ranks into \emph{probabilities} via the so-called \emph{heuristic-biased stochastic sampling} (HBSS).\cite{bresina-hbss} He provided a set of various decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$ or $e^{-r}$ etc., that take a specific integer choice rank $r \in \{1, 2, \ldots\}$ and return a number that corresponds to the probability of the choice to be selected. Cicirello and Smith improved HBSS by introducing the \emph{value-biased stochastic sampling} (VBSS). The $\mathsf{bias}$ function now takes as argument the heuristic \emph{value} itself.\cite{cicirello-vbss}
 
@@ -414,7 +414,7 @@ On the other hand, Gomes et al.\ exploit the so-called \emph{heuristic-equivalen
 
 Our contribution lies in the mathematical foundation of a framework that covers the above heuristic categories. In contrast to existing methodologies, we leverage on the \emph{smooth} transition from the total randomness to determinism.
 
-%\subsection{Heuristics Linearization}
+%\subsection{Heuristics linearization}
 %
 %In order to assign a probability to a specific choice, its heuristic estimation must be a real number. This is not always the case, because in general, heuristics are vectors of positive real numbers.
 %\begin{definition}
@@ -442,7 +442,7 @@ Our contribution lies in the mathematical foundation of a framework that covers 
 %\end{proposition}
 %Having transformed heuristic vectors into plain real numbers, we can now use them as probabilities.
 
-\subsection{Heuristics Probabilistic Foundations}
+\subsection{Heuristics probabilistic foundations}
 
 Probabilities are a more precise way to depict heuristics than orderings, because heuristics are actually \emph{estimations} whether a choice will guide us to a solution; they are not a strict quality rank.
 
@@ -474,7 +474,7 @@ The greatest heuristic value in Example~\ref{distribution} is $h_2 = 5$. Hence, 
 \end{example}
 If there is more than one maximum heuristic value, deterministic methods arbitrarily concern only one of them as maximum. To simplify the following equations we will make the assumption that there is only one maximum. Without loss of generality, we also assume that heuristic values are non-zero.
 
-\subsection{Bridging the Two Opposites}
+\subsection{Bridging the two opposites}
 
 We extend our previous formulation of the heuristic distribution function (Definition~\ref{hdf}) in order to compromise random and deterministic methods. We introduce a parameter $\mathsf{conf} \in \mathbb{R}^+$, that signifies how much the heuristic estimations will be taken into account; it is the heuristic \emph{confidence.} This $\mathsf{conf}$idence pararameter is the basis to define the condition when a heuristic distribution function is ``balanced''.
 \begin{definition}
@@ -573,7 +573,7 @@ Hence, the overall function is a transition from the total randomness to the alm
 
 The probabilistic framework founded in the previous section, naturally complies with existing search methods; it affects only the heuristic function and not the methods themselves. But in order to fully exploit the introduced heuristics framework, we built the new constructive search method \emph{Piece of Pie Search} (\textsc{PoPS}).
 
-\subsection{The Algorithm Core}
+\subsection{The algorithm's core}
 
 Figure~\ref{PopsSample} describes \textsc{PopsSample}, which is the \textsc{PoPS} core. It is called inside \textsc{PoPS} in order to solve a CSP by providing a complete and valid $\mathsf{Assignments}$ set, which is initially empty.
 
@@ -651,7 +651,7 @@ The exponent in the heuristic values has to do with the $\mathsf{conf}$idence se
 \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}}) Method\label{pops}}
 \end{figure}
 
-\subsection{Heuristic Confidence vs.\ Node Level}
+\subsection{Heuristic confidence vs.\ node level}
 
 An important detail in \textsc{PopsSample} appearing in Fig.~\ref{PopsSample}, is the increase in $\mathsf{conf}$ as the current search tree node level deepens.
 
@@ -661,7 +661,7 @@ Each subsequent recursive call deepens search by $1$, until the current depth re
 
 In the deepest node levels, heuristics are usually more accurate, because even more variables have been instantiated and we have a clearer picture of the problem. In our framework, more accuracy means more confidence, that's why we increase $\mathsf{conf}$ as the search method proceeds with the assignments.
 
-%\subsection{Computation of the Covered Piece of Pie}
+%\subsection{Computation of the covered piece of pie}
 %
 %A special detail is that in each iteration, $\frac{h_{X \gets \mathsf{value}}}{\sum_{v \in D_X} h_{X \gets v}}$ is added to the existing $\mathsf{CoveredPiece}$, multiplied by a factor $1.0 - \mathsf{CoveredPiece}$. Why is this factor needed?
 %
@@ -670,7 +670,7 @@ In the deepest node levels, heuristics are usually more accurate, because even m
 \newcommand{\PoPS}{\textbf{\large P\normalsize O\large PS}}
 \newcommand{\PopsSample}{\textbf{\large P\normalsize OPS\large S\normalsize AMPLE}}
 
-\subsection{\PopsSample: Average Complexity}
+\subsection{\PopsSample{} average complexity}
 
 The \textsc{PopsSample} complexity depends on $\mathsf{PieceToCover}$ argument and the heuristic function distribution.
 \begin{lemma}
@@ -685,7 +685,7 @@ The total time needed is $T_1 = \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot
 \end{proof}
 We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$ is equivalent to a complete search space exploration, which has an $\mathcal{O}(d^n)$ time complexity.
 
-\subsection{The Motivation Behind \PoPS\label{sampling}}
+\subsection{The motivation behind \PoPS\label{sampling}}
 
 Finding the best $\mathsf{conf}$ is the motivation behind \textsc{PoPS}. Unfortunately, we do not know a priori which $\mathsf{conf}$ is the best parameter for \textsc{PopsSample}. However, we can find it by trial and error. In Fig.~\ref{pops}, the \textsc{PoPS} function invokes \textsc{PopsSample} for $\mathsf{SamplesNum}$ different $\mathsf{conf}_i$ values, including the marginal values $0$ and $100$.
 
@@ -719,7 +719,7 @@ For the following first three subsections, our $\mathsf{conf}$idence framework w
 \caption{Solutions for the rest of the ITC instances\label{costsB}}
 \end{figure}
 
-\subsection{University Course Scheduling\label{ITC}}
+\subsection{University course scheduling\label{ITC}}
 
 Automated timetabling is nowadays a crucial application, as many educational institutes still use ad hoc manual processes to schedule their courses. The International Time\-ta\-bl\-in\-g Competition (ITC) is an attempt to unify all these processes. We borrowed the fourteen instances of the latest contest track concerning \emph{universities}.\cite{itc-agenda}
 
@@ -735,7 +735,7 @@ In practice, as shown in Fig.\ \ref{costsA} and \ref{costsB}, a $\mathsf{conf}$ 
 
 It is worth to mention that in Fig.~\ref{costsB} the only solution found for the \textsf{Let0405-1} instance, depicted with an asterisk~\textcolor{blue}{$*$}, was for $\mathsf{conf} = 10$.
 
-\subsection{Radio Link Frequency Assignment}
+\subsection{Radio link frequency assignment}
 
 Another important real problem is the frequency assignment, in which we have to assign a frequency to each radio transmitter with the objective to minimize the interference. The interference is minimized by assigning different frequencies to every two transmitters that are close to each other.
 
@@ -749,7 +749,7 @@ For each of these instances, we had 15 minutes to explore the search space. We r
 \caption{Unsatisfied soft constraints increase cost\label{CELAR}}
 \end{figure}
 
-\subsection{\PopsSample{} during Hard Optimization\label{PoPS}}
+\subsection{\PopsSample{} during hard optimization\label{PoPS}}
 
 The $\mathsf{conf}$ parameter can refine any search method that adopts our heuristic framework. The \textsc{PopsSample} method goes a step further: it incorporates our heuristic \emph{confidence semantics} into its search engine.
 
@@ -765,7 +765,7 @@ In the same graphs we include some of the well-known search methods results, suc
 
 %In the first two instances, \textsc{PoPS} outperforms the other systematic search methods. In the third instance \textsc{PoPS} comes second to DBS, but approximates it; generally speaking, with regard to the rest of the instances, the best parameters for \textsc{PoPS} are inside the area around the spot $(\mathsf{PieceToCover}, \mathsf{conf}) = (60, 0.4)$.
 
-\subsection{\PoPS{} vs.\ Other Search Methods}
+\subsection{\PoPS{} vs.\ other search methods}
 
 In the above sections, it was not easy to figure out which is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$ combination. That is why we employed \textsc{PoPS} to solve the fourteen course timetabling instances. As described in Section~\ref{sampling}, \textsc{PoPS} uses several $\mathsf{conf}$ values and favours the most fruitful ones. We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$, $50$, $75$, and $100$, by setting $\mathsf{SamplesNum}$ equal to $5$. In this way, \textsc{PoPS} constructed solutions with lower costs than the other methods, except for the fifth instance, as illustrated in Table~\ref{PopsItc}. The time limit for all the methods was set to 15 minutes.
 
