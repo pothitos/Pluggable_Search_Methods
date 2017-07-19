@@ -606,71 +606,117 @@ depends on the precise parameterized heuristic distribution
 function instance. We define the following function that
 gently scales randomness.
 \begin{lemma}
-\label{exponential}
-The function $P_\mathsf{conf} (i) = \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}}$ is balanced.\footnote{For $\mathsf{conf} = 1$, the function $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the \emph{fitness proportionate selection} function---resembling a \emph{roulette wheel}---that is used in Genetic Algorithms.\cite{roulette}}
+  \label{exponential}
+  The function $P_\mathsf{conf} (i) =
+  \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}}$ is
+  balanced.\footnote{For $\mathsf{conf} = 1$, the function
+  $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the
+  \emph{fitness proportionate selection}
+  function---resembling a \emph{roulette wheel}---that is
+  used in Genetic Algorithms.\cite{roulette}}
 \end{lemma}
 \begin{proof}
-We prove Definition~\ref{balanced} three requirements.
-\begin{enumerate}
-\item[1.]
-${\displaystyle \lim_{\mathsf{conf} \to 0} }  \!\!  P_\mathsf{conf} (i) =
-\frac{h_i^0}{\sum\limits_{j \in \mathsf{Choices}} \!\!\!\! h_j^0} =
-\frac{1}{\sum\limits_{j \in \mathsf{Choices}} \!\!\!\!\! 1} =
-\frac{1}{|\mathsf{Choices}|} \, $.
-%
-\vspace{0.3em}
-%
-\item[2a.]
-Let $n = |\mathsf{Choices}|$. This number is bounded as the possible assignments in a CSP are a finite set. Thus, the distribution function can be analyzed as
-\[
-P_\mathsf{conf} (i) =
-{\textstyle \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}} } =
-{\textstyle \frac{h_i^\mathsf{conf}}{h_1^\mathsf{conf} + h_2^\mathsf{conf} + \cdots + h_{\max}^\mathsf{conf} + \cdots + h_n^\mathsf{conf}} } \, .
-\]
-Let $h_{\max}$ be the maximum $h_i$. If we divide by $h_{\max}^\mathsf{conf}$ both the nominator and denominator, we have
-\begin{IEEEeqnarray}{rCl}
-P_\mathsf{conf} (i)
-&  =  &
-{\textstyle \frac{\left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{\left(\frac{h_1}{h_{\max}}\right)^\mathsf{conf} + \cdots + 1 + \cdots + \left(\frac{h_n}{h_{\max}}\right)^\mathsf{conf}} }
-\nonumber  \\
-&  =  &
-{\textstyle \frac{\left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{1 + \sum_{j \neq \max} \left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf}} } \, .
-\label{function}
-\end{IEEEeqnarray}
-Here, $\max$ is an abbreviation for $\arg\max_i h_i$. Therefore, $\forall \, j \neq \max$,
-\begin{IEEEeqnarray}{rCl}
-h_j < h_{\max}
-& \  \Longrightarrow \  &
-\frac{h_j}{h_{\max}} < 1
-\  \Longrightarrow \  \nonumber  \\
-&                       &
-\!\!\!
-{\displaystyle \lim_{\mathsf{conf} \to \infty}}
-\left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf} \!\!\! = 0 \, . \quad
-\label{limit}
-\end{IEEEeqnarray}
-As a result from \eqref{function} and \eqref{limit},
-\begin{IEEEeqnarray}{rCl}
-\lim_{\mathsf{conf} \to \infty}  \!\!\!\!  P_\mathsf{conf} (i)
-&  =  &
-{\textstyle \frac{\lim_{\mathsf{conf} \to \infty} \left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{1 + \sum_{j \neq \max} \lim_{\mathsf{conf} \to \infty} \left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf}} }
-\nonumber  \\
-&  =  &
-\lim_{\mathsf{conf} \to \infty}
-{\textstyle \left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf} } .
-\label{final-limit}
-\end{IEEEeqnarray}
-A direct derivation is that for $i = \max \equiv \arg\max_j h_j$, we have $\lim_{\mathsf{conf} \to \infty} P_\mathsf{conf} (\max) = 1$, which is the second prerequisite for a balanced function.
-%
-\vspace{0.3em}
-%
-\item[2b.]
-Finally, the last prerequisite of Definition~\ref{balanced} involves $i \neq \max \Rightarrow h_i < h_{\max} \Rightarrow \frac{h_i}{h_{\max}} < 1$, which, combined with \eqref{final-limit}, gives $\lim_{\mathsf{conf} \to \infty} P_\mathsf{conf} (i) = 0$, which had to be demonstrated.
-\end{enumerate}
+  We prove Definition~\ref{balanced} three requirements.
+  \begin{enumerate}
+    \item[1.] ${\displaystyle \lim_{\mathsf{conf} \to 0} }
+              \!\! P_\mathsf{conf} (i) =
+              \frac{h_i^0}{\sum\limits_{j \in
+              \mathsf{Choices}} \!\!\!\! h_j^0} =
+              \frac{1}{\sum\limits_{j \in \mathsf{Choices}}
+              \!\!\!\!\! 1} = \frac{1}{|\mathsf{Choices}|}
+              \, $.
+              \vspace{0.3em}
+    \item[2a.] Let $n = |\mathsf{Choices}|$. This number is
+               bounded as the possible assignments in a CSP
+               are a finite set. Thus, the distribution
+               function can be analyzed as
+               \[
+                 P_\mathsf{conf} (i) = {\textstyle
+                 \frac{h_i^\mathsf{conf}}{\sum_j
+                 h_j^\mathsf{conf}} } = {\textstyle
+                 \frac{h_i^\mathsf{conf}}{h_1^\mathsf{conf}
+                 + h_2^\mathsf{conf} + \cdots +
+                 h_{\max}^\mathsf{conf} + \cdots +
+                 h_n^\mathsf{conf}} } \, .
+               \]
+               Let $h_{\max}$ be the maximum $h_i$. If we
+               divide by $h_{\max}^\mathsf{conf}$ both the
+               nominator and denominator, we have
+               \begin{IEEEeqnarray}{rCl}
+                 P_\mathsf{conf} (i)
+                 & = &
+                 {\textstyle
+                  \frac{\left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{\left(\frac{h_1}{h_{\max}}\right)^\mathsf{conf}
+                  + \cdots + 1 + \cdots +
+                  \left(\frac{h_n}{h_{\max}}\right)^\mathsf{conf}}
+                 } \nonumber \\
+                 & = &
+                 {\textstyle
+                  \frac{\left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{1
+                  + \sum_{j \neq \max}
+                  \left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf}}
+                 } \, . \label{function}
+               \end{IEEEeqnarray}
+               Here, $\max$ is an abbreviation for
+               $\arg\max_i h_i$. Therefore, $\forall \, j
+               \neq \max$,
+               \begin{IEEEeqnarray}{rCl}
+                 h_j < h_{\max}
+                 & \  \Longrightarrow \  &
+                 \frac{h_j}{h_{\max}} < 1
+                 \  \Longrightarrow \  \nonumber \\
+                 & & \!\!\! {\displaystyle
+                 \lim_{\mathsf{conf} \to \infty}}
+                 \left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf}
+                 \!\!\! = 0 \, . \quad
+                 \label{limit}
+               \end{IEEEeqnarray}
+               As a result from \eqref{function} and
+               \eqref{limit},
+               \begin{IEEEeqnarray}{rCl}
+                 \lim_{\mathsf{conf} \to \infty} \!\!\!\!
+                 P_\mathsf{conf} (i)
+                 & = &
+                 {\textstyle \frac{\lim_{\mathsf{conf} \to
+                  \infty}
+                  \left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}}{1
+                  + \sum_{j \neq \max} \lim_{\mathsf{conf}
+                  \to \infty}
+                  \left(\frac{h_j}{h_{\max}}\right)^\mathsf{conf}}
+                 } \nonumber \\
+                 & = &
+                 \lim_{\mathsf{conf} \to \infty} {\textstyle
+                 \left(\frac{h_i}{h_{\max}}\right)^\mathsf{conf}
+                 } .
+                 \label{final-limit}
+               \end{IEEEeqnarray}
+               A direct derivation is that for $i = \max
+               \equiv \arg\max_j h_j$, we have
+               $\lim_{\mathsf{conf} \to \infty}
+               P_\mathsf{conf} (\max) = 1$, which is the
+               second prerequisite for a balanced function.
+               \vspace{0.3em}
+    \item[2b.] Finally, the last prerequisite of
+               Definition~\ref{balanced} involves $i \neq
+               \max \Rightarrow h_i < h_{\max} \Rightarrow
+               \frac{h_i}{h_{\max}} < 1$, which, combined
+               with \eqref{final-limit}, gives
+               $\lim_{\mathsf{conf} \to \infty}
+               P_\mathsf{conf} (i) = 0$, which had to be
+               demonstrated.
+  \end{enumerate}
 \end{proof}
-The above function (in Lemma~\ref{exponential}) is balanced and it also moves smoothly from the random extreme to the deterministic one, because it is a \emph{continuous} function, with regard to $\mathsf{conf} \in \mathbb{R}^+$.
+The above function (in Lemma~\ref{exponential}) is balanced
+and it also moves smoothly from the random extreme to the
+deterministic one, because it is a \emph{continuous}
+function, with regard to $\mathsf{conf} \in \mathbb{R}^+$.
 
-Hence, the overall function is a transition from the total randomness to the almost total determinism. This is illustrated in the three-dimensional Fig.~\ref{conf}, which for $\mathsf{conf} = 0$, is equivalent to the two-dimensional Fig.~\ref{uniform}, and when $\mathsf{conf} \to \infty$, it is equivalent to Fig.~\ref{systematic}.
+Hence, the overall function is a transition from the total
+randomness to the almost total determinism. This is
+illustrated in the three-dimensional Fig.~\ref{conf}, which
+for $\mathsf{conf} = 0$, is equivalent to the
+two-dimensional Fig.~\ref{uniform}, and when $\mathsf{conf}
+\to \infty$, it is equivalent to Fig.~\ref{systematic}.
 
 
 \section{Piece of Pie Search}
