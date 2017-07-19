@@ -437,27 +437,27 @@ amongst the choices with the most prevailing
 values.\cite{equivalence}
 
 \begin{figure}
-\centering
-\input{figures/heuristics}
-\caption{Heuristic estimations $h_i$ for each value $v_i$\label{heuristics}}
+  \centering
+  \input{figures/heuristics}
+  \caption{Heuristic estimations $h_i$ for each value $v_i$\label{heuristics}}
 \end{figure}
 
 \begin{figure}
-\centering
-\input{figures/uniform}
-\caption{The probability is spread uniformly\label{uniform}}
+  \centering
+  \input{figures/uniform}
+  \caption{The probability is spread uniformly\label{uniform}}
 \end{figure}
 
 \begin{figure}
-\centering
-\input{figures/systematic}
-\caption{Systematic search favours the highest $h_i$\label{systematic}}
+  \centering
+  \input{figures/systematic}
+  \caption{Systematic search favours the highest $h_i$\label{systematic}}
 \end{figure}
 
 \begin{figure}
-\centering
-\input{figures/conf}
-\caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is greater\label{conf}}
+  \centering
+  \input{figures/conf}
+  \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is greater\label{conf}}
 \end{figure}
 
 
@@ -670,9 +670,9 @@ Figure~\ref{piechart} demonstrates the heuristics pie for the Example~\ref{distr
 The exponent in the heuristic values has to do with the $\mathsf{conf}$idence semantics in our framework.
 
 \begin{figure}
-\centering
-\input{figures/piechart}
-\caption{The heuristics pie chart for Example~\ref{distribution}\label{piechart}}
+  \centering
+  \input{figures/piechart}
+  \caption{The heuristics pie chart for Example~\ref{distribution}\label{piechart}}
 \end{figure}
 
 \begin{figure}
@@ -759,15 +759,15 @@ For the following first three subsections, our $\mathsf{conf}$idence framework w
 %\cite{handbook-cp}
 
 \begin{figure}
-\centering
-\input{figures/costsA}
-\caption{Timetabling solutions costs vs.\ $\mathsf{conf}$\label{costsA}}
+  \centering
+  \input{figures/costsA}
+  \caption{Timetabling solutions costs vs.\ $\mathsf{conf}$\label{costsA}}
 \end{figure}
 
 \begin{figure}
-\centering
-\input{figures/costsB}
-\caption{Solutions for the rest of the ITC instances\label{costsB}}
+  \centering
+  \input{figures/costsB}
+  \caption{Solutions for the rest of the ITC instances\label{costsB}}
 \end{figure}
 
 \subsection{University course scheduling\label{ITC}}
@@ -795,9 +795,9 @@ The Centre Electronique de l'Armement (CELAR) provides a set of real datasets fo
 For each of these instances, we had 15 minutes to explore the search space. We recorded the best (lowest) solution costs found so far in Fig.~\ref{CELAR} for several $\mathsf{conf}$ values. Approximately the same as in course scheduling, the lowest solution costs occur around $\mathsf{conf} \approx 10$, which gives better results on average than the marginal $\mathsf{conf}$ values.
 
 \begin{figure}
-\centering
-\input{figures/CELAR}
-\caption{Unsatisfied soft constraints increase cost\label{CELAR}}
+  \centering
+  \input{figures/CELAR}
+  \caption{Unsatisfied soft constraints increase cost\label{CELAR}}
 \end{figure}
 
 \subsection{\PopsSample{} during hard optimization\label{PoPS}}
@@ -807,9 +807,9 @@ The $\mathsf{conf}$ parameter can refine any search method that adopts our heuri
 In order to solve the first university course timetabling instance (\textsf{Fis0506-1} of Section~\ref{ITC}), we invoked \textsc{PopsSample} for various $\mathsf{PieceToCover}$ and $\mathsf{conf}$ values and we plotted the best solution costs found in Figure~\ref{ITC1}. The third dimension is the $cost$ of the solutions found: the lower the solution cost is, the more qualitative timetable is produced.
 
 \begin{figure}
-\centering
-\input{figures/PoPS/ITC1}
-\caption{{\normalfont\textsc{PopsSample}} for the first ITC instance\label{ITC1}}
+  \centering
+  \input{figures/PoPS/ITC1}
+  \caption{{\normalfont\textsc{PopsSample}} for the first ITC instance\label{ITC1}}
 \end{figure}
 
 In the same graphs we include some of the well-known search methods results, such as DFS, LDS, and Iterative Broadening, implementesd in the same solver, with only their best solution cost depicted as a plane grid, in order to make comparisons easily.
@@ -857,15 +857,15 @@ In order to achieve this, we approached and used heuristics as a \emph{confidenc
 In future, it will be challenging to parallelize it, as it supports a whole grid of strategies, by concurrently invoking \textsc{PopsSample} with several $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
 
 %\begin{figure}
-%\centering
-%\input{figures/PoPS/ITC2}
-%\caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ costs for the second ITC instance\label{ITC2}}
+%  \centering
+%  \input{figures/PoPS/ITC2}
+%  \caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ costs for the second ITC instance\label{ITC2}}
 %\end{figure}
 
 %\begin{figure}
-%\centering
-%\input{figures/PoPS/ITC3}
-%\caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ solution costs for the third ITC instance\label{ITC3}}
+%  \centering
+%  \input{figures/PoPS/ITC3}
+%  \caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ solution costs for the third ITC instance\label{ITC3}}
 %\end{figure}
 
 % TODOs %
