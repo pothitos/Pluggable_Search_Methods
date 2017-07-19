@@ -169,7 +169,7 @@ For example, \emph{map-coloring} is a CSP for assigning
 colors to each prefecture in a given map, so as no
 neighbouring prefectures have the same color.
 Figure~\ref{map-colored} illustrates a map of the Greek
-region ``Thessaly'', containing four prefectures; the colors
+region ``Thessaly,'' containing four prefectures; the colors
 in the figure form an indicative solution.
 \begin{problem}
   \label{thessaly-coloring}
@@ -439,31 +439,39 @@ values.\cite{equivalence}
 \begin{figure}
   \centering
   \input{figures/heuristics}
-  \caption{Heuristic estimations $h_i$ for each value $v_i$\label{heuristics}}
+  \caption{Heuristic estimations $h_i$ for each value
+           $v_i$\label{heuristics}}
 \end{figure}
 
 \begin{figure}
   \centering
   \input{figures/uniform}
-  \caption{The probability is spread uniformly\label{uniform}}
+  \caption{The probability is spread
+           uniformly\label{uniform}}
 \end{figure}
 
 \begin{figure}
   \centering
   \input{figures/systematic}
-  \caption{Systematic search favours the highest $h_i$\label{systematic}}
+  \caption{Systematic search favours the highest
+           $h_i$\label{systematic}}
 \end{figure}
 
 \begin{figure}
   \centering
   \input{figures/conf}
-  \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is greater\label{conf}}
+  \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is
+           greater\label{conf}}
 \end{figure}
 
 
 \section{New Probabilistic Heuristics}
 
-Our contribution lies in the mathematical foundation of a framework that covers the above heuristic categories. In contrast to existing methodologies, we leverage on the \emph{smooth} transition from the total randomness to determinism.
+Our contribution lies in the mathematical foundation of a
+framework that covers the above heuristic categories. In
+contrast to existing methodologies, we leverage on the
+\emph{smooth} transition from the total randomness to
+determinism.
 
 %\subsection{Heuristics linearization}
 %
@@ -495,63 +503,108 @@ Our contribution lies in the mathematical foundation of a framework that covers 
 
 \subsection{Heuristics probabilistic foundations}
 
-Probabilities are a more precise way to depict heuristics than orderings, because heuristics are actually \emph{estimations} whether a choice will guide us to a solution; they are not a strict quality rank.
+Probabilities are a more precise way to depict heuristics
+than orderings, because heuristics are actually
+\emph{estimations} whether a choice will guide us to a
+solution; they are not a strict quality rank.
 
 \begin{definition}
-\label{hdf}
-A function $P: \mathsf{Choices} \to [0 \, , 1]\,,$ namely a \emph{heuristic distribution function,} maps each available choice to a corresponding probability, i.e.\ $P(i)$.
+  \label{hdf}
+  A function $P: \mathsf{Choices} \to [0 \, , 1]\,,$ namely
+  a \emph{heuristic distribution function,} maps each
+  available choice to a corresponding probability, i.e.\ 
+  $P(i)$.
 \end{definition}
 \begin{property}
-It should hold that $\sum_i P(i) = 1$, as $P$ denotes a probability for each $i \in \mathsf{Choices}$.
+  It should hold that $\sum_i P(i) = 1$, as $P$ denotes a
+  probability for each $i \in \mathsf{Choices}$.
 \end{property}
-Regarding random search methods (Section~\ref{random}), the probability is distributed uniformly along the $\mathsf{Choices}$. Conclusively,
+Regarding random search methods (Section~\ref{random}), the
+probability is distributed uniformly along the
+$\mathsf{Choices}$. Conclusively,
 \begin{proposition}
-\label{probability-random}
-The heuristic distribution for a random method is always $P(i) = \frac{1}{|\mathsf{Choices}|}$, $\forall \, i$.
+  \label{probability-random}
+  The heuristic distribution for a random method is always
+  $P(i) = \frac{1}{|\mathsf{Choices}|}$, $\forall \, i$.
 \end{proposition}
 \begin{example}
-\label{distribution}
-Say that $\mathsf{Choices} = \{ v_1, v_2, \ldots, v_5 \}$. Every $v_i$ denotes a possible assignment. Furthermore, in a specific search tree node we can make five different assignments, and their corresponding heuristic estimations $h_i$ are $1$, $5$, $2$, $4$, $3$ respectively, as in Fig.~\ref{heuristics}.
+  \label{distribution}
+  Say that $\mathsf{Choices} = \{ v_1, v_2, \ldots, v_5 \}$.
+  Every $v_i$ denotes a possible assignment. Furthermore, in
+  a specific search tree node we can make five different
+  assignments, and their corresponding heuristic estimations
+  $h_i$ are $1$, $5$, $2$, $4$, $3$ respectively, as in
+  Fig.~\ref{heuristics}.
 
-Figure~\ref{uniform} depicts the corresponding heuristic distribution function for a random method, that is $P(i) = \nicefrac{1}{5}$, $\forall \, i$.
+  Figure~\ref{uniform} depicts the corresponding heuristic
+  distribution function for a random method, that is $P(i) =
+  \nicefrac{1}{5}$, $\forall \, i$.
 \end{example}
-On the other extreme, deterministic search methods (Section~\ref{deterministic}) always select the choice $v_i$ that corresponds to the $h_i$ with the highest rank.
+On the other extreme, deterministic search methods
+(Section~\ref{deterministic}) always select the choice $v_i$
+that corresponds to the $h_i$ with the highest rank.
 \begin{proposition}
-\label{probability-deterministic}
-Formally, in deterministic search methods, if $i = \arg\max_j h_j$, then $P(i) = 1$, otherwise $P(i) = 0$.
+  \label{probability-deterministic}
+  Formally, in deterministic search methods, if $i =
+  \arg\max_j h_j$, then $P(i) = 1$, otherwise $P(i) = 0$.
 \end{proposition}
 \begin{example}
-The greatest heuristic value in Example~\ref{distribution} is $h_2 = 5$. Hence, a deterministic search method would select $v_2$ with a certain probability $P(v_2) = 1$. Consequently, the rest of the probabilities are zero, as in Fig.~\ref{systematic}.
+  The greatest heuristic value in Example~\ref{distribution}
+  is $h_2 = 5$. Hence, a deterministic search method would
+  select $v_2$ with a certain probability $P(v_2) = 1$.
+  Consequently, the rest of the probabilities are zero, as
+  in Fig.~\ref{systematic}.
 \end{example}
-If there is more than one maximum heuristic value, deterministic methods arbitrarily concern only one of them as maximum. To simplify the following equations we will make the assumption that there is only one maximum. Without loss of generality, we also assume that heuristic values are non-zero.
+If there is more than one maximum heuristic value,
+deterministic methods arbitrarily concern only one of them
+as maximum. To simplify the following equations we will make
+the assumption that there is only one maximum. Without loss
+of generality, we also assume that heuristic values are
+non-zero.
 
 \subsection{Bridging the two opposites}
 
-We extend our previous formulation of the heuristic distribution function (Definition~\ref{hdf}) in order to compromise random and deterministic methods. We introduce a parameter $\mathsf{conf} \in \mathbb{R}^+$, that signifies how much the heuristic estimations will be taken into account; it is the heuristic \emph{confidence.} This $\mathsf{conf}$idence pararameter is the basis to define the condition when a heuristic distribution function is ``balanced''.
+We extend our previous formulation of the heuristic
+distribution function (Definition~\ref{hdf}) in order to
+compromise random and deterministic methods. We introduce a
+parameter $\mathsf{conf} \in \mathbb{R}^+$, that signifies
+how much the heuristic estimations will be taken into
+account; it is the heuristic \emph{confidence.} This
+$\mathsf{conf}$idence pararameter is the basis to define the
+condition when a heuristic distribution function is
+``balanced.''
 \begin{definition}
-\label{balanced}
-A parameterized heuristic distribution function $P_\mathsf{conf} (i)$ is \emph{balanced} if and only if:
-\begin{enumerate}
-\item[1.]
-$\forall \, i$,
-${\displaystyle \lim_{\mathsf{conf} \to 0} }  \!\!
-P_\mathsf{conf} (i) = \frac{1}{|\mathsf{Choices}|}$, and
-%
-\item[2a.]
-if $i = \arg\max_j h_j$,
-${\displaystyle \lim_{\mathsf{conf} \to \infty} }  \!\!\!\!
-        P_\mathsf{conf} (i) = 1$,
-%
-\item[2b.]
-otherwise,
-${\displaystyle \lim_{\mathsf{conf} \to \infty} }  \!\!\!\!
-        P_\mathsf{conf} (i) = 0 \,$.
-\end{enumerate}
-Moreover, the function $P_\mathsf{conf} (i)$ must be monotonic and continuous with respect to $\mathsf{conf}$ and for fixed $i$.
+  \label{balanced}
+  A parameterized heuristic distribution function
+  $P_\mathsf{conf} (i)$ is \emph{balanced} if and only if:
+  \begin{enumerate}
+    \item[1.] $\forall \, i$, ${\displaystyle
+              \lim_{\mathsf{conf} \to 0} } \!\!
+              P_\mathsf{conf} (i) =
+              \frac{1}{|\mathsf{Choices}|}$, and
+    \item[2a.] if $i = \arg\max_j h_j$, ${\displaystyle
+               \lim_{\mathsf{conf} \to \infty} } \!\!\!\!
+               P_\mathsf{conf} (i) = 1$,
+    \item[2b.] otherwise, ${\displaystyle
+               \lim_{\mathsf{conf} \to \infty} } \!\!\!\!
+               P_\mathsf{conf} (i) = 0 \,$.
+  \end{enumerate}
+  Moreover, the function $P_\mathsf{conf} (i)$ must be
+  monotonic and continuous with respect to $\mathsf{conf}$
+  and for fixed $i$.
 \end{definition}
-Intuitively, $\mathsf{conf}$ is the link between random and deterministic search methods, as the above definition covers both Proposition~\ref{probability-random} when $\mathsf{conf} \to 0$ and Proposition~\ref{probability-deterministic} when $\mathsf{conf} \to \infty$. In other words, $\mathsf{conf}$ is the position along the random-deterministic axis.
+Intuitively, $\mathsf{conf}$ is the link between random and
+deterministic search methods, as the above definition covers
+both Proposition~\ref{probability-random} when
+$\mathsf{conf} \to 0$ and
+Proposition~\ref{probability-deterministic} when
+$\mathsf{conf} \to \infty$. In other words, $\mathsf{conf}$
+is the position along the random-deterministic axis.
 
-What happens for intermediate $\mathsf{conf}$ values? This depends on the precise parameterized heuristic distribution function instance. We define the following function that gently scales randomness.
+What happens for intermediate $\mathsf{conf}$ values? This
+depends on the precise parameterized heuristic distribution
+function instance. We define the following function that
+gently scales randomness.
 \begin{lemma}
 \label{exponential}
 The function $P_\mathsf{conf} (i) = \frac{h_i^\mathsf{conf}}{\sum_j h_j^\mathsf{conf}}$ is balanced.\footnote{For $\mathsf{conf} = 1$, the function $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the \emph{fitness proportionate selection} function---resembling a \emph{roulette wheel}---that is used in Genetic Algorithms.\cite{roulette}}
