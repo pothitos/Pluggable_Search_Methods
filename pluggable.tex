@@ -990,94 +990,186 @@ inside \textsc{PoPS}.
 \begin{figure}
   \centering
   \input{figures/costsB}
-  \caption{Solutions for the rest of the ITC instances\label{costsB}}
+  \caption{Solutions for the rest of the ITC
+           instances\label{costsB}}
 \end{figure}
 
 \subsection{University course scheduling\label{ITC}}
 
-Automated timetabling is nowadays a crucial application, as many educational institutes still use ad hoc manual processes to schedule their courses. The International Time\-ta\-bl\-in\-g Competition (ITC) is an attempt to unify all these processes. We borrowed the fourteen instances of the latest contest track concerning \emph{universities}.\cite{itc-agenda}
+Automated timetabling is nowadays a crucial application, as
+many educational institutes still use ad hoc manual
+processes to schedule their courses. The International
+Timetabling Competition (ITC) is an attempt to unify all
+these processes. We borrowed the fourteen instances of the
+latest contest track concerning
+\emph{universities}.\cite{itc-agenda}
 
-In these problems, we have to assign valid teaching periods and rooms to the curriculum lectures. The objective is to distribute them evenly during the week but without having gaps between them, if scheduled on the same day; each gap increases the solution cost.\cite{pothitos-ictai2012}
+In these problems, we have to assign valid teaching periods
+and rooms to the curriculum lectures. The objective is to
+distribute them evenly during the week but without having
+gaps between them, if scheduled on the same day; each gap
+increases the solution cost.\cite{pothitos-ictai2012}
 
-Due to ITC specifications, we had 333 seconds in our machine to solve each instance and minimize the solution cost as much as we could. Figures \ref{costsA} and \ref{costsB} display the minimum solution costs found per instance by \textsc{PopsSample} for various $\mathsf{conf}$ values. We observe that as $\mathsf{conf}$ increases the costs tend to a specific number, whilst for small $\mathsf{conf}$ values we have fluctuations because search becomes more random.
+Due to ITC specifications, we had 333 seconds in our machine
+to solve each instance and minimize the solution cost as
+much as we could. Figures \ref{costsA} and \ref{costsB}
+display the minimum solution costs found per instance by
+\textsc{PopsSample} for various $\mathsf{conf}$ values. We
+observe that as $\mathsf{conf}$ increases the costs tend to
+a specific number, whilst for small $\mathsf{conf}$ values
+we have fluctuations because search becomes more random.
 
 %In this problem, heuristics help search by choosing (i) the next variable to instantiate and (ii) the value to assign to the variable. In the evaluations, we applied our framework only on phase (i), but for the \textsc{PoPS} experiments in Section~\ref{PoPS} etc.\ we applied it on (ii).
 
-It was expected that for high $\mathsf{conf}$ values the results would be more stable, as the search process approximates the default depth-first-search (DFS). For the marginal low values, e.g.\ $\mathsf{conf} = 0$, search is completely stochastic and the results are worse on overage, as we have higher solution costs. However, the evaluations for intermediate $\mathsf{conf}$ values, e.g.\ $\mathsf{conf} \approx 20$, are more promising, but the automatic selection of the best $\mathsf{conf}$ is an open question here; in the last sections, \textsc{PoPS} finds automatically appropriate $\mathsf{conf}$ values.
+It was expected that for high $\mathsf{conf}$ values the
+results would be more stable, as the search process
+approximates the default depth-first-search (DFS). For the
+marginal low values, e.g.\ $\mathsf{conf} = 0$, search is
+completely stochastic and the results are worse on overage,
+as we have higher solution costs. However, the evaluations
+for intermediate $\mathsf{conf}$ values, e.g.\ 
+$\mathsf{conf} \approx 20$, are more promising, but the
+automatic selection of the best $\mathsf{conf}$ is an open
+question here; in the last sections, \textsc{PoPS} finds
+automatically appropriate $\mathsf{conf}$ values.
 
-In practice, as shown in Fig.\ \ref{costsA} and \ref{costsB}, a $\mathsf{conf}$ value around $100$ actually represents infinity, because search tends to produce the same solutions for $\mathsf{conf} \geq 100$.
+In practice, as shown in Fig.\ \ref{costsA} and
+\ref{costsB}, a $\mathsf{conf}$ value around $100$ actually
+represents infinity, because search tends to produce the
+same solutions for $\mathsf{conf} \geq 100$.
 
-It is worth to mention that in Fig.~\ref{costsB} the only solution found for the \textsf{Let0405-1} instance, depicted with an asterisk~\textcolor{blue}{$*$}, was for $\mathsf{conf} = 10$.
+It is worth to mention that in Fig.~\ref{costsB} the only
+solution found for the \textsf{Let0405-1} instance, depicted
+with an asterisk~\textcolor{blue}{$*$}, was for
+$\mathsf{conf} = 10$.
 
 \subsection{Radio link frequency assignment}
 
-Another important real problem is the frequency assignment, in which we have to assign a frequency to each radio transmitter with the objective to minimize the interference. The interference is minimized by assigning different frequencies to every two transmitters that are close to each other.
+Another important real problem is the frequency assignment,
+in which we have to assign a frequency to each radio
+transmitter with the objective to minimize the interference.
+The interference is minimized by assigning different
+frequencies to every two transmitters that are close to each
+other.
 
-The Centre Electronique de l'Armement (CELAR) provides a set of real datasets for this NP-hard problem.\cite{radio-link} We chose to solve the five so-called ``MAX'' problem instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in which, generally speaking, we try to maximize the number of the satisfied soft constraints.
+The Centre Electronique de l'Armement (CELAR) provides a set
+of real datasets for this NP-hard problem.\cite{radio-link}
+We chose to solve the five so-called ``MAX'' problem
+instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in
+which, generally speaking, we try to maximize the number of
+the satisfied soft constraints.
 
-For each of these instances, we had 15 minutes to explore the search space. We recorded the best (lowest) solution costs found so far in Fig.~\ref{CELAR} for several $\mathsf{conf}$ values. Approximately the same as in course scheduling, the lowest solution costs occur around $\mathsf{conf} \approx 10$, which gives better results on average than the marginal $\mathsf{conf}$ values.
+For each of these instances, we had 15 minutes to explore
+the search space. We recorded the best (lowest) solution
+costs found so far in Fig.~\ref{CELAR} for several
+$\mathsf{conf}$ values. Approximately the same as in course
+scheduling, the lowest solution costs occur around
+$\mathsf{conf} \approx 10$, which gives better results on
+average than the marginal $\mathsf{conf}$ values.
 
 \begin{figure}
   \centering
   \input{figures/CELAR}
-  \caption{Unsatisfied soft constraints increase cost\label{CELAR}}
+  \caption{Unsatisfied soft constraints increase
+           cost\label{CELAR}}
 \end{figure}
 
-\subsection{\PopsSample{} during hard optimization\label{PoPS}}
+\subsection{\PopsSample{} during hard
+            optimization\label{PoPS}}
 
-The $\mathsf{conf}$ parameter can refine any search method that adopts our heuristic framework. The \textsc{PopsSample} method goes a step further: it incorporates our heuristic \emph{confidence semantics} into its search engine.
+The $\mathsf{conf}$ parameter can refine any search method
+that adopts our heuristic framework. The \textsc{PopsSample}
+method goes a step further: it incorporates our heuristic
+\emph{confidence semantics} into its search engine.
 
-In order to solve the first university course timetabling instance (\textsf{Fis0506-1} of Section~\ref{ITC}), we invoked \textsc{PopsSample} for various $\mathsf{PieceToCover}$ and $\mathsf{conf}$ values and we plotted the best solution costs found in Figure~\ref{ITC1}. The third dimension is the $cost$ of the solutions found: the lower the solution cost is, the more qualitative timetable is produced.
+In order to solve the first university course timetabling
+instance (\textsf{Fis0506-1} of Section~\ref{ITC}), we
+invoked \textsc{PopsSample} for various
+$\mathsf{PieceToCover}$ and $\mathsf{conf}$ values and we
+plotted the best solution costs found in Figure~\ref{ITC1}.
+The third dimension is the $cost$ of the solutions found:
+the lower the solution cost is, the more qualitative
+timetable is produced.
 
 \begin{figure}
   \centering
   \input{figures/PoPS/ITC1}
-  \caption{{\normalfont\textsc{PopsSample}} for the first ITC instance\label{ITC1}}
+  \caption{{\normalfont\textsc{PopsSample}} for the first
+           ITC instance\label{ITC1}}
 \end{figure}
 
-In the same graphs we include some of the well-known search methods results, such as DFS, LDS, and Iterative Broadening, implementesd in the same solver, with only their best solution cost depicted as a plane grid, in order to make comparisons easily.
+In the same graphs we include some of the well-known search
+methods results, such as DFS, LDS, and Iterative Broadening,
+implementesd in the same solver, with only their best
+solution cost depicted as a plane grid, in order to make
+comparisons easily.
 
 %In the first two instances, \textsc{PoPS} outperforms the other systematic search methods. In the third instance \textsc{PoPS} comes second to DBS, but approximates it; generally speaking, with regard to the rest of the instances, the best parameters for \textsc{PoPS} are inside the area around the spot $(\mathsf{PieceToCover}, \mathsf{conf}) = (60, 0.4)$.
 
 \subsection{\PoPS{} vs.\ other search methods}
 
-In the above sections, it was not easy to figure out which is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$ combination. That is why we employed \textsc{PoPS} to solve the fourteen course timetabling instances. As described in Section~\ref{sampling}, \textsc{PoPS} uses several $\mathsf{conf}$ values and favours the most fruitful ones. We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$, $50$, $75$, and $100$, by setting $\mathsf{SamplesNum}$ equal to $5$. In this way, \textsc{PoPS} constructed solutions with lower costs than the other methods, except for the fifth instance, as illustrated in Table~\ref{PopsItc}. The time limit for all the methods was set to 15 minutes.
+In the above sections, it was not easy to figure out which
+is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$
+combination. That is why we employed \textsc{PoPS} to solve
+the fourteen course timetabling instances. As described in
+Section~\ref{sampling}, \textsc{PoPS} uses several
+$\mathsf{conf}$ values and favours the most fruitful ones.
+We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$, $50$,
+$75$, and $100$, by setting $\mathsf{SamplesNum}$ equal to
+$5$. In this way, \textsc{PoPS} constructed solutions with
+lower costs than the other methods, except for the fifth
+instance, as illustrated in Table~\ref{PopsItc}. The time
+limit for all the methods was set to 15 minutes.
 
 \begin{table}
-\centering
-\caption{Solution costs for fourteen ITC instances\label{PopsItc}}
-\begin{tabular}{|c|c|c|c|c|}
-\hline
-                      Instance & PoPS & LDS & DFS & It.\ Broad. \\
-\hline
-\hline
-\textsf{Fis0506-1} &  $\mathit{105}$ & $171$ & $345$ & $286$  \\ \hline
-\textsf{Ing0203-2} &  $\mathit{241}$ & $288$ & $698$ & $321$  \\ \hline
-\textsf{Ing0304-1} &  $\mathit{279}$ & $307$ & $578$ & $353$  \\ \hline
-\textsf{Ing0405-3} &  $\mathit{195}$ & $215$ & $817$ & $235$  \\ \hline
-\textsf{Let0405-1} &  $655$ & $\mathit{627}$ & X & X          \\ \hline
-\textsf{Ing0506-1} &  $\mathit{307}$ & $311$ & $812$ & $342$  \\ \hline
-\textsf{Ing0607-2} &  $\mathit{282}$ & $283$ & $1184$ & $328$ \\ \hline
-\textsf{Ing0607-3} &  $\mathit{223}$ & $239$ & $635$ & $262$  \\ \hline
-\textsf{Ing0304-3} &  $\mathit{288}$ & $294$ & $675$ & $370$  \\ \hline
-\textsf{Ing0405-2} &  $\mathit{265}$ & $284$ & $877$ & $344$  \\ \hline
-\textsf{Fis0506-2} &  $\mathit{12}$ & $33$ & $486$ & $34$     \\ \hline
-\textsf{Let0506-2} &  $\mathit{713}$ & $783$ & $1621$ & $937$ \\ \hline
-\textsf{Ing0506-3} &  $\mathit{231}$ & $256$ & $660$ & $280$  \\ \hline
-\textsf{Ing0708-1} &  $\mathit{223}$ & $227$ & $660$ & $264$  \\ \hline
-\end{tabular}
+  \centering
+  \caption{Solution costs for fourteen ITC
+           instances\label{PopsItc}}
+  \begin{tabular}{|c|c|c|c|c|}
+    \hline
+                          Instance & PoPS & LDS & DFS & It.\ Broad. \\
+    \hline
+    \hline
+    \textsf{Fis0506-1} &  $\mathit{105}$ & $171$ & $345$ & $286$  \\ \hline
+    \textsf{Ing0203-2} &  $\mathit{241}$ & $288$ & $698$ & $321$  \\ \hline
+    \textsf{Ing0304-1} &  $\mathit{279}$ & $307$ & $578$ & $353$  \\ \hline
+    \textsf{Ing0405-3} &  $\mathit{195}$ & $215$ & $817$ & $235$  \\ \hline
+    \textsf{Let0405-1} &  $655$ & $\mathit{627}$ & X & X          \\ \hline
+    \textsf{Ing0506-1} &  $\mathit{307}$ & $311$ & $812$ & $342$  \\ \hline
+    \textsf{Ing0607-2} &  $\mathit{282}$ & $283$ & $1184$ & $328$ \\ \hline
+    \textsf{Ing0607-3} &  $\mathit{223}$ & $239$ & $635$ & $262$  \\ \hline
+    \textsf{Ing0304-3} &  $\mathit{288}$ & $294$ & $675$ & $370$  \\ \hline
+    \textsf{Ing0405-2} &  $\mathit{265}$ & $284$ & $877$ & $344$  \\ \hline
+    \textsf{Fis0506-2} &  $\mathit{12}$ & $33$ & $486$ & $34$     \\ \hline
+    \textsf{Let0506-2} &  $\mathit{713}$ & $783$ & $1621$ & $937$ \\ \hline
+    \textsf{Ing0506-3} &  $\mathit{231}$ & $256$ & $660$ & $280$  \\ \hline
+    \textsf{Ing0708-1} &  $\mathit{223}$ & $227$ & $660$ & $264$  \\ \hline
+  \end{tabular}
 \end{table}
 
 
 \section{Conclusions and Perspectives}
 
-We presented a well-founded framework to exploit both stochastic and deterministic heuristics. Empirical evaluations showed that our hybrid approach can produce better results than fully random or fully deterministic methodologies.
+We presented a well-founded framework to exploit both
+stochastic and deterministic heuristics. Empirical
+evaluations showed that our hybrid approach can produce
+better results than fully random or fully deterministic
+methodologies.
 
 %In this context, we introduced a randomness degree value, namely $\mathsf{conf}$, we theoretically founded its semantics, and we linked it with the heuristic \emph{reliability} notion.
 
-In order to achieve this, we approached and used heuristics as a \emph{confidence} and \emph{reliability} measure. By exploiting these heuristic semantics, we were able to produce a new efficient search method, namely \textsc{PoPS}, that can outperform other methodologies. In general, our proposed framework gives the opportunity to exploit ``on the fly'' whichever heuristic confidence fluctuations occur.
+In order to achieve this, we approached and used heuristics
+as a \emph{confidence} and \emph{reliability} measure. By
+exploiting these heuristic semantics, we were able to
+produce a new efficient search method, namely \textsc{PoPS},
+that can outperform other methodologies. In general, our
+proposed framework gives the opportunity to exploit ``on the
+fly'' whichever heuristic confidence fluctuations occur.
 
-In future, it will be challenging to parallelize it, as it supports a whole grid of strategies, by concurrently invoking \textsc{PopsSample} with several $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
+In future, it will be challenging to parallelize it, as it
+supports a whole grid of strategies, by concurrently
+invoking \textsc{PopsSample} with several
+$\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
 
 %\begin{figure}
 %  \centering
@@ -1113,7 +1205,9 @@ In future, it will be challenging to parallelize it, as it supports a whole grid
 
 \section*{Acknowledgments}
 
-We want to thank Foivos Theocharis who initially built the search methods library \textsc{Amorgos}, which is available together with \textsc{Naxos}.\cite{naxos-solver}
+We want to thank Foivos Theocharis who initially built the
+search methods library \textsc{Amorgos}, which is available
+together with \textsc{Naxos}.\cite{naxos-solver}
 
 \bibliographystyle{ws-ijait}
 \bibliography{bibliography}
