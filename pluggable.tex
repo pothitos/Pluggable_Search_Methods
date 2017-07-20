@@ -721,11 +721,19 @@ two-dimensional Fig.~\ref{uniform}, and when $\mathsf{conf}
 
 \section{Piece of Pie Search}
 
-The probabilistic framework founded in the previous section, naturally complies with existing search methods; it affects only the heuristic function and not the methods themselves. But in order to fully exploit the introduced heuristics framework, we built the new constructive search method \emph{Piece of Pie Search} (\textsc{PoPS}).
+The probabilistic framework founded in the previous section,
+naturally complies with existing search methods; it affects
+only the heuristic function and not the methods themselves.
+But in order to fully exploit the introduced heuristics
+framework, we built the new constructive search method
+\emph{Piece of Pie Search} (\textsc{PoPS}).
 
 \subsection{The algorithm's core}
 
-Figure~\ref{PopsSample} describes \textsc{PopsSample}, which is the \textsc{PoPS} core. It is called inside \textsc{PoPS} in order to solve a CSP by providing a complete and valid $\mathsf{Assignments}$ set, which is initially empty.
+Figure~\ref{PopsSample} describes \textsc{PopsSample}, which
+is the \textsc{PoPS} core. It is called inside \textsc{PoPS}
+in order to solve a CSP by providing a complete and valid
+$\mathsf{Assignments}$ set, which is initially empty.
 
 \begin{figure}
 \centering
@@ -754,24 +762,55 @@ Figure~\ref{PopsSample} describes \textsc{PopsSample}, which is the \textsc{PoPS
                 \Comment{All alternative values are exhausted}
 \EndFunction
 \end{algorithmic}
-\caption{The recursive {\normalfont\textsc{PopsSample}} called by {\normalfont\textsc{PoPS}}\label{PopsSample}}
+\caption{The recursive {\normalfont\textsc{PopsSample}}
+         called by
+         {\normalfont\textsc{PoPS}}\label{PopsSample}}
 \end{figure}
 
-In each \textsc{PopsSample} call we get an unassigned variable returned by the function \textsc{VariablesOrderHeuristic}($\mathscr{X}$), where $\mathscr{X}$ is the set of all the constrained variables. Then, it stores its domain $D_X$, in order to restore it in a future backtrack. All the above steps are common in constructive search methods.
+In each \textsc{PopsSample} call we get an unassigned
+variable returned by the function
+\textsc{VariablesOrderHeuristic}($\mathscr{X}$), where
+$\mathscr{X}$ is the set of all the constrained variables.
+Then, it stores its domain $D_X$, in order to restore it in
+a future backtrack. All the above steps are common in
+constructive search methods.
 
-The crucial and novel part of this function is inside the \textbf{while} iteration where we iterate through the different values in $D_X$. The call \textsc{ValuesOrderHeuristic}($D_X, \mathsf{conf}$) returns the best value out of $D_X$, according to the heuristic estimation, using the heuristic function in Lemma~\ref{exponential}.
+The crucial and novel part of this function is inside the
+\textbf{while} iteration where we iterate through the
+different values in $D_X$. The call
+\textsc{ValuesOrderHeuristic}($D_X, \mathsf{conf}$) returns
+the best value out of $D_X$, according to the heuristic
+estimation, using the heuristic function in
+Lemma~\ref{exponential}.
 
-Normal search methods, like Depth First Search (DFS), %Depth-bounded Backtrack Search (DBS),
-Limited Discrepancy Search (LDS), and other known deterministic methods explore in their steps a specific \emph{number} of values in $D_X$ or every value in it (cf.\ Section~\ref{deterministic}). In \textsc{PopsSample}, we explore a specific \emph{subset} $D_X'$ of $D_X$, which corresponds to a proportion of the heuristics pie. The proportion is the argument $\mathsf{PieceToCover} \in [0,1]$. When $\mathsf{PieceToCover}$ becomes $1$, then \textsc{PopsSample} is a complete search method as it explores all the $D_X$ set values.
+Normal search methods, like Depth First Search (DFS),
+Limited Discrepancy Search (LDS), and other known
+deterministic methods explore in their steps a specific
+\emph{number} of values in $D_X$ or every value in it (cf.\ 
+Section~\ref{deterministic}). In \textsc{PopsSample}, we
+explore a specific \emph{subset} $D_X'$ of $D_X$, which
+corresponds to a proportion of the heuristics pie. The
+proportion is the argument $\mathsf{PieceToCover} \in
+[0,1]$. When $\mathsf{PieceToCover}$ becomes $1$, then
+\textsc{PopsSample} is a complete search method as it
+explores all the $D_X$ set values.
 \begin{example}
-Figure~\ref{piechart} demonstrates the heuristics pie for the Example~\ref{distribution}: Each $h_i$ corresponds to a value $v_i$ in $D_X$. In this case, a \textsc{PopsSample}$(0.5,1)$ invocation would explore half the pie. E.g., the choices that correspond to the heuristics $h_1^1 + h_2^1 + h_3^1$ or $h_2^1 + h_5^1$ make half the pie and more.
+  Figure~\ref{piechart} demonstrates the heuristics pie for
+  the Example~\ref{distribution}: Each $h_i$ corresponds to
+  a value $v_i$ in $D_X$. In this case, a
+  \textsc{PopsSample}$(0.5,1)$ invocation would explore half
+  the pie. E.g., the choices that correspond to the
+  heuristics $h_1^1 + h_2^1 + h_3^1$ or $h_2^1 + h_5^1$ make
+  half the pie and more.
 \end{example}
-The exponent in the heuristic values has to do with the $\mathsf{conf}$idence semantics in our framework.
+The exponent in the heuristic values has to do with the
+$\mathsf{conf}$idence semantics in our framework.
 
 \begin{figure}
   \centering
   \input{figures/piechart}
-  \caption{The heuristics pie chart for Example~\ref{distribution}\label{piechart}}
+  \caption{The heuristics pie chart for
+           Example~\ref{distribution}\label{piechart}}
 \end{figure}
 
 \begin{figure}
@@ -803,13 +842,32 @@ The exponent in the heuristic values has to do with the $\mathsf{conf}$idence se
 
 \subsection{Heuristic confidence vs.\ node level}
 
-An important detail in \textsc{PopsSample} appearing in Fig.~\ref{PopsSample}, is the increase in $\mathsf{conf}$ as the current search tree node level deepens.
+An important detail in \textsc{PopsSample} appearing in
+Fig.~\ref{PopsSample}, is the increase in $\mathsf{conf}$ as
+the current search tree node level deepens.
 
-When we make the first recursive \textsc{PopsSample} call (inside \textbf{while}), we have already made an assignment. Hence, the current tree level will be augmented by $1$ and $\mathsf{conf}$ will be increased by $\frac{100 - \mathsf{conf}}{|\mathscr{X}|}$.
+When we make the first recursive \textsc{PopsSample} call
+(inside \textbf{while}), we have already made an assignment.
+Hence, the current tree level will be augmented by $1$ and
+$\mathsf{conf}$ will be increased by $\frac{100 -
+\mathsf{conf}}{|\mathscr{X}|}$.
 
-Each subsequent recursive call deepens search by $1$, until the current depth reaches $|\mathscr{X}|$, which means that every variable in $\mathscr{X}$ has been assigned a value. For a specific depth $k$ the $\mathsf{conf}$ value is increased by $k \cdot \frac{100 - \mathsf{conf}}{|\mathscr{X}|}$. Finally, when $k = |\mathscr{X}|$, the $\mathsf{conf}$ argument of \textsc{PopsSample} will become equal to the marginal value $100$.
+Each subsequent recursive call deepens search by $1$, until
+the current depth reaches $|\mathscr{X}|$, which means that
+every variable in $\mathscr{X}$ has been assigned a value.
+For a specific depth $k$ the $\mathsf{conf}$ value is
+increased by $k \cdot \frac{100 -
+\mathsf{conf}}{|\mathscr{X}|}$. Finally, when $k =
+|\mathscr{X}|$, the $\mathsf{conf}$ argument of
+\textsc{PopsSample} will become equal to the marginal value
+$100$.
 
-In the deepest node levels, heuristics are usually more accurate, because even more variables have been instantiated and we have a clearer picture of the problem. In our framework, more accuracy means more confidence, that's why we increase $\mathsf{conf}$ as the search method proceeds with the assignments.
+In the deepest node levels, heuristics are usually more
+accurate, because even more variables have been instantiated
+and we have a clearer picture of the problem. In our
+framework, more accuracy means more confidence, that's why
+we increase $\mathsf{conf}$ as the search method proceeds
+with the assignments.
 
 %\subsection{Computation of the covered piece of pie}
 %
@@ -818,39 +876,104 @@ In the deepest node levels, heuristics are usually more accurate, because even m
 %After each iteration, $D_X$ is shrunk, so the $\sum_{v \in D_X} h_{X \gets v}$ is altered. The \emph{initial} $D_X$ refers to the complete pie $1.0$, whilst the \emph{current} $D_X$ refers to the \emph{remaining} proportion of the overall piece, which is $1.0 - \mathsf{CoveredPiece}$.
 
 \newcommand{\PoPS}{\textbf{\large P\normalsize O\large PS}}
-\newcommand{\PopsSample}{\textbf{\large P\normalsize OPS\large S\normalsize AMPLE}}
+\newcommand{\PopsSample}{\textbf{\large P\normalsize
+                         OPS\large S\normalsize AMPLE}}
 
 \subsection{\PopsSample{} average complexity}
 
-The \textsc{PopsSample} complexity depends on $\mathsf{PieceToCover}$ argument and the heuristic function distribution.
-\begin{lemma}
-Let $n$ be the constrained variables number and let $d$ be the average domain size. Then, the average complexity of a \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$ call equals $\mathcal{O}(d^n \cdot \mathsf{PieceToCover}^n)$.
+The \textsc{PopsSample} complexity depends on
+$\mathsf{PieceToCover}$ argument and the heuristic function
+distribution.
+  \begin{lemma}
+  Let $n$ be the constrained variables number and let $d$ be
+  the average domain size. Then, the average complexity of a
+  \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
+  call equals $\mathcal{O}(d^n \cdot
+  \mathsf{PieceToCover}^n)$.
 \end{lemma}
 \begin{proof}
-An initial \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$ call, iterates through the values of, let's say, the first variable $X_1$. If the heuristic function numbers for the values in $D_{X_1}$ are uniformly distributed, the expected value for $h_{X_1 \gets \mathsf{value}}$ would be $\mu = \frac{\sum_{v \in D_{X_1}} h_{X \gets v}}{|D_{X_1}|}$.
+  An initial
+  \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
+  call, iterates through the values of, let's say, the first
+  variable $X_1$. If the heuristic function numbers for the
+  values in $D_{X_1}$ are uniformly distributed, the
+  expected value for $h_{X_1 \gets \mathsf{value}}$ would be
+  $\mu = \frac{\sum_{v \in D_{X_1}} h_{X \gets
+  v}}{|D_{X_1}|}$.
 
-Thus, to reach the pie proportion $A = \mathsf{PieceToCover} \cdot \sum_{v \in D_X} h_{X \gets v}$, we need $A / \mu = \mathsf{PieceToCover} \cdot |D_{X_1}|$ iterations, i.e.\ $\mathcal{O}(\mathsf{PieceToCover} \cdot d)$ loops.
+  Thus, to reach the pie proportion $A =
+  \mathsf{PieceToCover} \cdot \sum_{v \in D_X} h_{X \gets
+  v}$, we need $A / \mu = \mathsf{PieceToCover} \cdot
+  |D_{X_1}|$ iterations, i.e.\
+  $\mathcal{O}(\mathsf{PieceToCover} \cdot d)$ loops.
 
-The total time needed is $T_1 = \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_2$, where $T_2$ is the time for the \textsc{PopsSample} call \emph{inside} the loop. It also holds that $T_2 = \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_3$, etc., and finally $T_n = \mathcal{O}(\mathsf{PieceToCover} \cdot d)$. In conclusion, the aggregate complexity is $\mathcal{O}(\mathsf{PieceToCover}^n \cdot d^n)$ for the initial call.
+  The total time needed is $T_1 =
+  \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_2$,
+  where $T_2$ is the time for the \textsc{PopsSample} call
+  \emph{inside} the loop. It also holds that $T_2 =
+  \mathcal{O}(\mathsf{PieceToCover} \cdot d) \cdot T_3$,
+  etc., and finally $T_n = \mathcal{O}(\mathsf{PieceToCover}
+  \cdot d)$. In conclusion, the aggregate complexity is
+  $\mathcal{O}(\mathsf{PieceToCover}^n \cdot d^n)$ for the
+  initial call.
 \end{proof}
-We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$ is equivalent to a complete search space exploration, which has an $\mathcal{O}(d^n)$ time complexity.
+We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$
+is equivalent to a complete search space exploration, which
+has an $\mathcal{O}(d^n)$ time complexity.
 
 \subsection{The motivation behind \PoPS\label{sampling}}
 
-Finding the best $\mathsf{conf}$ is the motivation behind \textsc{PoPS}. Unfortunately, we do not know a priori which $\mathsf{conf}$ is the best parameter for \textsc{PopsSample}. However, we can find it by trial and error. In Fig.~\ref{pops}, the \textsc{PoPS} function invokes \textsc{PopsSample} for $\mathsf{SamplesNum}$ different $\mathsf{conf}_i$ values, including the marginal values $0$ and $100$.
+Finding the best $\mathsf{conf}$ is the motivation behind
+\textsc{PoPS}. Unfortunately, we do not know a priori which
+$\mathsf{conf}$ is the best parameter for
+\textsc{PopsSample}. However, we can find it by trial and
+error. In Fig.~\ref{pops}, the \textsc{PoPS} function
+invokes \textsc{PopsSample} for $\mathsf{SamplesNum}$
+different $\mathsf{conf}_i$ values, including the marginal
+values $0$ and $100$.
 
-Each different $\mathsf{conf}_i$ is used in turn. Initially, the $\mathsf{Cover}_i$ parameter in the \textsc{PoPS} algorithm is zero for every $\mathsf{conf}_i$. When a specific $\mathsf{conf}_i$ has been examined, the corresponding $\mathsf{Cover}_i$ is increased by $\frac{1}{d}$, where $d$ is the average domain size. When the second iteration over a specific $\mathsf{conf}_i$ ends, the $\mathsf{Cover}_i$ is increased again by $\frac{1}{d}$ and so on.
+Each different $\mathsf{conf}_i$ is used in turn. Initially,
+the $\mathsf{Cover}_i$ parameter in the \textsc{PoPS}
+algorithm is zero for every $\mathsf{conf}_i$. When a
+specific $\mathsf{conf}_i$ has been examined, the
+corresponding $\mathsf{Cover}_i$ is increased by
+$\frac{1}{d}$, where $d$ is the average domain size. When
+the second iteration over a specific $\mathsf{conf}_i$ ends,
+the $\mathsf{Cover}_i$ is increased again by $\frac{1}{d}$
+and so on.
 
-In this way, each $\mathsf{conf}_i$ is given the same opportunity (search space) to find a solution. If some $\mathsf{conf}_i$ does not produce a solution, it is deactivated. It is reactivated only if all other $\mathsf{conf}_i$'s fail to produce a solution.
+In this way, each $\mathsf{conf}_i$ is given the same
+opportunity (search space) to find a solution. If some
+$\mathsf{conf}_i$ does not produce a solution, it is
+deactivated. It is reactivated only if all other
+$\mathsf{conf}_i$'s fail to produce a solution.
 
 
 \section{Empirical Evaluations}
 
-The gradual switch from randomness to determinism can boost search in demanding CSPs, such as course scheduling and the radio frequency assignment problems. With the help of our free constraint programming C++ library \textsc{Naxos Solver},\cite{naxos-solver} we solved official instances of these problems for different heuristic distribution configurations.
+The gradual switch from randomness to determinism can boost
+search in demanding CSPs, such as course scheduling and the
+radio frequency assignment problems. With the help of our
+free constraint programming C++ library \textsc{Naxos
+Solver},\cite{naxos-solver} we solved official instances of
+these problems for different heuristic distribution
+configurations.
 
-The source code for our evaluations is freely available at \url{http://di.uoa.gr/~pothitos/PoPS} including the problem datasets. The experiments were conducted on an HP computer with an Intel dual-core E6750 processor clocked at 2.66\,GHz with 2\,GB of memory and a Xubuntu Linux 12.04 operating system.
+The source code for our evaluations is freely available at
+\url{http://di.uoa.gr/~pothitos/PoPS} including the problem
+datasets. The experiments were conducted on an HP computer
+with an Intel dual-core E6750 processor clocked at 2.66\,GHz
+with 2\,GB of memory and a Xubuntu Linux 12.04 operating
+system.
 
-For the following first three subsections, our $\mathsf{conf}$idence framework was used to randomize only the \emph{variables ordering heuristic} (minimum remaining values and degree used for tie breaking), whereas in the last subsection, which refers to \textsc{PoPS}, the randomization affects only the \textsc{ValuesOrderHeuristic} (least constraining value), called by \textsc{PopsSample} inside \textsc{PoPS}.
+For the following first three subsections, our
+$\mathsf{conf}$idence framework was used to randomize only
+the \emph{variables ordering heuristic} (minimum remaining
+values and degree used for tie breaking), whereas in the
+last subsection, which refers to \textsc{PoPS}, the
+randomization affects only the \textsc{ValuesOrderHeuristic}
+(least constraining value), called by \textsc{PopsSample}
+inside \textsc{PoPS}.
 
 %For the first two subsections, the \emph{variables} ordering heuristic used is a mix of the selection of the variable with the \emph{minimum remaining values} (primary heuristic) and the variable having the maximum \emph{degree,} i.e.\ the variable connected to the greatest number of other variables (secondary heuristic). In the other two subsections, the \emph{values} ordering heuristic favours the \emph{least constraining values}, i.e.\ it gives a better heuristic estimation to the value that, if assigned, it will provoke the least domain restrictions to the other variables. Secondarily, it favours the value that, if assigned, it will contribute to the maximum improvement of the solution quality\slash cost (objective function).
 
@@ -860,7 +983,8 @@ For the following first three subsections, our $\mathsf{conf}$idence framework w
 \begin{figure}
   \centering
   \input{figures/costsA}
-  \caption{Timetabling solutions costs vs.\ $\mathsf{conf}$\label{costsA}}
+  \caption{Timetabling solutions costs vs.\ 
+           $\mathsf{conf}$\label{costsA}}
 \end{figure}
 
 \begin{figure}
