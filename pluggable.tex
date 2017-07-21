@@ -875,7 +875,11 @@ with the assignments.
 %
 %After each iteration, $D_X$ is shrunk, so the $\sum_{v \in D_X} h_{X \gets v}$ is altered. The \emph{initial} $D_X$ refers to the complete pie $1.0$, whilst the \emph{current} $D_X$ refers to the \emph{remaining} proportion of the overall piece, which is $1.0 - \mathsf{CoveredPiece}$.
 
-\subsection{\textsc{PopsSample} average complexity}
+\newcommand{\PoPS}{\textbf{\large P\normalsize O\large PS}}
+\newcommand{\PopsSample}{\textbf{\large P\normalsize
+                         OPS\large S\normalsize AMPLE}}
+
+\subsection{\PopsSample{} average complexity}
 
 The \textsc{PopsSample} complexity depends on
 $\mathsf{PieceToCover}$ argument and the heuristic function
@@ -917,8 +921,7 @@ We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$
 is equivalent to a complete search space exploration, which
 has an $\mathcal{O}(d^n)$ time complexity.
 
-\subsection{The motivation behind
-            \textsc{PoPS}\label{sampling}}
+\subsection{The motivation behind \PoPS\label{sampling}}
 
 Finding the best $\mathsf{conf}$ is the motivation behind
 \textsc{PoPS}. Unfortunately, we do not know a priori which
@@ -1071,7 +1074,7 @@ average than the marginal $\mathsf{conf}$ values.
            cost\label{CELAR}}
 \end{figure}
 
-\subsection{\textsc{PopsSample} during hard
+\subsection{\PopsSample{} during hard
             optimization\label{PoPS}}
 
 The $\mathsf{conf}$ parameter can refine any search method
@@ -1103,7 +1106,7 @@ comparisons easily.
 
 %In the first two instances, \textsc{PoPS} outperforms the other systematic search methods. In the third instance \textsc{PoPS} comes second to DBS, but approximates it; generally speaking, with regard to the rest of the instances, the best parameters for \textsc{PoPS} are inside the area around the spot $(\mathsf{PieceToCover}, \mathsf{conf}) = (60, 0.4)$.
 
-\subsection{\textsc{PoPS} vs.\ other search methods}
+\subsection{\PoPS{} vs.\ other search methods}
 
 In the above sections, it was not easy to figure out which
 is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$
