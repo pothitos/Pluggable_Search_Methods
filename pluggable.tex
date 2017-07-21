@@ -909,12 +909,6 @@ framework, more accuracy means more confidence, that's why
 we increase $\mathsf{conf}$ as the search method proceeds
 with the assignments.
 
-%\subsection{Computation of the covered piece of pie}
-%
-%A special detail is that in each iteration, $\frac{h_{X \gets \mathsf{value}}}{\sum_{v \in D_X} h_{X \gets v}}$ is added to the existing $\mathsf{CoveredPiece}$, multiplied by a factor $1.0 - \mathsf{CoveredPiece}$. Why is this factor needed?
-%
-%After each iteration, $D_X$ is shrunk, so the $\sum_{v \in D_X} h_{X \gets v}$ is altered. The \emph{initial} $D_X$ refers to the complete pie $1.0$, whilst the \emph{current} $D_X$ refers to the \emph{remaining} proportion of the overall piece, which is $1.0 - \mathsf{CoveredPiece}$.
-
 \newcommand{\PoPS}{\textbf{\normalsize P\small O\normalsize
                            PS}}
 \newcommand{\PopsSample}{\textbf{\normalsize P\small
@@ -1016,11 +1010,6 @@ randomization affects only the \textsc{ValuesOrderHeuristic}
 (least constraining value), called by \textsc{PopsSample}
 inside \textsc{PoPS}.
 
-%For the first two subsections, the \emph{variables} ordering heuristic used is a mix of the selection of the variable with the \emph{minimum remaining values} (primary heuristic) and the variable having the maximum \emph{degree,} i.e.\ the variable connected to the greatest number of other variables (secondary heuristic). In the other two subsections, the \emph{values} ordering heuristic favours the \emph{least constraining values}, i.e.\ it gives a better heuristic estimation to the value that, if assigned, it will provoke the least domain restrictions to the other variables. Secondarily, it favours the value that, if assigned, it will contribute to the maximum improvement of the solution quality\slash cost (objective function).
-
-%\cite{sabin-mace}
-%\cite{handbook-cp}
-
 \begin{figure}
   \centering
   \input{figures/costsA}
@@ -1059,8 +1048,6 @@ display the minimum solution costs found per instance by
 observe that as $\mathsf{conf}$ increases the costs tend to
 a specific number, whilst for small $\mathsf{conf}$ values
 we have fluctuations because search becomes more random.
-
-%In this problem, heuristics help search by choosing (i) the next variable to instantiate and (ii) the value to assign to the variable. In the evaluations, we applied our framework only on phase (i), but for the \textsc{PoPS} experiments in Section~\ref{PoPS} etc.\ we applied it on (ii).
 
 It was expected that for high $\mathsf{conf}$ values the
 results would be more stable, as the search process
@@ -1145,8 +1132,6 @@ implementesd in the same solver, with only their best
 solution cost depicted as a plane grid, in order to make
 comparisons easily.
 
-%In the first two instances, \textsc{PoPS} outperforms the other systematic search methods. In the third instance \textsc{PoPS} comes second to DBS, but approximates it; generally speaking, with regard to the rest of the instances, the best parameters for \textsc{PoPS} are inside the area around the spot $(\mathsf{PieceToCover}, \mathsf{conf}) = (60, 0.4)$.
-
 \subsection{\PoPS{} vs.\ other search methods}
 
 In the above sections, it was not easy to figure out which
@@ -1196,8 +1181,6 @@ evaluations showed that our hybrid approach can produce
 better results than fully random or fully deterministic
 methodologies.
 
-%In this context, we introduced a randomness degree value, namely $\mathsf{conf}$, we theoretically founded its semantics, and we linked it with the heuristic \emph{reliability} notion.
-
 In order to achieve this, we approached and used heuristics
 as a \emph{confidence} and \emph{reliability} measure. By
 exploiting these heuristic semantics, we were able to
@@ -1210,27 +1193,6 @@ In future, it will be challenging to parallelize it, as it
 supports a whole grid of strategies, by concurrently
 invoking \textsc{PopsSample} with several
 $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
-
-%\begin{figure}
-%  \centering
-%  \input{figures/PoPS/ITC2}
-%  \caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ costs for the second ITC instance\label{ITC2}}
-%\end{figure}
-
-%\begin{figure}
-%  \centering
-%  \input{figures/PoPS/ITC3}
-%  \caption{\textsc{PoPS}$(\mathsf{PieceToCover})$ solution costs for the third ITC instance\label{ITC3}}
-%\end{figure}
-
-% TODOs %
-% Many random trials/seeds
-% Compare to HBSS
-% Test different heuristics
-
-% Extended LDS %
-% A Novel Insight on Defining Search Methods and Incorporating Heuristics
-% Keywords: discrepancy, LDS, DDS, heuristic linearization, CSP, constraint programming.
 
 
 \section*{Acknowledgments}
