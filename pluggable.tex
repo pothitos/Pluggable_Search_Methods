@@ -260,113 +260,113 @@ solution or not. Being a prediction, it implies an inherent
 \emph{reliability\slash confidence} level.
 
 \begin{figure}
-\centering
-\begin{tikzpicture}
- [labelNode/.style   = {inner sep=0pt},
-  rootNode/.style    = {circle, fill, inner sep=1.5pt},
-  redNode/.style     = {circle, fill, inner sep=3pt, drop shadow,
-                        red},
-  greenNode/.style   = {circle, fill, inner sep=3pt, drop shadow,
-                        green!90!black},
-  blueNode/.style    = {circle, fill, inner sep=3pt, drop shadow,
-                        blue},
-  redPruned/.style   = {circle, fill, inner sep=3pt,
-                        pattern=north west lines,
-                        pattern color=red},
-  greenPruned/.style = {circle, fill, inner sep=3pt,
-                        pattern=north west lines,
-                        pattern color=green!90!black},
-  bluePruned/.style  = {circle, fill, inner sep=3pt,
-                        pattern=north west lines,
-                        pattern color=blue},
-  pruned/.style = {dotted},
-  solution/.style  = {line width=2pt, dashed}]
- %
- \node at (0,0) [rootNode] (root) {};
- %
- \node at (-4.3,-1) [labelNode]   {$X_1 \! :$};
- \node at (-2,  -1) [redNode]     (R)    {};
- \node at (+2,  -1) [greenNode]   (G)    {};
- %
- \node at (-4.3,-2) [labelNode]   {$X_2 \! :$};
- \node at (-3,  -2) [redNode]     (RR)   {};
-  \draw [ultra thick] (-3.25,-1.75) -- (-2.75,-2.25);
- \node at (-1,  -2) [blueNode]    (RB)   {};
- \node at (+1,  -2) [redNode]     (GR)   {};
- \node at (+3,  -2) [blueNode]    (GB)   {};
- %
- \node at (-4.3,-3) [labelNode]   {$X_3 \! :$};
- \node at (-3.5,-3) [redPruned]   (RRR)  {};
- \node at (-2.5,-3) [greenPruned] (RRG)  {};
- \node at (-1.5,-3) [redNode]     (RBR)  {};
-  \draw [ultra thick] (-1.75,-2.75) -- (-1.25,-3.25);
- \node at (-0.5,-3) [greenNode]   (RBG)  {};
- \node at (+0.5,-3) [redNode]     (GRR)  {};
-  \draw [ultra thick] (+0.25,-2.75) -- (+0.75,-3.25);
- \node at (+1.5,-3) [greenNode]   (GRG)  {};
-  \draw [ultra thick] (+1.25,-2.75) -- (+1.75,-3.25);
- \node at (+2.5,-3) [redNode]     (GBR)  {};
- \node at (+3.5,-3) [greenNode]   (GBG)  {};
-  \draw [ultra thick] (+3.25,-2.75) -- (+3.75,-3.25);
- %
- \node at (-4.3, -4) [labelNode]  {$X_4 \! :$};
- \node at (-3.75,-4) [redPruned]  (RRRR) {};
- \node at (-3.25,-4) [bluePruned] (RRRB) {};
- \node at (-2.75,-4) [redPruned]  (RRGR) {};
- \node at (-2.25,-4) [bluePruned] (RRGB) {};
- \node at (-1.75,-4) [redPruned]  (RBRR) {};
- \node at (-1.25,-4) [bluePruned] (RBRB) {};
- \node at (-0.75,-4) [redNode]    (RBGR) {};
- \node at (-0.25,-4) [blueNode]   (RBGB) {};
-  \draw [ultra thick] (-0.5,-3.75) -- (0,-4.25);
- \node at (+0.25,-4) [redPruned]  (GRRR) {};
- \node at (+0.75,-4) [bluePruned] (GRRB) {};
- \node at (+1.25,-4) [redPruned]  (GRGR) {};
- \node at (+1.75,-4) [bluePruned] (GRGB) {};
- \node at (+2.25,-4) [redNode]    (GBRR) {};
- \node at (+2.75,-4) [blueNode]   (GBRB) {};
-  \draw [ultra thick] (+2.5,-3.75) -- (+3,-4.25);
- \node at (+3.25,-4) [redPruned]  (GBGR) {};
- \node at (+3.75,-4) [bluePruned] (GBGB) {};
- %
- \path
-    (root)  edge [solution]  (R)
-    (root)  edge  (G)
-    %
-    (R)     edge  (RR)
-    (R)     edge [solution]  (RB)
-    (G)     edge node [sloped,above=-2pt] {$h_{X_2 \gets 1}$} (GR)
-    (G)     edge node [sloped,above=-2pt] {$h_{X_2 \gets 3}$} (GB)
-    %
-    (RR)    edge [pruned]  (RRR)
-    (RR)    edge [pruned]  (RRG)
-    (RB)    edge  (RBR)
-    (RB)    edge [solution]  (RBG)
-    (GR)    edge  (GRR)
-    (GR)    edge  (GRG)
-    (GB)    edge  (GBR)
-    (GB)    edge  (GBG)
-    %
-    (RRR)   edge [pruned]  (RRRR)
-    (RRR)   edge [pruned]  (RRRB)
-    (RRG)   edge [pruned]  (RRGR)
-    (RRG)   edge [pruned]  (RRGB)
-    (RBR)   edge [pruned]  (RBRR)
-    (RBR)   edge [pruned]  (RBRB)
-    (RBG)   edge [solution]  (RBGR)
-    (RBG)   edge  (RBGB)
-    (GRR)   edge [pruned]  (GRRR)
-    (GRR)   edge [pruned]  (GRRB)
-    (GRG)   edge [pruned]  (GRGR)
-    (GRG)   edge [pruned]  (GRGB)
-    (GBR)   edge  (GBRR)
-    (GBR)   edge  (GBRB)
-    (GBG)   edge [pruned]  (GBGR)
-    (GBG)   edge [pruned]  (GBGB)
-    ;
-\end{tikzpicture}
-\caption{The search tree for
-         Thessaly-coloring\label{pruned-tree}}
+  \centering
+  \begin{tikzpicture}
+    [labelNode/.style = {inner sep=0pt},
+     rootNode/.style = {circle, fill, inner sep=1.5pt},
+     redNode/.style = {circle, fill, inner sep=3pt, drop
+                       shadow, red},
+     greenNode/.style = {circle, fill, inner sep=3pt, drop
+                         shadow, green!90!black},
+     blueNode/.style = {circle, fill, inner sep=3pt, drop
+                        shadow, blue},
+     redPruned/.style = {circle, fill, inner sep=3pt,
+                         pattern=north west lines, pattern
+                         color=red},
+     greenPruned/.style = {circle, fill, inner sep=3pt,
+                           pattern=north west lines, pattern
+                           color=green!90!black},
+     bluePruned/.style = {circle, fill, inner sep=3pt,
+                          pattern=north west lines, pattern
+                          color=blue},
+     pruned/.style = {dotted},
+     solution/.style = {line width=2pt, dashed}]
+
+    \node at (0,0) [rootNode] (root) {};
+
+    \node at (-4.3,-1) [labelNode]   {$X_1 \! :$};
+    \node at (-2,  -1) [redNode]     (R) {};
+    \node at (+2,  -1) [greenNode]   (G) {};
+
+    \node at (-4.3,-2) [labelNode] {$X_2 \! :$};
+    \node at (-3,  -2) [redNode]     (RR) {};
+      \draw [ultra thick] (-3.25,-1.75) -- (-2.75,-2.25);
+    \node at (-1,  -2) [blueNode]    (RB) {};
+    \node at (+1,  -2) [redNode]     (GR) {};
+    \node at (+3,  -2) [blueNode]    (GB) {};
+
+    \node at (-4.3,-3) [labelNode]   {$X_3 \! :$};
+    \node at (-3.5,-3) [redPruned]   (RRR) {};
+    \node at (-2.5,-3) [greenPruned] (RRG) {};
+    \node at (-1.5,-3) [redNode]     (RBR) {};
+      \draw [ultra thick] (-1.75,-2.75) -- (-1.25,-3.25);
+    \node at (-0.5,-3) [greenNode]   (RBG) {};
+    \node at (+0.5,-3) [redNode]     (GRR) {};
+      \draw [ultra thick] (+0.25,-2.75) -- (+0.75,-3.25);
+    \node at (+1.5,-3) [greenNode]   (GRG) {};
+      \draw [ultra thick] (+1.25,-2.75) -- (+1.75,-3.25);
+    \node at (+2.5,-3) [redNode]     (GBR) {};
+    \node at (+3.5,-3) [greenNode]   (GBG) {};
+      \draw [ultra thick] (+3.25,-2.75) -- (+3.75,-3.25);
+
+    \node at (-4.3, -4) [labelNode]  {$X_4 \! :$};
+    \node at (-3.75,-4) [redPruned]  (RRRR) {};
+    \node at (-3.25,-4) [bluePruned] (RRRB) {};
+    \node at (-2.75,-4) [redPruned]  (RRGR) {};
+    \node at (-2.25,-4) [bluePruned] (RRGB) {};
+    \node at (-1.75,-4) [redPruned]  (RBRR) {};
+    \node at (-1.25,-4) [bluePruned] (RBRB) {};
+    \node at (-0.75,-4) [redNode]    (RBGR) {};
+    \node at (-0.25,-4) [blueNode]   (RBGB) {};
+      \draw [ultra thick] (-0.5,-3.75) -- (0,-4.25);
+    \node at (+0.25,-4) [redPruned]  (GRRR) {};
+    \node at (+0.75,-4) [bluePruned] (GRRB) {};
+    \node at (+1.25,-4) [redPruned]  (GRGR) {};
+    \node at (+1.75,-4) [bluePruned] (GRGB) {};
+    \node at (+2.25,-4) [redNode]    (GBRR) {};
+    \node at (+2.75,-4) [blueNode]   (GBRB) {};
+      \draw [ultra thick] (+2.5,-3.75) -- (+3,-4.25);
+    \node at (+3.25,-4) [redPruned]  (GBGR) {};
+    \node at (+3.75,-4) [bluePruned] (GBGB) {};
+
+    \path
+      (root) edge [solution] (R)
+      (root) edge (G)
+
+      (R) edge (RR)
+      (R) edge [solution] (RB)
+      (G) edge node [sloped, above=-2pt] {$h_{X_2 \gets 1}$} (GR)
+      (G) edge node [sloped, above=-2pt] {$h_{X_2 \gets 3}$} (GB)
+
+      (RR) edge [pruned] (RRR)
+      (RR) edge [pruned] (RRG)
+      (RB) edge (RBR)
+      (RB) edge [solution] (RBG)
+      (GR) edge (GRR)
+      (GR) edge (GRG)
+      (GB) edge (GBR)
+      (GB) edge (GBG)
+
+      (RRR) edge [pruned] (RRRR)
+      (RRR) edge [pruned] (RRRB)
+      (RRG) edge [pruned] (RRGR)
+      (RRG) edge [pruned] (RRGB)
+      (RBR) edge [pruned] (RBRR)
+      (RBR) edge [pruned] (RBRB)
+      (RBG) edge [solution] (RBGR)
+      (RBG) edge (RBGB)
+      (GRR) edge [pruned] (GRRR)
+      (GRR) edge [pruned] (GRRB)
+      (GRG) edge [pruned] (GRGR)
+      (GRG) edge [pruned] (GRGB)
+      (GBR) edge (GBRR)
+      (GBR) edge (GBRB)
+      (GBG) edge [pruned] (GBGR)
+      (GBG) edge [pruned] (GBGB)
+      ;
+  \end{tikzpicture}
+  \caption{The search tree for
+           Thessaly-coloring\label{pruned-tree}}
 \end{figure}
 
 \subsection{Heuristics exploitation in related work}
