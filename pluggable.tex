@@ -514,7 +514,7 @@ determinism.
 %  The \emph{linearization} of $\mathbf{h} = [h_{x_1} \;
 %  h_{x_2} \; \cdots \; h_{x_n}]$ equals to $\mathsf{linear}
 %  (\mathbf{h}) = h_{x_1} \cdot b_1 + h_{x_2} \cdot b_2 +
-%  \cdots + h_{x_n} \cdot b_n$, where $b_n = 1$, $b_{n-1} =
+%  \cdots + h_{x_n} \cdot b_n$, where $b_n = 1$, $b_{n - 1} =
 %  b_n \! \cdot \! ( \max h_{x_n} + 1 )$, \ldots, $b_1 = b_2
 %  \! \cdot \! ( \max h_{x_2} + 1 )$.
 %\end{definition}
@@ -864,30 +864,32 @@ $\mathsf{conf}$idence semantics in our framework.
 \end{figure}
 
 \begin{figure}
-\centering
-\begin{algorithmic}
-\Function{PoPS}{}
-        \For {$i$ \textbf{from} $1$ \textbf{to} $\mathsf{SamplesNum}$}
-                \State  $\mathsf{Sample}_i$ is activated
-                \State  $\mathsf{Cover}_i \, \gets \, 0$
-                \State  $\mathsf{conf}_i  \, \gets \, 100 \cdot \frac{i-1}{\mathsf{SamplesNum}-1}$
+  \centering
+  \begin{algorithmic}
+    \Function{PoPS}{}
+      \For {$i$ \textbf{from} $1$ \textbf{to} $\mathsf{SamplesNum}$}
+        \State $\mathsf{Sample}_i$ is activated
+        \State $\mathsf{Cover}_i \, \gets \, 0$
+        \State $\mathsf{conf}_i \, \gets \,
+                100 \cdot \frac{i - 1}{\mathsf{SamplesNum} - 1}$
+      \EndFor
+      \While {the available time is not exhausted}
+        \For {\textbf{each} active $\mathsf{Sample}_i$}
+          \If {\Call{PopsSample}{$\mathsf{Cover}_i, \mathsf{conf}_i$}
+               \hspace{5em} did not return a solution}
+            \State $\mathsf{Sample}_i$ is deactivated
+          \EndIf
+          \State $\mathsf{Cover}_i \, \gets \,
+                  \mathsf{Cover}_i + \frac{1}{d}$
         \EndFor
-        \While {the available time is not exhausted}
-                \For {\textbf{each} active $\mathsf{Sample}_i$}
-                        \If {\Call{PopsSample}{$\mathsf{Cover}_i, \mathsf{conf}_i$} \\
-                        \hspace{5em} did not return a solution}
-                                \State  $\mathsf{Sample}_i$ is deactivated
-                        \EndIf
-                        \State  $\mathsf{Cover}_i \, \gets \, \mathsf{Cover}_i + \frac{1}{d}$
-                \EndFor
-                \If  {every $\mathsf{Sample}_i$ is deactivated}
-                        \State  Activate every $\mathsf{Sample}_i$
-                        \Comment{to keep searching.}
-                \EndIf
-        \EndWhile
-\EndFunction
-\end{algorithmic}
-\caption{Piece of Pie Search ({\normalfont\textsc{PoPS}}) Method\label{pops}}
+        \If {every $\mathsf{Sample}_i$ is deactivated}
+          \State Activate every $\mathsf{Sample}_i$
+            \Comment{to keep searching.}
+        \EndIf
+      \EndWhile
+    \EndFunction
+  \end{algorithmic}
+  \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}}) Method\label{pops}}
 \end{figure}
 
 \subsection{Heuristic confidence vs.\ node level}
