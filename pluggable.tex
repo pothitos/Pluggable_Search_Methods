@@ -778,29 +778,39 @@ $\mathsf{Assignments}$ set, which is initially empty.
 \begin{figure}
 \centering
 \begin{algorithmic}
-\Function{PopsSample}{$\mathsf{PieceToCover}, \mathsf{conf}$}
-        \If {$\mathsf{Assignments}$ violate any constraint}
-                \State  \Return failure
-        \ElsIf {$\mathsf{Assignments}$ include every variable}
-                \State  Record $\mathsf{Assignments}$ as solution
-                \State  \Return success
-        \EndIf
-        \State  $X \, \gets \, \Call{VariablesOrderHeuristic}{\mathscr{X}}$
-        \State  $D_{X_\mathrm{init}} \, \gets \, D_X$
-        \State  $\mathsf{CoveredPiece} \, \gets \, 0$
-        \While {$\mathsf{CoveredPiece} \, \leq \, \mathsf{PieceToCover}$}
-                \State  $\mathsf{value} \, \gets \, \Call{ValuesOrderHeuristic}{D_X, \mathsf{conf}}$
-                \State  $\mathsf{CoveredPiece} \, \gets \, \mathsf{CoveredPiece} \, + \, \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}}{\sum_{v \in D_{X_\mathrm{init}}} h_{X \gets v}^\mathsf{conf}}$
-                \State  Assign $\mathsf{value}$ to $X$ and add it to $\mathsf{Assignments}$
-                \State  \Call{PopsSample}{$\mathsf{PieceToCover}, \, \mathsf{conf} \! + \! \frac{100 - \mathsf{conf}}{|\mathscr{X}|}$}
-                \State  Undo the assignment
-                \State  $D_X \, \gets \, D_X - \{\mathsf{value}\}$
-        \EndWhile
-        \State  $D_X \, \gets \, D_{X_\mathrm{init}}$
-                \Comment{Restores initial domain}
-        \State  \Return failure
-                \Comment{All alternative values are exhausted}
-\EndFunction
+  \Function{PopsSample}{$\mathsf{PieceToCover}, \mathsf{conf}$}
+    \If {$\mathsf{Assignments}$ violate any constraint}
+      \State \Return failure
+    \ElsIf {$\mathsf{Assignments}$ include every variable}
+      \State Record $\mathsf{Assignments}$ as solution
+      \State \Return success
+    \EndIf
+    \State $X \, \gets \,
+            \Call{VariablesOrderHeuristic}{\mathscr{X}}$
+    \State $D_{X_\mathrm{init}} \, \gets \, D_X$
+    \State $\mathsf{CoveredPiece} \, \gets \, 0$
+    \While {$\mathsf{CoveredPiece} \, \leq \,
+             \mathsf{PieceToCover}$}
+      \State $\mathsf{value} \, \gets \,
+              \Call{ValuesOrderHeuristic}{D_X, \mathsf{conf}}$
+      \State $\mathsf{CoveredPiece} \, \gets \,
+              \mathsf{CoveredPiece} \, + \,
+              \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}}
+                   {\sum_{v \in D_{X_\mathrm{init}}}
+                    h_{X \gets v}^\mathsf{conf}}$
+      \State Assign $\mathsf{value}$ to $X$ and add it to
+             $\mathsf{Assignments}$
+      \State \Call{PopsSample}{$\mathsf{PieceToCover}, \,
+                   \mathsf{conf} \! + \!
+                   \frac{100 - \mathsf{conf}}{|\mathscr{X}|}$}
+      \State Undo the assignment
+      \State $D_X \, \gets \, D_X - \{\mathsf{value}\}$
+    \EndWhile
+    \State $D_X \, \gets \, D_{X_\mathrm{init}}$
+      \Comment{Restores initial domain}
+    \State \Return failure
+      \Comment{All alternative values are exhausted}
+  \EndFunction
 \end{algorithmic}
 \caption{The recursive {\normalfont\textsc{PopsSample}}
          called by
