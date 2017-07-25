@@ -7,11 +7,11 @@ The original conference paper is available through the
 > Nikolaos Pothitos and Panagiotis Stamatopoulos. Piece of
 > Pie Search: Confidently exploiting heuristics. In _SETN
 > 2016_, pages 8:1–8:8, New York, 2016. ACM.
-> [[BibTeX](http://cgi.di.uoa.gr/~pothitos/papers/Pothitos2016-PoPS.bib)]
+> [[BibTeX](http://di.uoa.gr/~pothitos/papers/Pothitos2016-PoPS.bib)]
 
 __This repository that you're currently viewing produces an
 [extended/revised
-version](http://cgi.di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
+version](http://di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
 currently under construction.__
 
 It will be submitted to IJAIT journal. Therefore, it should
