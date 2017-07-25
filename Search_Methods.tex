@@ -369,7 +369,7 @@ solution or not. Being a prediction, it implies an inherent
 \subsection{Heuristics exploitation in related work}
 
 In \emph{constructive search,} one can build a solution
-either with a deterministic\slash systematic search method,
+either with a deterministic\slash systematic search method
 or by making one-by-one random assignments. Do these methods
 exploit heuristics and how?
 
@@ -743,7 +743,7 @@ gently scales randomness.
                demonstrated.
   \end{enumerate}
 \end{proof}
-The above function (in Lemma~\ref{exponential}) is balanced
+The above function (in Lemma~\ref{exponential}) is balanced,
 and it also moves smoothly from the random extreme to the
 deterministic one, because it is a \emph{continuous}
 function, with regard to $\mathsf{conf} \in \mathbb{R}^+$.
@@ -913,11 +913,11 @@ increased by $k \cdot \frac{100 -
 $100$.
 
 In the deepest node levels, heuristics are usually more
-accurate, because even more variables have been instantiated
-and we have a clearer picture of the problem. In our
-framework, more accuracy means more confidence, that's why
-we increase $\mathsf{conf}$ as the search method proceeds
-with the assignments.
+accurate, because even more variables have been
+instantiated, and we have a clearer picture of the problem.
+In our framework, more accuracy means more confidence,
+that's why we increase $\mathsf{conf}$ as the search method
+proceeds with the assignments.
 
 \newcommand{\PoPS}{\textbf{\normalsize P\small O\normalsize
                            PS}}
