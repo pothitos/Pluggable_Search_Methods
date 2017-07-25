@@ -64,25 +64,29 @@
 
 % Abstract should be less than 200 words
 \begin{abstract}
-  Search is not a direct path to a solution. While searching
-  for a solution to a problem, \emph{heuristics} consult us
-  to avoid paths with dead ends, but they are not
-  infallible. Many popular search methodologies ``disobey''
-  them during critical points of the search. In this work,
-  we found an efficient stochastic methods framework that
-  smoothly combines randomness with normal heuristics. We
-  consider a factor of disobedience to the heuristics and we
+  In the late 1990s, \emph{Constrained Programming} (CP)
+  promised to separate the declaration of a problem from the
+  process to solve it. This work attempts to serve this
+  direction, by implementing and presenting a modular way to
+  defile \emph{search methods} that seek solutions to
+  arbitrary \emph{Constraint Satisfaction Problems} (CSPs).
+  The user just declares their CSP, and it can be solved
+  from a portfolio of search methods already in place.
+  Except from the pluggable search methods framework for any
+  CSP, we also introduce pluggable \emph{heuristics} for our
+  search methods. We found an efficient stochastic
+  heuristics' paradigm that smoothly combines randomness
+  with normal heuristics. We consider a factor of
+  \emph{disobedience} to the normal heuristics, and we
   fine-tune it each time, according to our estimation of
-  heuristic-reliability. We prove mathematically that while
-  the disobedience factor falls, the stochastic methods
-  approximate deterministic methods. Our algebraic evidence
-  is supported by empirical evaluations on real life
-  problems, such as course scheduling and frequency
-  assignment. In this context, we exploit our proposed
-  heuristic-reliability semantics in order to produce a
-  \emph{piece of pie search} (\textsc{PoPS}) method that can
-  outperform other known constructive search processes in
-  hard optimization problems.
+  normal heuristics' reliability (confidence). We prove
+  mathematically that while the disobedience factor
+  decreases, the stochastic heuristics approximate
+  deterministic normal heuristics. Our algebraic evidence is
+  supported by empirical evaluations on real life problems:
+  A new search method, namely \textsc{PoPS}, that exploits
+  this heuristics' paradigm, can outperform regular
+  well-known constructive search methods.
 \end{abstract}
 
 \keywords{Randomness; stochastic methods; discrepancy;
