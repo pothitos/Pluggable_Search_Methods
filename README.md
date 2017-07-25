@@ -1,4 +1,4 @@
-# Self-confident Heuristics in a Pluggable Search Methods Framework [![Build Status](https://travis-ci.org/pothitos/Pluggable_Search_Methods.svg?branch=master)](https://travis-ci.org/pothitos/Pluggable_Search_Methods)
+# Building Search Methods with Self-confidence [![Build Status](https://travis-ci.org/pothitos/Search_Methods.svg?branch=master)](https://travis-ci.org/pothitos/Search_Methods)
 
 The original conference paper is available through the
 [authors'](http://di.uoa.gr/~pothitos)
@@ -11,7 +11,7 @@ The original conference paper is available through the
 
 __This repository that you're currently viewing produces an
 [extended/revised
-version](http://cgi.di.uoa.gr/~pothitos/papers/pluggable.pdf)
+version](http://cgi.di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
 currently under construction.__
 
 It will be submitted to IJAIT journal. Therefore, it should

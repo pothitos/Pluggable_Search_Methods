@@ -7,7 +7,8 @@ addons:
       - texlive-full
 
 script:
-  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode" pluggable.tex
+  - latexmk -pdf -pdflatex="pdflatex -interaction=nonstopmode"
+    Search_Methods.tex
 
 after_success:
   # Decrypt private key for accessing web server
@@ -17,7 +18,7 @@ after_success:
     -out key_for_uploading.pem -d
   - chmod 600 key_for_uploading.pem
   # Upload to web server
-  - scp -i key_for_uploading.pem -o StrictHostKeyChecking=no pluggable.pdf
+  - scp -i key_for_uploading.pem -o StrictHostKeyChecking=no Search_Methods.pdf
     pothitos@linux02.di.uoa.gr:public_html/papers/
   - ssh -i key_for_uploading.pem -o StrictHostKeyChecking=no
-    pothitos@linux02.di.uoa.gr chmod o+r public_html/papers/pluggable.pdf
+    pothitos@linux02.di.uoa.gr chmod o+r public_html/papers/Search_Methods.pdf
