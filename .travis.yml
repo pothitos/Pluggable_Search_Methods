@@ -20,5 +20,5 @@ after_success:
   # Upload to web server
   - scp -i key_for_uploading.pem -o StrictHostKeyChecking=no Search_Methods.pdf
     pothitos@linux02.di.uoa.gr:public_html/papers/
-  - ssh -i key_for_uploading.pem -o StrictHostKeyChecking=no
-    pothitos@linux02.di.uoa.gr chmod o+r public_html/papers/Search_Methods.pdf
+  - ssh -i key_for_uploading.pem pothitos@linux02.di.uoa.gr
+    chmod o+r public_html/papers/Search_Methods.pdf
