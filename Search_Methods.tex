@@ -108,11 +108,17 @@ declaration phase, as this serves the original promise of
 Constraint Programming: \emph{The user states the problem,
 the computer solves it.}\cite{grand-challenges}
 
-Naive algorithms have to explore the whole candidate
+In this work, we go one step further and allow the
+user/programmer to state their own \emph{search methods}
+that can apply to any CSP. We found a framework where the
+user can compose their search methods out of conjunctive and
+disjunctive goals.
+
+However, naive search methods explore the whole candidate
 solutions spectrum, in order to find a real solution. The
 issue here is that the candidate solution range is
 exponential in the problem instance parameters, and,
-unavoidably, an iteration through the candidate solutions
+unavoidably, an iteration through every candidate solution
 becomes infeasible as the problem scales.
 
 \emph{Heuristics} role in this situation is to change the
@@ -125,12 +131,12 @@ should be examined soon.
 
 This reordering cannot make the search space
 tractable---this is most probably
-impossible\cite{p-np}---but it is able to dramatically
-decrease the time needed to guide a search method toward a
-real solution. In this direction, we study heuristic
+impossible\cite{p-np}---but it is able to decrease
+dramatically the time needed to guide a search method toward
+a real solution. In this direction, we study heuristic
 properties, such as reliability\slash confidence, and we
 propose a generic framework in order to exploit them by
-incorporating a randomness factor into them. This is an
+incorporating a randomness factor into them. This work is an
 extended and revised version of a preliminary conference
 paper.\cite{Pothitos2016-PoPS}
 
@@ -165,8 +171,8 @@ assignments.
   \leftsquigarrow \{v\}$.
 \end{definition}
 A \emph{solution} is an assignment that involves all
-variables and also satisfies all the constraints. The
-\emph{search} process leads a CSP after consecutive
+variables and also satisfies all the constraints. A
+\emph{search method} leads a CSP after consecutive
 assignments into a solution.
 
 \subsection{Map-coloring problem}
