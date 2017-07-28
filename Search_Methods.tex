@@ -237,52 +237,6 @@ Figure~\ref{pruned-tree} displays the search tree for the
 Thessaly-coloring problem. The struck out nodes have been
 pruned as no-goods.
 
-Each path from the root (i.e.\ the uppermost node)
-represents an \emph{assignment.} If the path from the root
-ends up into a leaf (lowest node), we have a \emph{complete}
-assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
-is an alternative form of the solution assignment in
-\eqref{solution}.
-
-\subsection{Heuristic estimation as a real number}
-
-A heuristic function maps every possible choice in the
-search tree to a number that corresponds to the estimation
-that it will eventually guide us toward a solution.
-\begin{definition}
-  For a specific search tree node, let $\mathsf{Choices}$ be
-  the set with the alternative assignments that one may
-  follow. The \emph{heuristic function} $h_i$ maps each
-  alternative assignment $i \in \mathsf{Choices}$ to a
-  positive number or zero, i.e.\ $h: \mathsf{Choices} \to
-  \mathbb{R}^+$.
-\end{definition}
-\begin{example}
-  In Fig.~\ref{pruned-tree} uppermost right node, there are
-  two alternative assignments in $\mathsf{Choices} = \{ X_2
-  \gets 1, \, X_2 \gets 3 \}$. One heuristic function may
-  provide the estimations, e.g.\ $h_{X_2 \gets 1} = 0.7$ and
-  $h_{X_2 \gets 3} = 2.8$; that is, the assignment $X_2
-  \gets 3$ is more promising.
-\end{example}
-The above example is almost ideal, as the heuristic function
-$h$ favours the assignment $X_2 \gets 3$ over $X_2 \gets 1$.
-Besides, the latter leads to a dead end, as its two
-descendants are struck out in Fig.~\ref{pruned-tree},
-because they violate the constraints.
-
-Unfortunately, this is not always the case, i.e.\ the
-heuristic value for an assignment that leads to a dead end
-(say $X_2 \gets 1$ in Fig.~\ref{pruned-tree}) may be
-overestimated or, even worse, may be greater than the
-heuristic estimation for an assignment that really leads to
-a solution (e.g.\ $X_2 \gets 3$).
-
-A heuristic value $h_i$ is actually a \emph{prediction}
-whether a specific assignment will ultimately guide us to a
-solution or not. Being a prediction, it implies an inherent
-\emph{reliability\slash confidence} level.
-
 \begin{figure}
   \centering
   \begin{tikzpicture}
@@ -393,6 +347,52 @@ solution or not. Being a prediction, it implies an inherent
            Thessaly-coloring\label{pruned-tree}}
 \end{figure}
 
+Each path from the root (i.e.\ the uppermost node)
+represents an \emph{assignment.} If the path from the root
+ends up into a leaf (lowest node), we have a \emph{complete}
+assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
+is an alternative form of the solution assignment in
+\eqref{solution}.
+
+\subsection{Heuristic estimation as a real number}
+
+A heuristic function maps every possible choice in the
+search tree to a number that corresponds to the estimation
+that it will eventually guide us toward a solution.
+\begin{definition}
+  For a specific search tree node, let $\mathsf{Choices}$ be
+  the set with the alternative assignments that one may
+  follow. The \emph{heuristic function} $h_i$ maps each
+  alternative assignment $i \in \mathsf{Choices}$ to a
+  positive number or zero, i.e.\ $h: \mathsf{Choices} \to
+  \mathbb{R}^+$.
+\end{definition}
+\begin{example}
+  In Fig.~\ref{pruned-tree} uppermost right node, there are
+  two alternative assignments in $\mathsf{Choices} = \{ X_2
+  \gets 1, \, X_2 \gets 3 \}$. One heuristic function may
+  provide the estimations, e.g.\ $h_{X_2 \gets 1} = 0.7$ and
+  $h_{X_2 \gets 3} = 2.8$; that is, the assignment $X_2
+  \gets 3$ is more promising.
+\end{example}
+The above example is almost ideal, as the heuristic function
+$h$ favours the assignment $X_2 \gets 3$ over $X_2 \gets 1$.
+Besides, the latter leads to a dead end, as its two
+descendants are struck out in Fig.~\ref{pruned-tree},
+because they violate the constraints.
+
+Unfortunately, this is not always the case, i.e.\ the
+heuristic value for an assignment that leads to a dead end
+(say $X_2 \gets 1$ in Fig.~\ref{pruned-tree}) may be
+overestimated or, even worse, may be greater than the
+heuristic estimation for an assignment that really leads to
+a solution (e.g.\ $X_2 \gets 3$).
+
+A heuristic value $h_i$ is actually a \emph{prediction}
+whether a specific assignment will ultimately guide us to a
+solution or not. Being a prediction, it implies an inherent
+\emph{reliability\slash confidence} level.
+
 \subsection{Heuristics exploitation in related work}
 
 In \emph{constructive search,} one can build a solution
@@ -459,34 +459,6 @@ highest heuristic values. In this way, we can exclude the
 choices with the lower heuristic values and select at random
 amongst the choices with the most prevailing
 values.\cite{equivalence}
-
-\begin{figure}
-  \centering
-  \input{figures/heuristics}
-  \caption{Heuristic estimations $h_i$ for each value
-           $v_i$\label{heuristics}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \input{figures/uniform}
-  \caption{The probability is spread
-           uniformly\label{uniform}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \input{figures/systematic}
-  \caption{Systematic search favours the highest
-           $h_i$\label{systematic}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \input{figures/conf}
-  \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is
-           greater\label{conf}}
-\end{figure}
 
 
 \section{New Probabilistic Heuristics}
@@ -625,6 +597,34 @@ as maximum. To simplify the following equations we will make
 the assumption that there is only one maximum. Without loss
 of generality, we also assume that heuristic values are
 non-zero.
+
+\begin{figure}
+  \centering
+  \input{figures/heuristics}
+  \caption{Heuristic estimations $h_i$ for each value
+           $v_i$\label{heuristics}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \input{figures/uniform}
+  \caption{The probability is spread
+           uniformly\label{uniform}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \input{figures/systematic}
+  \caption{Systematic search favours the highest
+           $h_i$\label{systematic}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \input{figures/conf}
+  \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is
+           greater\label{conf}}
+\end{figure}
 
 \subsection{Bridging the two opposites}
 
