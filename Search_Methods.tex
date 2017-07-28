@@ -102,12 +102,11 @@ also problems stemming from various disciplines, e.g.\
 Bioinformatics.\cite{bioinformatics}
 
 All these Constraint Satisfaction Problems have been
-declared in our Constraint Programming
-solver.\cite{naxos-solver} The solution phase is completely
-independent to the CSP declaration phase, as this serves the
-original promise of Constraint Programming: \emph{The user
-states the problem, the computer solves
-it.}\cite{grand-challenges}
+declared in our Constraint Programming solver.\cite{Naxos}
+The solution phase is completely independent to the CSP
+declaration phase, as this serves the original promise of
+Constraint Programming: \emph{The user states the problem,
+the computer solves it.}\cite{grand-challenges}
 
 In these cases, naive algorithms have to explore the whole
 candidate solutions spectrum, in order to find a real
@@ -131,7 +130,9 @@ decrease the time needed to guide a search method toward a
 real solution. In this direction, we study heuristic
 properties, such as reliability\slash confidence, and we
 propose a generic framework in order to exploit them by
-incorporating a randomness factor into them.
+incorporating a randomness factor into them. This is an
+extended and revised version of a preliminary conference
+paper.\cite{Pothitos2016-PoPS}
 
 
 \section{Background and Related Work}
@@ -1009,8 +1010,8 @@ The gradual switch from randomness to determinism can boost
 search in demanding CSPs, such as course scheduling and the
 radio frequency assignment problems. With the help of our
 free constraint programming C++ library \textsc{Naxos
-Solver},\cite{naxos-solver} we solved official instances of
-these problems for different heuristic distribution
+Solver},\cite{Naxos} we solved official instances of these
+problems for different heuristic distribution
 configurations.
 
 The source code for our evaluations is freely available at
@@ -1217,7 +1218,7 @@ $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
 
 We want to thank Foivos Theocharis who initially built the
 search methods library \textsc{Amorgos}, which is available
-together with \textsc{Naxos}.\cite{naxos-solver}
+together with \textsc{Naxos}.\cite{Naxos}
 
 \bibliographystyle{ws-ijait}
 \bibliography{bibliography}
