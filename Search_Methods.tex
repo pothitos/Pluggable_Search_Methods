@@ -101,6 +101,16 @@ assignment,\cite{radio-link} other NP-hard problems, and
 also problems stemming from various disciplines, e.g.\ 
 Bioinformatics.\cite{bioinformatics}
 
+All these Constraint Satisfaction Problems have been
+declared in our Constraint Programming
+solver.\cite{naxos-solver} The solution phase is completely
+independent to the CSP declaration phase, as this serves the
+original promise of Constraint
+Programming\cite{grand-challenges}:
+\begin{quote}
+  The user states the problem, the computer solves it.
+\end{quote}
+
 In these cases, naive algorithms have to explore the whole
 candidate solutions spectrum, in order to find a real
 solution. The issue here is that the candidate solution
@@ -158,9 +168,7 @@ assignments.
 A \emph{solution} is an assignment that involves all
 variables and also satisfies all the constraints. The
 \emph{search} process leads a CSP after consecutive
-assignments into a solution. The strategic advantage of the
-overall paradigm is that the CSP description and search
-phases are independent.\cite{grand-challenges}
+assignments into a solution.
 
 \subsection{Map-coloring problem}
 
