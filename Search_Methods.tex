@@ -184,6 +184,13 @@ neighbouring prefectures have the same color.
 Figure~\ref{map-colored} illustrates a map of the Greek
 region ``Thessaly,'' containing four prefectures; the colors
 in the figure form an indicative solution.
+
+\begin{figure}
+  \centering
+  \input{figures/map-colored.pstex_t}
+  \caption{The four Thessaly prefectures\label{map-colored}}
+\end{figure}
+
 \begin{problem}
   \label{thessaly-coloring}
   Typically, \emph{``Thessaly-coloring''} is a CSP with:
@@ -211,12 +218,6 @@ assignment
   \textcolor{blue}{3}, \, X_3 \gets \textcolor{green}{2}, \,
   X_4 \gets \textcolor{red}{1} \} \, .
 \end{equation}
-
-\begin{figure}
-  \centering
-  \input{figures/map-colored.pstex_t}
-  \caption{The four Thessaly prefectures\label{map-colored}}
-\end{figure}
 
 
 \section{Search Methods' Statement}
@@ -887,36 +888,6 @@ $\mathsf{conf}$idence semantics in our framework.
            Example~\ref{distribution}\label{piechart}}
 \end{figure}
 
-\begin{figure}
-  \centering
-  \begin{algorithmic}
-    \Function{PoPS}{}
-      \For {$i$ \textbf{from} $1$ \textbf{to} $\mathsf{SamplesNum}$}
-        \State $\mathsf{Sample}_i$ is activated
-        \State $\mathsf{Cover}_i \, \gets \, 0$
-        \State $\mathsf{conf}_i \, \gets \,
-                100 \cdot \frac{i - 1}{\mathsf{SamplesNum} - 1}$
-      \EndFor
-      \While {the available time is not exhausted}
-        \For {\textbf{each} active $\mathsf{Sample}_i$}
-          \If {\Call{PopsSample}{$\mathsf{Cover}_i, \mathsf{conf}_i$}
-               \hspace{5em} did not return a solution}
-            \State $\mathsf{Sample}_i$ is deactivated
-          \EndIf
-          \State $\mathsf{Cover}_i \, \gets \,
-                  \mathsf{Cover}_i + \frac{1}{d}$
-        \EndFor
-        \If {every $\mathsf{Sample}_i$ is deactivated}
-          \State Activate every $\mathsf{Sample}_i$
-            \Comment{to keep searching.}
-        \EndIf
-      \EndWhile
-    \EndFunction
-  \end{algorithmic}
-  \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}})
-           Method\label{pops}}
-\end{figure}
-
 \subsection{Heuristic confidence vs.\ node level}
 
 An important detail in \textsc{PopsSample} appearing in
@@ -1004,6 +975,36 @@ invokes \textsc{PopsSample} for $\mathsf{SamplesNum}$
 different $\mathsf{conf}_i$ values, including the marginal
 values $0$ and $100$.
 
+\begin{figure}
+  \centering
+  \begin{algorithmic}
+    \Function{PoPS}{}
+      \For {$i$ \textbf{from} $1$ \textbf{to} $\mathsf{SamplesNum}$}
+        \State $\mathsf{Sample}_i$ is activated
+        \State $\mathsf{Cover}_i \, \gets \, 0$
+        \State $\mathsf{conf}_i \, \gets \,
+                100 \cdot \frac{i - 1}{\mathsf{SamplesNum} - 1}$
+      \EndFor
+      \While {the available time is not exhausted}
+        \For {\textbf{each} active $\mathsf{Sample}_i$}
+          \If {\Call{PopsSample}{$\mathsf{Cover}_i, \mathsf{conf}_i$}
+               \hspace{5em} did not return a solution}
+            \State $\mathsf{Sample}_i$ is deactivated
+          \EndIf
+          \State $\mathsf{Cover}_i \, \gets \,
+                  \mathsf{Cover}_i + \frac{1}{d}$
+        \EndFor
+        \If {every $\mathsf{Sample}_i$ is deactivated}
+          \State Activate every $\mathsf{Sample}_i$
+            \Comment{to keep searching.}
+        \EndIf
+      \EndWhile
+    \EndFunction
+  \end{algorithmic}
+  \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}})
+           Method\label{pops}}
+\end{figure}
+
 Each different $\mathsf{conf}_i$ is used in turn. Initially,
 the $\mathsf{Cover}_i$ parameter in the \textsc{PoPS}
 algorithm is zero for every $\mathsf{conf}_i$. When a
@@ -1047,20 +1048,6 @@ randomization affects only the \textsc{ValuesOrderHeuristic}
 (least constraining value), called by \textsc{PopsSample}
 inside \textsc{PoPS}.
 
-\begin{figure}
-  \centering
-  \input{figures/costsA}
-  \caption{Timetabling solutions costs vs.\ 
-           $\mathsf{conf}$\label{costsA}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \input{figures/costsB}
-  \caption{Solutions for the rest of the ITC
-           instances\label{costsB}}
-\end{figure}
-
 \subsection{University course scheduling\label{ITC}}
 
 Automated timetabling is nowadays a crucial application, as
@@ -1085,6 +1072,20 @@ display the minimum solution costs found per instance by
 observe that as $\mathsf{conf}$ increases the costs tend to
 a specific number, whilst for small $\mathsf{conf}$ values
 we have fluctuations because search becomes more random.
+
+\begin{figure}
+  \centering
+  \input{figures/costsA}
+  \caption{Timetabling solutions costs vs.\ 
+           $\mathsf{conf}$\label{costsA}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \input{figures/costsB}
+  \caption{Solutions for the rest of the ITC
+           instances\label{costsB}}
+\end{figure}
 
 It was expected that for high $\mathsf{conf}$ values the
 results would be more stable, as the search process
