@@ -987,8 +987,8 @@ values $0$ and $100$.
       \EndFor
       \While {the available time is not exhausted}
         \For {\textbf{each} active $\mathsf{Sample}_i$}
-          \If {\Call{PopsSample}{$\mathsf{Cover}_i, \mathsf{conf}_i$}
-               \hspace{5em} did not return a solution}
+          \If {\Call{PopsSample}{$\mathsf{Cover}_i,
+               \mathsf{conf}_i$} did not return a solution}
             \State $\mathsf{Sample}_i$ is deactivated
           \EndIf
           \State $\mathsf{Cover}_i \, \gets \,
