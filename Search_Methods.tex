@@ -229,6 +229,97 @@ the search methods should be ``CSP-agnostic'' in order to
 keep the independence between the Constraint Programming
 stages.
 
+\subsection{Defining search methods recursively}
+
+In our CP-MR schema, we do \emph{not} make assignments using
+a constant variable ordering. On the contrary, we define a
+declarative way to describe ad hoc sequential search
+methods.
+
+\subsubsection{Search methods are goal-driven}
+
+Every constructive search method is built up of goals. Each
+goal executes an operation, e.g.\ an assignment of a value
+to a constrained variable. Optionally, the goal returns
+another goal to be executed. The goal returned can be a
+\emph{meta}-goal, that is a goal that refers to another two
+goals. There are two meta-goals kinds:
+\begin{enumerate}
+  \item The $\mathsf{AND}(g_1,g_2)$, which implies that the
+        two sub-goals $g_1$ and $g_2$ must be executed and
+        succeed both.
+  \item The $\mathsf{OR}(g_1,g_2)$, which executes $g_1$. If
+        $g_1$ does not succeed, i.e.\ if it does not lead to
+        a solution, then $g_2$ is executed.
+\end{enumerate}
+This goal-driven framework is able to describe most of the
+common search methods.
+
+\subsubsection{The Depth-First Search example}
+
+An elementary search method that can be straightforwardly
+described via goals is \emph{depth-first search} (DFS). This
+method iterates through the variables of a CSP\@. For each
+variable $X$ selected, it selects a value $v$ from its
+domain and makes the assignment $X \gets v$. It subsequently
+proceeds to the next unassigned variable and makes another
+assignment, etc.
+
+If every variable is assigned a value and no constraint is
+violated, the assignments set consists a \emph{solution}. In
+any case, if there is a constraint violated, the last
+assignment to a variable is undone and we try to assign
+another value from its domain. If all the alternative values
+are exhausted, we \emph{backtrack} to the previous variable
+selected and we undo its assignment and so forth.
+
+\subsubsection{Defining DFS using goals}
+
+The ultimate goal in DFS and in every constructive search
+method is to \texttt{Label} every variable with a value.
+Each \texttt{Label}'s call aims to \texttt{Instantiate} a
+variable.
+\begin{itemize}
+  \item \texttt{Label}($\emptyset$) := \textsf{success}.
+  \item \texttt{Label}($\mathscr{X}$) :=
+          \textsf{AND}(\texttt{Instantiate}($X$), \\
+        \phantom{\texttt{Label}($\mathscr{X}$) :=
+          \textsf{AND}(}%
+        \texttt{Label}($\mathscr{X} \! - \! \{X\}$)),
+          with $X \in \mathscr{X}$,
+\end{itemize}
+where $\mathscr{X}$ is the set of all the variables. While
+\texttt{Label} iterates recursively through the CSP
+variables, an \texttt{Instantiate} call attempts to assign a
+selected value $v$ to the variable $X$. If the assignment
+fails to produce a solution, the value $v$ is deleted and
+another instantiation is attempted, until all the
+alternatives in $D_X$ are exhausted.
+\begin{itemize}
+  \item \texttt{Instantiate}($X$) := \textsf{failure},
+          with $D_X = \emptyset$.
+  \item \texttt{Instantiate}($X$) :=
+          \textsf{OR}($X \! \gets \! v$, \\
+        \textsf{AND}($D_X \!\! \gets \!\!
+          D_X \!\! - \!\! \{v\}$,\,%
+        \texttt{Instantiate}($X$))), with $v \in D_X$.
+\end{itemize}
+When we call \texttt{Label}($\mathscr{X}$), a whole search
+tree will be created.
+
+\subsubsection{The goals are the search tree nodes}
+
+There is a direct relationship between a search tree and the
+goals hierarchy.
+\begin{itemize}
+  \item When the first goal, e.g.\ 
+        \texttt{Label}($\mathscr{X}$), is called, the search
+        tree \emph{root} is created.
+  \item When an \textsf{OR} goal occurs, the current node is
+        extended into two branches that represent the two
+        alternative choices.
+\end{itemize}
+
 
 \section{Search Tree Exploration}
 
