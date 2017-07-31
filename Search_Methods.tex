@@ -351,10 +351,11 @@ goals hierarchy.
               \State \textbf{return} false
             \EndIf
           \EndIf
-          \If {$NewGoal \neq NIL$}
+          \If {$NewGoal \neq \texrm{null}$}
             \State stackOr.top.stackAnd.push($NewGoal$)
-          \ElsIf {stackOr.top.stackAnd is empty \textbf{and} \\
-                  $\mathrm{stackOr.top.delayedGoal} = NIL$}
+          \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
+                  \\ $\mathrm{stackOr.top.delayedGoal} =
+                  \texrm{null}$}
             \State \textbf{return} true \Comment {Success}
           \EndIf
         \EndIf
