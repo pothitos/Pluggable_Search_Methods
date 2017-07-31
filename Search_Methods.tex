@@ -351,12 +351,12 @@ goals hierarchy.
               \Return false
             \EndIf
           \EndIf
-          \If {$NewGoal \neq \texrm{null}$}
+          \If {$NewGoal \neq \textrm{null}$}
             \State stackOr.top.stackAnd.push($NewGoal$)
           \ElsIf {stackOr.top.stackAnd is empty \And \\
                   \hspace{7em}
                   $\mathrm{stackOr.top.delayedGoal} =
-                  \texrm{null}$}
+                  \textrm{null}$}
             \Return true \Comment {Success}
           \EndIf
         \EndIf
