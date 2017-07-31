@@ -282,11 +282,9 @@ variable.
 \begin{itemize}
   \item \texttt{Label}($\emptyset$) := \textsf{success}.
   \item \texttt{Label}($\mathscr{X}$) :=
-          \textsf{AND}(\texttt{Instantiate}($X$), \\
-        \phantom{\texttt{Label}($\mathscr{X}$) :=
-          \textsf{AND}(}%
-        \texttt{Label}($\mathscr{X} \! - \! \{X\}$)),
-          with $X \in \mathscr{X}$,
+          \textsf{AND}(\texttt{Instantiate}($X$),
+            \texttt{Label}($\mathscr{X} \! - \! \{X\}$)),
+        with $X \in \mathscr{X}$,
 \end{itemize}
 where $\mathscr{X}$ is the set of all the variables. While
 \texttt{Label} iterates recursively through the CSP
@@ -299,10 +297,10 @@ alternatives in $D_X$ are exhausted.
   \item \texttt{Instantiate}($X$) := \textsf{failure},
           with $D_X = \emptyset$.
   \item \texttt{Instantiate}($X$) :=
-          \textsf{OR}($X \! \gets \! v$, \\
-        \textsf{AND}($D_X \!\! \gets \!\!
-          D_X \!\! - \!\! \{v\}$,\,%
-        \texttt{Instantiate}($X$))), with $v \in D_X$.
+          \textsf{OR}($X \! \gets \! v$,
+            \textsf{AND}($D_X \!\! \gets \!\!
+            D_X \!\! - \!\! \{v\}$,\,
+            \texttt{Instantiate}($X$))), with $v \in D_X$.
 \end{itemize}
 When we call \texttt{Label}($\mathscr{X}$), a whole search
 tree will be created.
