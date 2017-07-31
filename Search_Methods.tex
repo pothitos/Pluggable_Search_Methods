@@ -312,6 +312,59 @@ goals hierarchy.
         alternative choices.
 \end{itemize}
 
+\subsection{Goals' Satisfaction Algorithm}
+
+\begin{figure}
+  \centering
+  \begin{algorithmic}
+    \Function{Solve}{}
+      \While {time limit has not been reached}
+        \If {stackOr.top.stackAnd is not empty}
+          \State $CurrGoal \gets
+                  \mathrm{stackOr.top.stackAnd.pop()}$
+        \Else
+          \State $CurrGoal \gets
+                  \mathrm{stackOr.top.delayedGoal}$
+          \State $\mathrm{stackOr.top.delayedGoal} \gets
+                 \textrm{get}$ the next goal of stackAnd of
+                 the stackOr frame that ``delayedGoal''
+                 points to \textbf{or} (if there is not such
+                 a goal) get the next delayed goal of that
+                 stackOr frame
+        \EndIf
+        \If {$CurrGoal$ is an AND-goal}
+          \State stackOr.top.stackAnd.push(2\textsuperscript{nd}
+                 sub-goal of $CurrGoal$)
+          \State stackOr.top.stackAnd.push(1\textsuperscript{st}
+                 sub-goal of $CurrGoal$)
+        \ElsIf {$CurrGoal$ is an OR-goal}
+          \State stackOr.push(2\textsuperscript{nd} sub-goal
+                 of $CurrGoal$)
+          \State Initialize stackOr.top.delayedGoal
+          \State stackOr.top.stackAnd.push(1\textsuperscript{st}
+                 sub-goal of $CurrGoal$)
+        \Else
+          \State $NewGoal \gets \textrm{result
+                  of }CurrGoal\textrm{'s execution}$
+          \If {$\Call{TwoConsistent}{}() = \mathrm{false}$}
+            \If {$\Call{BackTrack}{}() = \mathrm{false}$}
+              \State \textbf{return} false
+            \EndIf
+          \EndIf
+          \If {$NewGoal \neq NIL$}
+            \State stackOr.top.stackAnd.push($NewGoal$)
+          \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
+                  $\mathrm{stackOr.top.delayedGoal} = NIL$}
+            \State \textbf{return} true \Comment {Success}
+          \EndIf
+        \EndIf
+      \EndWhile
+      \State \textbf{return} false
+    \EndFunction
+  \end{algorithmic}
+  \caption{Core Search Algorithm\label{search}}
+\end{figure}
+
 
 \section{Search Tree Exploration}
 
