@@ -238,14 +238,14 @@ to a constrained variable. Optionally, the goal returns
 another goal to be executed. The goal returned can be a
 \emph{meta}-goal, that is a goal that refers to another two
 goals. There are two meta-goals kinds:
-\begin{enumerate}
+\begin{romanlist}
   \item The $\mathsf{AND}(g_1,g_2)$, which implies that the
         two sub-goals $g_1$ and $g_2$ must be executed and
         succeed both.
   \item The $\mathsf{OR}(g_1,g_2)$, which executes $g_1$. If
         $g_1$ does not succeed, i.e.\ if it does not lead to
         a solution, then $g_2$ is executed.
-\end{enumerate}
+\end{romanlist}
 This goal-driven framework is able to describe most of the
 common search methods.
 
