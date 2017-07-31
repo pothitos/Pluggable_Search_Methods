@@ -348,7 +348,7 @@ goals hierarchy.
                   of }CurrGoal\textrm{'s execution}$
           \If {$\Call{TwoConsistent}{}() = \mathrm{false}$}
             \If {$\Call{BackTrack}{}() = \mathrm{false}$}
-              \Return false
+              \State \Return false
             \EndIf
           \EndIf
           \If {$NewGoal \neq \textrm{null}$}
@@ -357,11 +357,11 @@ goals hierarchy.
                   \\ \hspace{7em}
                   $\mathrm{stackOr.top.delayedGoal} =
                   \textrm{null}$}
-            \Return true \Comment {Success}
+            \State \Return true \Comment {Success}
           \EndIf
         \EndIf
       \EndWhile
-      \Return false
+      \State \Return false
     \EndFunction
   \end{algorithmic}
   \caption{Core Search Algorithm\label{search}}
