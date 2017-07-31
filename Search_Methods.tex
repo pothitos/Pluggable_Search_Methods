@@ -1014,7 +1014,8 @@ distribution.
   Let $n$ be the constrained variables number and let $d$ be
   the average domain size. Then, the average complexity of a
   \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
-  call equals $O(d^n \cdot \mathsf{PieceToCover}^n)$.
+  call equals $\mathrm{O}(d^n \cdot
+  \mathsf{PieceToCover}^n)$.
 \end{lemma}
 \begin{proof}
   An initial
@@ -1030,20 +1031,21 @@ distribution.
   \mathsf{PieceToCover} \cdot \sum_{v \in D_X} h_{X \gets
   v}$, we need $A / \mu = \mathsf{PieceToCover} \cdot
   |D_{X_1}|$ iterations, i.e.\ 
-  $O(\mathsf{PieceToCover} \cdot d)$ loops.
+  $\mathrm{O}(\mathsf{PieceToCover} \cdot d)$ loops.
 
-  The total time needed is $T_1 = O(\mathsf{PieceToCover}
-  \cdot d) \cdot T_2$, where $T_2$ is the time for the
-  \textsc{PopsSample} call \emph{inside} the loop. It also
-  holds that $T_2 = O(\mathsf{PieceToCover} \cdot d) \cdot
-  T_3$, etc., and finally $T_n = O(\mathsf{PieceToCover}
+  The total time needed is $T_1 =
+  \mathrm{O}(\mathsf{PieceToCover} \cdot d) \cdot T_2$,
+  where $T_2$ is the time for the \textsc{PopsSample} call
+  \emph{inside} the loop. It also holds that $T_2 =
+  \mathrm{O}(\mathsf{PieceToCover} \cdot d) \cdot T_3$,
+  etc., and finally $T_n = \mathrm{O}(\mathsf{PieceToCover}
   \cdot d)$. In conclusion, the aggregate complexity is
-  $O(\mathsf{PieceToCover}^n \cdot d^n)$ for the initial
-  call.
+  $\mathrm{O}(\mathsf{PieceToCover}^n \cdot d^n)$ for the
+  initial call.
 \end{proof}
 We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$
 is equivalent to a complete search space exploration, which
-has an $O(d^n)$ time complexity.
+has an $\mathrm{O}(d^n)$ time complexity.
 
 \subsection{The motivation behind \PoPS\label{sampling}}
 
