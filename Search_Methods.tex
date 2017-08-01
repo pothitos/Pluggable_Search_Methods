@@ -327,7 +327,7 @@ goals hierarchy.
                   \mathrm{stackOr.top.delayedGoal}$
           \State $\mathrm{stackOr.top.delayedGoal} \gets
                  \textrm{get}$ the next goal of stackAnd of
-                 the \\ \hspace{10em} stackOr frame that
+                 the \\ \hspace{13em} stackOr frame that
                  ``delayedGoal'' points to \textbf{or} (if
                  there is not such a goal) get the next
                  delayed goal of that stackOr frame
@@ -354,7 +354,7 @@ goals hierarchy.
           \If {$NewGoal \neq \textrm{null}$}
             \State stackOr.top.stackAnd.push($NewGoal$)
           \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
-                  \\ \hspace{8em}
+                  \\ \hspace{7.5em}
                   $\mathrm{stackOr.top.delayedGoal} =
                   \textrm{null}$}
             \State \Return true \Comment {Success}
