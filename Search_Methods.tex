@@ -327,11 +327,10 @@ goals hierarchy.
                   \mathrm{stackOr.top.delayedGoal}$
           \State $\mathrm{stackOr.top.delayedGoal} \gets
                  \textrm{get}$ the next goal of stackAnd of
-                 the \\ \hspace{14em} stackOr frame that
-                 ``delayedGoal'' points to \textbf{or} \\
-                 \hspace{14em} (if there is not such a goal)
-                 get the next delayed goal of that stackOr
-                 frame
+                 the \\ \hspace{11em} stackOr frame that
+                 ``delayedGoal'' points to \textbf{or} (if
+                 there is not such a goal) get the next
+                 delayed goal of that stackOr frame
         \EndIf
         \If {$CurrGoal$ is an AND-goal}
           \State stackOr.top.stackAnd.push(2\textsuperscript{nd}
