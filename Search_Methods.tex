@@ -1065,7 +1065,7 @@ distribution.
   Let $n$ be the constrained variables number and let $d$ be
   the average domain size. Then, the average complexity of a
   \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
-  call equals $O(d^n \cdot \mathsf{PieceToCover}^n)$.
+  call is $O(d^n \cdot \mathsf{PieceToCover}^n)$.
 \end{lemma}
 \begin{proof}
   An initial
@@ -1196,14 +1196,15 @@ distribute them evenly during the week but without having
 gaps between them, if scheduled on the same day; each gap
 increases the solution cost.\cite{pothitos-ictai2012}
 
-Due to ITC specifications, we had 333 seconds in our machine
-to solve each instance and minimize the solution cost as
-much as we could. Figures \ref{costsA} and \ref{costsB}
-display the minimum solution costs found per instance by
-\textsc{PopsSample} for various $\mathsf{conf}$ values. We
-observe that as $\mathsf{conf}$ increases the costs tend to
-a specific number, whilst for small $\mathsf{conf}$ values
-we have fluctuations because search becomes more random.
+Due to the ITC specifications, we had 333 seconds in our
+machine to solve each instance and minimize the solution
+cost as much as we could. Figures \ref{costsA} and
+\ref{costsB} display the minimum solution costs found per
+instance by \textsc{PopsSample} for various $\mathsf{conf}$
+values. We observe that as $\mathsf{conf}$ increases the
+costs tend to a specific number, whilst for small
+$\mathsf{conf}$ values we have fluctuations because search
+becomes more random.
 
 \begin{figure}
   \centering
@@ -1229,7 +1230,7 @@ for intermediate $\mathsf{conf}$ values, e.g.\
 $\mathsf{conf} \approx 20$, are more promising, but the
 automatic selection of the best $\mathsf{conf}$ is an open
 question here; in the last sections, \textsc{PoPS} finds
-automatically appropriate $\mathsf{conf}$ values.
+automatically the best $\mathsf{conf}$ values.
 
 In practice, as shown in Fig.\ \ref{costsA} and
 \ref{costsB}, a $\mathsf{conf}$ value around $100$ actually
@@ -1318,7 +1319,8 @@ instance, as illustrated in Table~\ref{PopsItc}. The time
 limit for all the methods was set to 15 minutes.
 
 \begin{table}
-  \tbl{Solution costs for 14 ITC instances\label{PopsItc}}
+  \tbl{Solution costs for fourteen ITC
+       instances\label{PopsItc}}
   {\begin{tabular}{ccccc}
     \toprule
                          Instance & PoPS & LDS & DFS & It.\ Broad. \\
