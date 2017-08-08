@@ -314,8 +314,8 @@ goals hierarchy.
   \centering
   \begin{tikzpicture}
     [level distance = 1.5cm,
-     level 1/.style = {sibling distance=3cm},
-     level 2/.style = {sibling distance=1.5cm}]
+     level 1/.style = {sibling distance = 3cm},
+     level 2/.style = {sibling distance = 1.5cm}]
 
     \node {root}
       child {node {left}
@@ -396,25 +396,25 @@ pruned as no-goods.
 \begin{figure}
   \centering
   \begin{tikzpicture}
-    [labelNode/.style = {inner sep=0pt},
-     rootNode/.style = {circle, fill, inner sep=1.5pt},
-     redNode/.style = {circle, fill, inner sep=3pt, drop
+    [labelNode/.style = {inner sep = 0pt},
+     rootNode/.style = {circle, fill, inner sep = 1.5pt},
+     redNode/.style = {circle, fill, inner sep = 3pt, drop
                        shadow, red},
-     greenNode/.style = {circle, fill, inner sep=3pt, drop
+     greenNode/.style = {circle, fill, inner sep = 3pt, drop
                          shadow, green!90!black},
-     blueNode/.style = {circle, fill, inner sep=3pt, drop
+     blueNode/.style = {circle, fill, inner sep = 3pt, drop
                         shadow, blue},
-     redPruned/.style = {circle, fill, inner sep=3pt,
-                         pattern=north west lines, pattern
-                         color=red},
-     greenPruned/.style = {circle, fill, inner sep=3pt,
-                           pattern=north west lines, pattern
-                           color=green!90!black},
-     bluePruned/.style = {circle, fill, inner sep=3pt,
-                          pattern=north west lines, pattern
-                          color=blue},
+     redPruned/.style = {circle, fill, inner sep = 3pt,
+                         pattern = north west lines, pattern
+                         color = red},
+     greenPruned/.style = {circle, fill, inner sep = 3pt,
+                           pattern = north west lines,
+                           pattern color = green!90!black},
+     bluePruned/.style = {circle, fill, inner sep = 3pt,
+                          pattern = north west lines,
+                          pattern color = blue},
      pruned/.style = {dotted},
-     solution/.style = {line width=2pt, dashed}]
+     solution/.style = {line width = 2pt, dashed}]
 
     \node at (0,0) [rootNode] (root) {};
 
@@ -469,8 +469,8 @@ pruned as no-goods.
 
       (R) edge (RR)
       (R) edge [solution] (RB)
-      (G) edge node [sloped, above=-2pt] {$h_{X_2 \gets 1}$} (GR)
-      (G) edge node [sloped, above=-2pt] {$h_{X_2 \gets 3}$} (GB)
+      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets 1}$} (GR)
+      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets 3}$} (GB)
 
       (RR) edge [pruned] (RRR)
       (RR) edge [pruned] (RRG)
