@@ -313,22 +313,29 @@ goals hierarchy.
 \begin{figure}
   \centering
   \begin{tikzpicture}
-    [level distance = 3em, sibling distance = 10em]
-    \node {\texttt{Label}($\mathscr{X}$)}
+    [level distance = 3em, sibling distance = 10em,
+     recursion/.style = {->, dotted, bend right}]
+    \node (Label) {\texttt{Label}($\mathscr{X}$)}
       child {node {\textsf{AND}}
-        child {node {\texttt{Instantiate}($X$)}
+        child {node (Instantiate)
+                    {\texttt{Instantiate}($X$)}
           child {node {\textsf{OR}}
             child {node {$X \! \gets \! v$}}
             child {node {\textsf{AND}}
               child {node {$D_X \!\! \gets
-	                   \!\! D_X \!\! - \!\! \{v\}$}}
-              child {node {\texttt{Instantiate}($X$)}}
+                           \!\! D_X \!\! - \!\! \{v\}$}}
+              child {node (InstantiateChild)
+                          {\texttt{Instantiate}($X$)}}
             }
           }
         }
-        child {node {\texttt{Label}($\mathscr{X} \! - \!
-	                             \{X\}$)}}
+        child {node (LabelChild)
+              {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
       };
+    \path
+      (LabelChild.40) edge [recursion] (Label.east)
+      (InstantiateChild) edge [recursion]
+      (Instantiate.east);
   \end{tikzpicture}
   \caption{The combination of the goals that compose DFS\label{DFS}}
 \end{figure}
@@ -472,8 +479,10 @@ pruned as no-goods.
 
       (R) edge (RR)
       (R) edge [solution] (RB)
-      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets 1}$} (GR)
-      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets 3}$} (GB)
+      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets
+                                             1}$} (GR)
+      (G) edge node [sloped, above = -2pt] {$h_{X_2 \gets
+                                             3}$} (GB)
 
       (RR) edge [pruned] (RRR)
       (RR) edge [pruned] (RRG)
@@ -499,8 +508,7 @@ pruned as no-goods.
       (GBR) edge (GBRR)
       (GBR) edge (GBRB)
       (GBG) edge [pruned] (GBGR)
-      (GBG) edge [pruned] (GBGB)
-      ;
+      (GBG) edge [pruned] (GBGB);
   \end{tikzpicture}
   \caption{The search tree for
            Thessaly-coloring\label{pruned-tree}}
