@@ -313,18 +313,21 @@ goals hierarchy.
 \begin{figure}
   \centering
   \begin{tikzpicture}
+    [level distance = 3em, sibling distance = 10em]
     \node {\texttt{Label}($\mathscr{X}$)}
       child {node {\textsf{AND}}
         child {node {\texttt{Instantiate}($X$)}
           child {node {\textsf{OR}}
             child {node {$X \! \gets \! v$}}
             child {node {\textsf{AND}}
-              child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+              child {node {$D_X \!\! \gets
+	                   \!\! D_X \!\! - \!\! \{v\}$}}
               child {node {\texttt{Instantiate}($X$)}}
             }
           }
         }
-        child {node {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
+        child {node {\texttt{Label}($\mathscr{X} \! - \!
+	                             \{X\}$)}}
       };
   \end{tikzpicture}
   \caption{The combination of the goals that compose DFS\label{DFS}}
