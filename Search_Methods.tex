@@ -341,7 +341,7 @@ goals hierarchy.
     [level distance = 3em, sibling distance = 10em,
      recursion/.style = {->, dotted, bend right}]
     \node (Broadening) {\texttt{Broadening}($\mathit{Breadth}$)}
-      child {node {\textsf{AND}}
+      child {node {\textsf{OR}}
         child {node (Label) {\texttt{Label}($\mathscr{X}$)}
           child {node {\textsf{AND}}
             child {node (Instantiate) {\texttt{Instantiate}($X$)}
@@ -400,7 +400,7 @@ goals hierarchy.
         \Else
           \State $\mathit{NextGoal} \gets \textrm{result
                   of }\mathit{Goal}\textrm{'s execution}$
-          \If {$\Call{TwoConsistent}{}() = \mathrm{false}$}
+          \If {$\Call{PropagateConstraints}{}() = \mathrm{false}$}
             \If {$\Call{BackTrack}{}() = \mathrm{false}$}
               \State \Return false
             \EndIf
