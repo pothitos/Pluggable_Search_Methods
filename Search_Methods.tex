@@ -340,20 +340,26 @@ goals hierarchy.
   \begin{tikzpicture}
     [level distance = 3em, sibling distance = 10em,
      recursion/.style = {->, dotted, bend right}]
-    \node (Label) {\texttt{Label}($\mathscr{X}$)}
+    \node (Broadening) {\texttt{Broadening}($\mathit{Breadth}$)}
       child {node {\textsf{AND}}
-        child {node (Instantiate) {\texttt{Instantiate}($X$)}
-          child {node {\textsf{OR}}
-            child {node {$X \! \gets \! v$}}
-            child {node {\textsf{AND}}
-              child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
-              child {node (InstantiateChild) {\texttt{Instantiate}($X$)}}
+        child {node (Label) {\texttt{Label}($\mathscr{X}$)}
+          child {node {\textsf{AND}}
+            child {node (Instantiate) {\texttt{Instantiate}($X$)}
+              child {node {\textsf{OR}}
+                child {node {$X \! \gets \! v$}}
+                child {node {\textsf{AND}}
+                  child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+                  child {node (InstantiateChild) {\texttt{Instantiate}($X$)}}
+                }
+              }
             }
+            child {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
           }
         }
-        child {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
+        child {node (BroadeningChild) {\texttt{Broadening}($\mathit{Breadth} + 1$)}}
       };
     \path
+      (BroadeningChild.12) edge [recursion] (Broadening.east)
       (LabelChild.40) edge [recursion] (Label.east)
       (InstantiateChild) edge [recursion] (Instantiate.east);
   \end{tikzpicture}
@@ -367,10 +373,10 @@ goals hierarchy.
     \Function{Solve}{}
       \While {time limit has not been reached}
         \If {stackOr.top.stackAnd is not empty}
-          \State $CurrGoal \gets
+          \State $\mathit{Goal} \gets
                   \mathrm{stackOr.top.stackAnd.pop()}$
         \Else
-          \State $CurrGoal \gets
+          \State $\mathit{Goal} \gets
                   \mathrm{stackOr.top.delayedGoal}$
           \State $\mathrm{stackOr.top.delayedGoal} \gets
                  \textrm{get}$ the next goal of stackAnd of
@@ -380,27 +386,27 @@ goals hierarchy.
                  get the next delayed goal of that stackOr
                  frame
         \EndIf
-        \If {$CurrGoal$ is an AND-goal}
+        \If {$\mathit{Goal}$ is an AND-goal}
           \State stackOr.top.stackAnd.push(2\textsuperscript{nd}
-                 sub-goal of $CurrGoal$)
+                 sub-goal of $\mathit{Goal}$)
           \State stackOr.top.stackAnd.push(1\textsuperscript{st}
-                 sub-goal of $CurrGoal$)
-        \ElsIf {$CurrGoal$ is an OR-goal}
+                 sub-goal of $\mathit{Goal}$)
+        \ElsIf {$\mathit{Goal}$ is an OR-goal}
           \State stackOr.push(2\textsuperscript{nd} sub-goal
-                 of $CurrGoal$)
+                 of $\mathit{Goal}$)
           \State Initialize stackOr.top.delayedGoal
           \State stackOr.top.stackAnd.push(1\textsuperscript{st}
-                 sub-goal of $CurrGoal$)
+                 sub-goal of $\mathit{Goal}$)
         \Else
-          \State $NewGoal \gets \textrm{result
-                  of }CurrGoal\textrm{'s execution}$
+          \State $\mathit{NextGoal} \gets \textrm{result
+                  of }\mathit{Goal}\textrm{'s execution}$
           \If {$\Call{TwoConsistent}{}() = \mathrm{false}$}
             \If {$\Call{BackTrack}{}() = \mathrm{false}$}
               \State \Return false
             \EndIf
           \EndIf
-          \If {$NewGoal \neq \textrm{null}$}
-            \State stackOr.top.stackAnd.push($NewGoal$)
+          \If {$\mathit{NextGoal} \neq \textrm{null}$}
+            \State stackOr.top.stackAnd.push($\mathit{NextGoal}$)
           \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
                   \\ \hspace{7.5em}
                   $\mathrm{stackOr.top.delayedGoal} =
@@ -1336,8 +1342,8 @@ instance (\textsf{Fis0506-1} of Section~\ref{ITC}), we
 invoked \textsc{PopsSample} for various
 $\mathsf{PieceToCover}$ and $\mathsf{conf}$ values and we
 plotted the best solution costs found in Figure~\ref{ITC1}.
-The third dimension is the $cost$ of the solutions found:
-the lower the solution cost is, the more qualitative
+The third dimension is the \emph{cost} of the solutions
+found: the lower the solution cost is, the more qualitative
 timetable is produced.
 
 \begin{figure}
