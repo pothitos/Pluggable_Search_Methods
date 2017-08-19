@@ -11,7 +11,7 @@ The original conference paper is available through the
 
 __This repository that you're currently viewing produces an
 [extended/revised
-version](http://di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
+article](http://di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
 currently under construction.__
 
 It will be submitted to IJAIT journal. Therefore, it should
