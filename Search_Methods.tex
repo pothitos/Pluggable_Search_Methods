@@ -403,13 +403,13 @@ goals hierarchy.
                   \mathrm{stackOr.top.stackAnd.pop()}$
         \Else
           \State $\mathit{Goal} \gets
-                  \mathrm{stackOr.top.delayed}$
-          \State $\mathrm{stackOr.top.delayed} \gets
+                  \mathrm{stackOr.top.pending}$
+          \State $\mathrm{stackOr.top.pending} \gets
                  \textrm{get}$ the next goal of stackAnd of
                  the \\ \hspace{8em} stackOr frame that
-                 ``delayed'' points to \textbf{or} (if there
+                 ``pending'' points to \textbf{or} (if there
                  is not \\ \hspace{8em} such a goal) get the
-                 next delayed goal of that stackOr frame
+                 next pending goal of that stackOr frame
         \EndIf
         \If {$\mathit{Goal}$ is an AND-goal}
           \State stackOr.top.stackAnd.push(2\textsuperscript{nd}
@@ -419,7 +419,7 @@ goals hierarchy.
         \ElsIf {$\mathit{Goal}$ is an OR-goal}
           \State stackOr.push(2\textsuperscript{nd} sub-goal
                  of $\mathit{Goal}$)
-          \State Initialize stackOr.top.delayed
+          \State Initialize stackOr.top.pending
           \State stackOr.top.stackAnd.push(1\textsuperscript{st}
                  sub-goal of $\mathit{Goal}$)
         \Else
@@ -434,7 +434,7 @@ goals hierarchy.
             \State stackOr.top.stackAnd.push($\mathit{NextGoal}$)
           \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
                   \\ \hspace{7.5em}
-                  $\mathrm{stackOr.top.delayed} =
+                  $\mathrm{stackOr.top.pending} =
                   \textrm{null}$}
             \State \Return true \Comment {Success}
           \EndIf
