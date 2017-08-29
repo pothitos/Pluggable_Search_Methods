@@ -294,21 +294,6 @@ alternatives in $D_X$ are exhausted.
             D_X \!\! - \!\! \{v\}$,\,
             \texttt{Instantiate}($X$))), with $v \in D_X$.
 \end{itemize}
-When we call \texttt{Label}($\mathscr{X}$), a whole search
-tree will be created.
-
-\subsection{The goals are the search tree nodes}
-
-There is a direct relationship between a search tree and the
-goals hierarchy.
-\begin{itemize}
-  \item When the first goal, e.g.\ 
-        \texttt{Label}($\mathscr{X}$), is called, the search
-        tree \emph{root} is created.
-  \item When an \textsf{OR} goal occurs, the current node is
-        extended into two branches that represent the two
-        alternative choices.
-\end{itemize}
 
 \begin{figure}
   \centering
@@ -606,6 +591,19 @@ ends up into a leaf (lowest node), we have a \emph{complete}
 assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
 is an alternative form of the solution assignment in
 \eqref{solution}.
+
+\subsection{The goals are the search tree nodes}
+
+There is a direct relationship between a search tree and the
+goals hierarchy.
+\begin{itemize}
+  \item When the first goal, e.g.\ 
+        \texttt{Label}($\mathscr{X}$), is called, the search
+        tree \emph{root} is created.
+  \item When an \textsf{OR} goal occurs, the current node is
+        extended into two branches that represent the two
+        alternative choices.
+\end{itemize}
 
 \subsection{Heuristic estimation as a real number}
 
