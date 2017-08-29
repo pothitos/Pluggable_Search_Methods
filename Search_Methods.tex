@@ -294,6 +294,8 @@ alternatives in $D_X$ are exhausted.
             D_X \!\! - \!\! \{v\}$,\,
             \texttt{Instantiate}($X$))), with $v \in D_X$.
 \end{itemize}
+The interdependencies between the above DFS goals are
+graphically displayed in Fig.~\ref{DFS}.
 
 \begin{figure}
   \centering
@@ -317,7 +319,8 @@ alternatives in $D_X$ are exhausted.
       (LabelChild.40) edge [recursion] (Label.east)
       (InstantiateChild) edge [recursion] (Instantiate.east);
   \end{tikzpicture}
-  \caption{The combination of the goals that compose DFS\label{DFS}}
+  \caption{The combination of the goals that compose
+           DFS\label{DFS}}
 \end{figure}
 
 \begin{figure}
