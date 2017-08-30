@@ -408,6 +408,33 @@ exceed $\mathit{Breadth}$.
            Broadening\label{IBroadening}}
 \end{figure}
 
+\newcommand{\Solve}{\textbf{\normalsize S\small OLVE}}
+
+\subsection{\Solve: An algorithm that satisfies search
+            methods' goals}
+
+In the previous sections we described a high level way to
+define search methods. This framework consists of goals that
+support recursion (goals that return goals or success) and
+meta-goals used to combine other goals in a conjunctive
+(\textsf{AND}) or disjunctive (\textsf{OR}) manner.
+
+This is a not only a theoretical model; it has been
+implemented in a C++ Constraint Programming \textsc{Naxos
+Solver}. DFS and Iterative Broadening have been declared in
+\textsc{Naxos} without loosing much of the above
+expressiveness, along with many other search methods in the
+solver's repository.\cite{Naxos}
+
+The search methods' goals cannot solve by themselves any
+CSP; we need a procedure that satisfies these goals.
+\textsc{Solve} algorithm in Figure~\ref{solve} uses an
+advanced ``stack of stacks'' data structure to store goals.
+Initially, the stack of stacks contains just a single goal,
+e.g.\ \texttt{Broadening}($1$) or
+\texttt{Label}($\mathscr{X}$) for DFS, as in
+Figure~\ref{abcd}(a).
+
 \begin{figure}
   \centering
   \begin{algorithmic}
@@ -458,7 +485,7 @@ exceed $\mathit{Breadth}$.
       \State \Return false
     \EndFunction
   \end{algorithmic}
-  \caption{Goals' Satisfaction Algorithm\label{search}}
+  \caption{Goals' Satisfaction Algorithm\label{solve}}
 \end{figure}
 
 \begin{figure}
