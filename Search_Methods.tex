@@ -354,6 +354,10 @@ comes into play. The \texttt{Instantiate} goal is now named
   \item \texttt{Instantiate2}($X$,
                               $\mathit{CurrentBreadth}$) :=
           \textsf{failure},
+          if $D_X = \emptyset$,
+  \item \texttt{Instantiate2}($X$,
+                              $\mathit{CurrentBreadth}$) :=
+          \textsf{failure},
           if $\mathit{CurrentBreadth} > \mathit{Breadth}$,
   \item \texttt{Instantiate2}($X$,
                               $\mathit{CurrentBreadth}$) :=
@@ -647,8 +651,8 @@ There is a direct relationship between a search tree and the
 goals hierarchy.
 \begin{itemize}
   \item When the first goal, e.g.\ 
-        \texttt{Label}($\mathscr{X}$), is called, the search
-        tree \emph{root} is created.
+        \texttt{Label}($\mathscr{X}$) in DFS, is called, the
+        search tree \emph{root} is created.
   \item When an \textsf{OR} goal occurs, the current node is
         extended into two branches that represent the two
         alternative choices.
