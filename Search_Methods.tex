@@ -407,32 +407,6 @@ comes into play. The \texttt{Instantiate} goal is now named
 
 \begin{figure}
   \centering
-  \begin{tikzpicture}
-    [level distance = 3em, sibling distance = 12em,
-     recursion/.style = {->, dotted, bend right}]
-    \node (Label) {\textsc{PopsSample}($\mathscr{X}$)}
-      child {node {\textsf{AND}}
-        child {node (Instantiate) {\texttt{Instantiate3}($X$)}
-          child {node {\textsf{OR}}
-            child {node {$X \! \gets \! v$}}
-            child {node {\textsf{AND}}
-              child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
-              child {node (InstantiateChild) {\texttt{Instantiate3}($X$)}}
-            }
-          }
-        }
-        child {node (LabelChild) {\textsc{PopsSample}($\mathscr{X} \! - \! \{X\}$)}}
-      };
-    \path
-      (LabelChild.18) edge [recursion] (Label.east)
-      (InstantiateChild) edge [recursion] (Instantiate.east);
-  \end{tikzpicture}
-  \caption{The goals that build up
-           \textsc{PopsSample}\label{PopsSampleGoals}}
-\end{figure}
-
-\begin{figure}
-  \centering
   \begin{algorithmic}
     \Function{Solve}{}
       \While {time limit has not been reached}
@@ -1188,6 +1162,32 @@ $\mathsf{conf}$idence semantics in our framework.
   \input{figures/piechart}
   \caption{The heuristics pie chart for
            Example~\ref{distribution}\label{piechart}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \begin{tikzpicture}
+    [level distance = 3em, sibling distance = 12em,
+     recursion/.style = {->, dotted, bend right}]
+    \node (Label) {\textsc{PopsSample}($\mathscr{X}$)}
+      child {node {\textsf{AND}}
+        child {node (Instantiate) {\texttt{Instantiate3}($X$)}
+          child {node {\textsf{OR}}
+            child {node {$X \! \gets \! v$}}
+            child {node {\textsf{AND}}
+              child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+              child {node (InstantiateChild) {\texttt{Instantiate3}($X$)}}
+            }
+          }
+        }
+        child {node (LabelChild) {\textsc{PopsSample}($\mathscr{X} \! - \! \{X\}$)}}
+      };
+    \path
+      (LabelChild.18) edge [recursion] (Label.east)
+      (InstantiateChild) edge [recursion] (Instantiate.east);
+  \end{tikzpicture}
+  \caption{The goals that build up
+           \textsc{PopsSample}\label{PopsSampleGoals}}
 \end{figure}
 
 \subsection{Heuristic confidence vs.\ node level}
