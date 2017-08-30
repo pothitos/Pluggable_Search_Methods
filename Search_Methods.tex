@@ -440,49 +440,54 @@ Figure~\ref{abcd}(a).
   \begin{algorithmic}
     \Function{Solve}{}
       \While {time limit has not been reached}
-        \If {stackOr.top.stackAnd is not empty}
+        \If {stacks.top is not empty}
           \State $\mathit{Goal} \gets
-                  \mathrm{stackOr.top.stackAnd.pop()}$
+                  \mathrm{stacks.top.pop()}$
         \Else
           \State $\mathit{Goal} \gets
-                  \mathrm{stackOr.top.pending}$
-          \State $\mathrm{stackOr.top.pending} \gets
-                 \textrm{get}$ the next goal of stackAnd of
-                 the \\ \hspace{8em} stackOr frame that
-                 ``pending'' points to \textbf{or} (if there
-                 is not \\ \hspace{8em} such a goal) get the
-                 next pending goal of that stackOr frame
+                  \mathrm{stacks.top.pending}$
+          \State $\mathrm{stacks.top.pending} \gets
+                 \textrm{get}$ the next goal of the frame
+                 that ``pending'' \\ \hspace*{14em} points
+                 to \textbf{or} (if there is not such a
+                 goal) get \\ \hspace*{14em} the next
+                 ``pending'' goal of that frame
         \EndIf
         \If {$\mathit{Goal}$ is an AND-goal}
-          \State stackOr.top.stackAnd.push(2\textsuperscript{nd}
-                 sub-goal of $\mathit{Goal}$)
-          \State stackOr.top.stackAnd.push(1\textsuperscript{st}
-                 sub-goal of $\mathit{Goal}$)
+          \State stacks.top.push(2\textsuperscript{nd}
+                 subgoal of $\mathit{Goal}$)
+          \State stacks.top.push(1\textsuperscript{st}
+                 subgoal of $\mathit{Goal}$)
         \ElsIf {$\mathit{Goal}$ is an OR-goal}
-          \State stackOr.push(2\textsuperscript{nd} sub-goal
-                 of $\mathit{Goal}$)
-          \State Initialize stackOr.top.pending
-          \State stackOr.top.stackAnd.push(1\textsuperscript{st}
-                 sub-goal of $\mathit{Goal}$)
+          \State stacks.top.push(2\textsuperscript{nd}
+                 subgoal of $\mathit{Goal}$)
+          \State stacks.push() \Comment Push an empty frame
+          \State stacks.top.push(1\textsuperscript{st}
+                 subgoal of $\mathit{Goal}$)
+          \State $\mathrm{stacks.top.pending} \gets
+                 \textrm{the}$ goal after the
+                 2\textsuperscript{nd} subgoal in the below
+                 frame
         \Else
-          \State $\mathit{NextGoal} \gets \textrm{result
-                  of }\mathit{Goal}\textrm{'s execution}$
-          \If {$\Call{PropagateConstraints}{}() = \mathrm{false}$}
-            \If {$\Call{BackTrack}{}() = \mathrm{false}$}
-              \State \Return false
+          \State $\mathit{NextGoal} \gets
+                  \mathit{Goal}\textrm{.execute()}$
+          \If {$\Call{PropagateConstraints}{}() =
+                \mathrm{false}$}
+            \State stacks.pop()
+            \Comment Backtrack to previous frame
+            \If {stacks empty}
+              \State \Return failure
             \EndIf
-          \EndIf
-          \If {$\mathit{NextGoal} \neq \textrm{null}$}
-            \State stackOr.top.stackAnd.push($\mathit{NextGoal}$)
-          \ElsIf {stackOr.top.stackAnd is empty \textbf{and}
-                  \\ \hspace{7.5em}
-                  $\mathrm{stackOr.top.pending} =
-                  \textrm{null}$}
-            \State \Return true \Comment {Success}
+          \ElsIf {$\mathit{NextGoal} \neq \textrm{null}$}
+            \State stacks.top.push($\mathit{NextGoal}$)
+          \ElsIf {stacks.top is empty \textbf{and}
+                  $\mathrm{stacks.top.pending} =
+                   \textrm{null}$}
+            \State \Return success
           \EndIf
         \EndIf
       \EndWhile
-      \State \Return false
+      \State \Return failure
     \EndFunction
   \end{algorithmic}
   \caption{Goals' Satisfaction Algorithm\label{solve}}
