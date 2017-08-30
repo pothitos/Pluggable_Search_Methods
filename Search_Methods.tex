@@ -408,6 +408,8 @@ exceed $\mathit{Breadth}$.
            Broadening\label{IBroadening}}
 \end{figure}
 
+\newcommand{\SolveNormal}{{\normalsize S\small OLVE}}
+
 \newcommand{\Solve}{\textbf{\normalsize S\small OLVE}}
 
 \subsection{\Solve: An algorithm that satisfies search
@@ -528,6 +530,32 @@ structure itself.
                 the previous inner stacks.
         \end{itemize}
 \end{itemize}
+
+\subsubsection{\SolveNormal{} in a Nutshell}
+
+We can see the ``stack of stacks'' data structure inside the
+\textsc{Solve} algorithm.
+\begin{itemize}
+  \item The outer stack corresponds to the ``stacks''
+        variable.
+  \item The ``stacks.top'' expression corresponds to the top
+        frame of the ``stacks.''
+  \item The ``stacks.top.pending'' corresponds to the
+        pointer of the top frame.
+\end{itemize}
+
+The algorithm is wrapped into a ``while'' loop. In each
+iteration a unique goal is examined.
+
+Inside the loop we have two ``if'' statements. In the first
+``if,'' we select the goal that we will attempt to satisfy.
+In the second ``if,'' we check if the $\mathit{Goal}$ is a
+meta-goal and we handle properly its two subgoals. If it is
+not a meta-goal, we simply ``execute()'' it and store the
+returned value to the $\mathit{NextGoal}$ variable. A
+``null'' returned value means that the executed
+$\mathit{Goal}$ did not generate another goal to be
+satisfied.
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/efgh}
