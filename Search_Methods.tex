@@ -329,7 +329,7 @@ Figure~\ref{IBroadening} displays the corresponding goals'
 graph for the \emph{Iterative Broadening} search method. The
 goals' structure is similar to DFS. However, one basic
 difference is that there is one more level, namely
-\texttt{Broadening}, above the ordinary DFS goals:
+\texttt{Broadening}, above the ordinary DFS goals.
 \begin{itemize}
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
           \textsf{failure}, if $\mathit{Breadth} > d$,
@@ -349,7 +349,7 @@ $d$, then the \texttt{Broadening} goal fails.
 
 Therefore, a second basic difference in comparison with DFS
 comes into play. The \texttt{Instantiate} goal is now named
-\texttt{Instantiate2}, and it takes one more argument:
+\texttt{Instantiate2}, and it takes one more argument.
 \begin{itemize}
   \item \texttt{Instantiate2}($X$,
                               $\mathit{CurrentBreadth}$) :=
