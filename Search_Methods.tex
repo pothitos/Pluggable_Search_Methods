@@ -499,6 +499,36 @@ Figure~\ref{abcd}(a).
            instantiation\label{abcd}}
 \end{figure}
 
+\subsubsection{The ``stack of stacks'' data structure}
+
+In order to understand the \textsc{Solve} pseudocode, we
+should look closer at the underlying data structure in
+Fig.~\ref{abcd}. Each subfigure from (a) to (v) displays a
+snapshot of the ``stack of stacks'' while trying to satisfy
+the \texttt{Label}($\mathscr{X}$) goal for the
+Thessaly-coloring problem. Here we focus on the data
+structure itself.
+\begin{itemize}
+  \item The ``stack of the stacks'' is outlined by the outer
+        borders of each subfigure.
+        \begin{itemize}
+          \item The frames of the (outer) stack are
+                connected with an \textsf{OR} relationship.
+        \end{itemize}
+  \item Each frame of the outer stack is a stack too,
+        containing goals.
+        \begin{itemize}
+          \item The goals of each (inner) stack are
+                connected with an \textsf{AND} relationship.
+        \end{itemize}
+  \item Each inner stack contains additionally a
+        \textsf{pending} pointer.
+        \begin{itemize}
+          \item It points to the first unsatisfied goal of
+                the previous inner stacks.
+        \end{itemize}
+\end{itemize}
+
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/efgh}
   \caption{\textsc{Solve} with DFS example: Part B: $X_2$
