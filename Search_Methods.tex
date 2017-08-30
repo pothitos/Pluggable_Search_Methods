@@ -327,18 +327,43 @@ graphically displayed in Fig.~\ref{DFS}.
 
 Figure~\ref{IBroadening} displays the corresponding goals'
 graph for the \emph{Iterative Broadening} search method. The
-goals' structure is similar to DFS. One basic difference is
-that there is one more level, namely \texttt{Broadening},
-above the ordinary DFS goals:
+goals' structure is similar to DFS. However, one basic
+difference is that there is one more level, namely
+\texttt{Broadening}, above the ordinary DFS goals:
 \begin{itemize}
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
-          \textsf{failure}, if $\mathit{Breadth} = d$,
+          \textsf{failure}, if $\mathit{Breadth} > d$,
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
           \textsf{AND}(\texttt{Label}($\mathscr{X}$),
             \texttt{Broadening}($\mathit{Breadth} + 1$)),
         otherwise.
 \end{itemize}
+For each Iterative Broadening iteration, the
+$\mathit{Breadth}$ parameter defines the maximum number of
+values that a constrained variable can be successively
+assigned. This value is initially $0$. The
+$\mathit{Breadth}$ value cannot exceed $d$, which in this
+context is the maximum cardinality (size) of the domains of
+all constrained variables. If $\mathit{Breadth}$ exceeds
+$d$, then the \texttt{Broadening} goal fails.
 
+Therefore, a second basic difference in comparison with DFS
+comes into play. The \texttt{Instantiate} goal is now named
+\texttt{Instantiate2}, and it takes one more argument:
+\begin{itemize}
+  \item \texttt{Instantiate2}($X$,
+                              $\mathit{CurrentBreadth}$) :=
+          \textsf{failure},
+          if $\mathit{CurrentBreadth} > \mathit{Breadth}$,
+  \item \texttt{Instantiate2}($X$,
+                              $\mathit{CurrentBreadth}$) :=
+          \textsf{OR}($X \! \gets \! v$, \\
+            \hspace*{\stretch{1}}
+            \textsf{AND}($D_X \!\! \gets \!\!
+                D_X \!\! - \!\! \{v\}$,\,
+              \texttt{Instantiate2}($X$,
+                $\mathit{CurrentBreadth} + 1$))), otherwise.
+\end{itemize}
 
 \begin{figure}
   \centering
