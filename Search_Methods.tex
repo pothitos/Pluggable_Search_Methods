@@ -368,6 +368,9 @@ comes into play. The \texttt{Instantiate} goal is now named
               \texttt{Instantiate2}($X$,
                 $\mathit{CurrentBreadth} + 1$))), otherwise.
 \end{itemize}
+This implements Iterative Broadening's semantics: The number
+of consecutive instantiations to the same variable cannot
+exceed $\mathit{Breadth}$.
 
 \begin{figure}
   \centering
