@@ -323,33 +323,54 @@ graphically displayed in Fig.~\ref{DFS}.
            DFS\label{DFS}}
 \end{figure}
 
+\subsection{Defining Iterative Broadening using goals}
+
+Figure~\ref{IBroadening} displays the corresponding goals'
+graph for the \emph{Iterative Broadening} search method. The
+goals' structure is similar to DFS. One basic difference is
+that there is one more level, namely \texttt{Broadening},
+above the ordinary DFS goals:
+\begin{itemize}
+  \item \texttt{Broadening}($\mathit{Breadth}$) :=
+          \textsf{failure}, if $\mathit{Breadth} = d$,
+  \item \texttt{Broadening}($\mathit{Breadth}$) :=
+          \textsf{AND}(\texttt{Label}($\mathscr{X}$),
+            \texttt{Broadening}($\mathit{Breadth} + 1$)),
+        otherwise.
+\end{itemize}
+
+
 \begin{figure}
   \centering
   \begin{tikzpicture}
     [level distance = 3em, sibling distance = 10em,
+     normalDistant/.style = {sibling distance = 10em},
+     distant/.style = {sibling distance = 12.5em},
+     moreDistant/.style = {sibling distance = 14em},
      recursion/.style = {->, dotted, bend right}]
     \node (Broadening) {\texttt{Broadening}($\mathit{Breadth}$)}
       child {node {\textsf{OR}}
         child {node (Label) {\texttt{Label}($\mathscr{X}$)}
           child {node {\textsf{AND}}
-            child {node (Instantiate) {\texttt{Instantiate}($X$)}
-              child {node {\textsf{OR}}
+            child [moreDistant] {node {$\mathit{CurrentBreadth} \! \gets \! 0$}}
+            child [moreDistant] {node (Instantiate) {\texttt{Instantiate2}($X$, $\mathit{CurrentBreadth}$)}
+              child [normalDistant] {node {\textsf{OR}}
                 child {node {$X \! \gets \! v$}}
                 child {node {\textsf{AND}}
-                  child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
-                  child {node (InstantiateChild) {\texttt{Instantiate}($X$)}}
+                  child [distant] {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+                  child [distant] {node (InstantiateChild) {\texttt{Instantiate2}($X$, $\mathit{CurrentBreadth} + 1$)}}
                 }
               }
             }
-            child {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
+            child [moreDistant] {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
           }
         }
         child {node (BroadeningChild) {\texttt{Broadening}($\mathit{Breadth} + 1$)}}
       };
     \path
       (BroadeningChild.12) edge [recursion] (Broadening.east)
-      (LabelChild.40) edge [recursion] (Label.east)
-      (InstantiateChild) edge [recursion] (Instantiate.east);
+      (LabelChild) edge [->, dotted] (Label.east)
+      (InstantiateChild.16) edge [recursion] (Instantiate.east);
   \end{tikzpicture}
   \caption{The goals composing Iterative
            Broadening\label{IBroadening}}
