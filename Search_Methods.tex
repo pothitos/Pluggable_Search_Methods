@@ -607,6 +607,40 @@ visible in the corresponding subfigures of Figures
              \textcolor{red}{1}$, \textsf{AND}($D_{X_1} \!\!
              \gets \!\! D_X \! - \!
              \{\textcolor{red}{1}\}$,\,\texttt{Instantiate}($X_1$))).
+             In this case, \textsc{Solve} algorithm should
+             cover three requirements.
+             \begin{enumerate}
+               \item[1.] Execute the first subgoal and, of
+                         course, all the returned\slash
+                         generated goals.
+               \item[2.] Execute all the ``pending'' goals
+                         that were unsatisfied before the
+                         \textsf{OR}-goal.
+               \item[3.] If any of the above fails, undo all
+                         the actions and execute the second
+                         subgoal.
+             \end{enumerate}
+             In Fig.~\ref{abcd}(c), all three requirements
+             have been implemented.
+             \begin{enumerate}
+               \item[1.] The first subgoal is in the top
+                         stack and will be executed in the
+                         next iteration.
+               \item[2.] The ``pending'' pointer of the top
+                         stack points to the next
+                         unsatisfied goal.
+               \item[3.] Most importantly, a new stack has
+                         been created on top of the previous
+                         inner stack. The new stack was
+                         added in order to isolate the
+                         previous inner stack. This would be
+                         useful if any of the top stack
+                         goals fails: The top stack will be
+                         popped, and the second
+                         \textsf{OR}-subgoal that is stored
+                         in the previous inner stack will be
+                         executed.
+             \end{enumerate}
   \item[(d)] 
   \item[(e)] 
   \item[(f)] 
