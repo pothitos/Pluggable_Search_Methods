@@ -668,9 +668,16 @@ to \ref{tuv}:
              \texttt{Label}($\{X_2, X_3, X_4\}$)), which is
              executed in turn in the next iteration. The
              result is depicted in Fig.~\ref{a2h}(e).
-  \item[(f)] 
-  \item[(g)] 
-  \item[(h)] 
+  \item[(f)] \texttt{Instantiate}($X_2$) is executed, and,
+             as in (c). As this is an \textsc{OR} goal, a
+             new stack is pushed.
+  \item[(g)] $X_2 \! \gets \! \textcolor{red}{1}$ gets
+             executed.
+  \item[(h)] The assignment makes
+             \textsc{PropagateConstraints} fail, as it
+             violates the $X_1 \neq X_2$ constraint.
+             Backtracking, i.e. popping the whole top stack,
+             is activated.
   \item[(i)] 
   \item[(j)] 
   \item[(k)] 
