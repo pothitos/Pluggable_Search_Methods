@@ -559,6 +559,17 @@ returned value into the $\mathit{NextGoal}$ variable. A
 $\mathit{Goal}$ did not generate another goal to be
 satisfied.
 
+After each $\mathit{Goal}$ execution,
+\textsc{PropagateConstraints} is called. A simple
+implementation for this function would just check if every
+constraint is still valid. If even a single constraint is
+violated, \textsc{PropagateConstraints} should return false.
+However, as its name implies, \textsc{PropagateConstraints}
+can do more just than checking constraints: it may remove
+no-good values from the variables and enforce a kind of
+``consistency'' between them, but this is beyond the scope
+of this paper to analyze further.\cite{AC}
+
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/efgh}
   \caption{\textsc{Solve} with DFS example: Part B: $X_2$
