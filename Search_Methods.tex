@@ -265,7 +265,7 @@ another value from its domain. If all the alternative values
 are exhausted, we \emph{backtrack} to the previous variable
 selected and we undo its assignment and so forth.
 
-\subsection{Defining DFS using goals}
+\subsection{Defining DFS using goals\label{DFS-goals}}
 
 The ultimate goal in DFS and in every constructive search
 method is to \texttt{Label} every variable with a value.
@@ -570,6 +570,57 @@ can do more just than checking constraints: it may remove
 no-good values from the variables and enforce a kind of
 ``consistency'' between them, but this is beyond the scope
 of this paper to analyze further.\cite{AC}
+
+\subsubsection{\SolveNormal{} in action}
+
+Let's execute \textsc{Solve} to find a solution to the
+Thessaly-coloring (Problem~\ref{thessaly-coloring}) using
+the DFS method goals (Section~\ref{DFS-goals}). The
+snapshots of the ``stack of stacks'' data structure are
+visible in the corresponding subfigures of Figures
+\ref{abcd} to \ref{tuv}:
+\begin{enumerate}
+  \item[(a)] Before \textsc{Solve} begins, the first goal to
+             be satisfied should be already in the single
+             inner stack. In the case of DFS, the initial
+             goal is \texttt{Label}($\mathscr{X}$) which in
+             Thessaly-coloring is equivalent to
+             \texttt{Label}($\{X_1, X_2, X_3, X_4\}$).
+  \item[(b)] \textsc{Solve} begins and pops the
+             \texttt{Label} goal out of the inner stack and
+             executes it. By definition, \texttt{Label}
+             returns an \textsf{AND} goal. In other words,
+             \texttt{Label} is substituted by an
+             \textsf{AND} goal at the inner stack.
+
+             This \textsf{AND} goal is then popped in turn
+             by the next \textsc{Solve} iteration and after
+             its execution returns its two subgoals
+             \texttt{Instantiate}($\{X_1\}$) and
+             \texttt{Label}($\{X_2, X_3, X_4\}$). At that
+             time, the ``stack of stacks'' looks like
+             Fig.~\ref{abcd}(b).
+  \item[(c)] 
+  \item[(d)] 
+  \item[(e)] 
+  \item[(f)] 
+  \item[(g)] 
+  \item[(h)] 
+  \item[(i)] 
+  \item[(j)] 
+  \item[(k)] 
+  \item[(l)] 
+  \item[(m)] 
+  \item[(n)] 
+  \item[(o)] 
+  \item[(p)] 
+  \item[(q)] 
+  \item[(r)] 
+  \item[(s)] 
+  \item[(t)] 
+  \item[(u)] 
+  \item[(v)] 
+\end{enumerate}
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/efgh}
