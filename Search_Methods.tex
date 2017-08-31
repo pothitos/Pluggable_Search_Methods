@@ -438,7 +438,7 @@ advanced ``stack of stacks'' data structure to store goals.
 Initially, the stack of stacks contains just a single goal,
 e.g.\ \texttt{Broadening}($1$) or
 \texttt{Label}($\mathscr{X}$) for DFS, as in
-Figure~\ref{abcd}(a).
+Figure~\ref{a2h}(a).
 
 \begin{figure}
   \centering
@@ -500,15 +500,17 @@ Figure~\ref{abcd}(a).
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/abcd}
+  \includegraphics[width=\textwidth]{figures/stacks/efgh}
   \caption{\textsc{Solve} with DFS example: $X_1$
-           instantiation\label{abcd}}
+           instantiation and $X_2$ instantiation
+           attempt\label{a2h}}
 \end{figure}
 
 \subsubsection{The ``stack of stacks'' data structure}
 
 In order to understand the \textsc{Solve} pseudocode, we
 should look closer at the underlying data structure in
-Fig.~\ref{abcd}. Each subfigure from (a) to (v) displays a
+Fig.~\ref{a2h}. Each subfigure from (a) to (v) displays a
 snapshot of the ``stack of stacks'' main data structure
 while trying to satisfy the \texttt{Label}($\mathscr{X}$)
 goal for the Thessaly-coloring problem. Here we focus on the
@@ -577,8 +579,8 @@ Let's execute \textsc{Solve} to find a solution to the
 Thessaly-coloring (Problem~\ref{thessaly-coloring}) using
 the DFS method goals (Section~\ref{DFS-goals}). The
 snapshots of the ``stack of stacks'' data structure are
-visible in the corresponding subfigures of Figures
-\ref{abcd} to \ref{tuv}:
+visible in the corresponding subfigures of Figures \ref{a2h}
+to \ref{tuv}:
 \begin{enumerate}
   \item[(a)] Before \textsc{Solve} begins, the first goal to
              be satisfied should be already in the single
@@ -599,7 +601,7 @@ visible in the corresponding subfigures of Figures
              \texttt{Instantiate}($\{X_1\}$) and
              \texttt{Label}($\{X_2, X_3, X_4\}$). At this
              time, the ``stack of stacks'' looks like
-             Fig.~\ref{abcd}(b).
+             Fig.~\ref{a2h}(b).
   \item[(c)] By definition, \texttt{Instantiate}($\{X_1\}$)
              is substituted by an \textsf{OR} goal. The
              complete expression for this goal is
@@ -620,7 +622,7 @@ visible in the corresponding subfigures of Figures
                          the actions and execute the second
                          subgoal.
              \end{enumerate}
-             In Fig.~\ref{abcd}(c), all three requirements
+             In Fig.~\ref{a2h}(c), all three requirements
              have been implemented.
              \begin{enumerate}
                \item[1.] The first subgoal is in the top
@@ -646,8 +648,8 @@ visible in the corresponding subfigures of Figures
              \gets \!\! D_X \! - \!
              \{\textcolor{red}{1}\}$,
              \texttt{Instantiate}($X_1$)) into the bottom
-             stack in Fig.~\ref{abcd}(c), we ``unwrapped''
-             it and added directly its two subgoals.
+             stack in Fig.~\ref{a2h}(c), we ``unwrapped'' it
+             and added directly its two subgoals.
   \item[(d)] $X_1 \! \gets \! \textcolor{red}{1}$ is
              executed. This assignment does not violate any
              constraint. This goal did not return another
@@ -665,7 +667,7 @@ visible in the corresponding subfigures of Figures
              \textsf{AND}(\texttt{Instantiate}($X_2$),
              \texttt{Label}($\{X_2, X_3, X_4\}$)), which is
              executed in turn in the next iteration. The
-             result is depicted in Fig.~\ref{efgh}(e).
+             result is depicted in Fig.~\ref{a2h}(e).
   \item[(f)] 
   \item[(g)] 
   \item[(h)] 
@@ -684,12 +686,6 @@ visible in the corresponding subfigures of Figures
   \item[(u)] 
   \item[(v)] 
 \end{enumerate}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/efgh}
-  \caption{\textsc{Solve} with DFS example: $X_2$
-           instantiation attempt\label{efgh}}
-\end{figure}
 
 \begin{figure}
   \includegraphics[width=\textwidth]{figures/stacks/ijkl}
