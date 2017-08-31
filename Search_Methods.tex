@@ -648,8 +648,24 @@ visible in the corresponding subfigures of Figures
              \texttt{Instantiate}($X_1$)) into the bottom
              stack in Fig.~\ref{abcd}(c), we ``unwrapped''
              it and added directly its two subgoals.
-  \item[(d)] 
-  \item[(e)] 
+  \item[(d)] $X_1 \! \gets \! \textcolor{red}{1}$ is
+             executed. This assignment does not violate any
+             constraint. This goal did not return another
+             goal, so the top stack is now empty.
+  \item[(e)] As the top stack is empty, \textsc{Solve} uses
+             its ``pending'' pointer to fetch the next goal.
+             Therefore, \texttt{Label}($\{X_2, X_3, X_4\}$)
+             is fetched and the ``pending'' pointer is moved
+             one step further, to the next goal. As there
+             aren't any more goals, the top stack
+             ``pending'' pointer is assigned the bottom
+             stack ``pending'' value, which is ``null.''
+
+             The \texttt{Label} goal is executed and returns
+             \textsf{AND}(\texttt{Instantiate}($X_2$),
+             \texttt{Label}($\{X_2, X_3, X_4\}$)), which is
+             executed in turn in the next iteration. The
+             result is depicted in Fig.~\ref{efgh}(e).
   \item[(f)] 
   \item[(g)] 
   \item[(h)] 
