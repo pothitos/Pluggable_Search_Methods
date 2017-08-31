@@ -701,8 +701,14 @@ to \ref{tuv}:
              violates the $X_1 \neq X_2$ constraint.
              Backtracking, i.e. popping the whole top stack,
              is activated.
-  \item[(i)] 
-  \item[(j)] 
+  \item[(i)] $D_{X_2} \!\! \gets \!\! D_{X_2} \! - \!
+             \{\textcolor{red}{1}\}$ is successfuly
+             executed. This removes the ``no-good'' value.
+  \item[(j)] \texttt{Instantiate}($X_2$) is executed again.
+             However, this time the corresponding domain
+             $D_{X_2}$ does not contain the removed value
+             $\textcolor{red}{1}$. Thus, the only value left
+             to assign to $X_2$ is $\textcolor{blue}{3}$.
   \item[(k)] 
   \item[(l)] 
   \item[(m)] 
