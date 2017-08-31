@@ -668,6 +668,29 @@ to \ref{tuv}:
              \texttt{Label}($\{X_2, X_3, X_4\}$)), which is
              executed in turn in the next iteration. The
              result is depicted in Fig.~\ref{a2h}(e).
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/stacks/ijkl}
+  \includegraphics[width=\textwidth]{figures/stacks/mnop}
+  \caption{\textsc{Solve} with DFS example: $X_2$ successful
+           instantiation and $X_3$ instantiation
+           attempt\label{i2p}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/stacks/qrs}
+  \caption{\textsc{Solve} with DFS example: $X_3$ successful
+           instantiation\label{qrs}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/stacks/tuv}
+  \caption{\textsc{Solve} with DFS example: $X_4$
+           instantiation\label{tuv}}
+\end{figure}
+
   \item[(f)] \texttt{Instantiate}($X_2$) is executed, and,
              as in (c). As this is an \textsc{OR} goal, a
              new stack is pushed.
@@ -693,30 +716,6 @@ to \ref{tuv}:
   \item[(u)] 
   \item[(v)] 
 \end{enumerate}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/ijkl}
-  \caption{\textsc{Solve} with DFS example: $X_2$ successful
-           instantiation\label{ijkl}}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/mnop}
-  \caption{\textsc{Solve} with DFS example: $X_3$
-           instantiation attempt\label{mnop}}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/qrs}
-  \caption{\textsc{Solve} with DFS example: $X_3$ successful
-           instantiation\label{qrs}}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/tuv}
-  \caption{\textsc{Solve} with DFS example: $X_4$
-           instantiation\label{tuv}}
-\end{figure}
 
 
 \section{Search Tree Exploration}
