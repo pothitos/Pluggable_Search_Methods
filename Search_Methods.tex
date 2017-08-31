@@ -709,18 +709,47 @@ to \ref{tuv}:
              $D_{X_2}$ does not contain the removed value
              $\textcolor{red}{1}$. Thus, the only value left
              to assign to $X_2$ is $\textcolor{blue}{3}$.
-  \item[(k)] 
-  \item[(l)] 
-  \item[(m)] 
-  \item[(n)] 
-  \item[(o)] 
-  \item[(p)] 
-  \item[(q)] 
-  \item[(r)] 
-  \item[(s)] 
-  \item[(t)] 
-  \item[(u)] 
-  \item[(v)] 
+  \item[(k)] $X_2 \! \gets \! \textcolor{blue}{3}$ is
+             successfully executed.
+  \item[(l)] Top stack is empty, so we fetch the ``pending''
+             goal \texttt{Label}($\{X_3, X_4\}$) and set
+             ``pending'' equal to ``null.'' The
+             \texttt{Label} goal returns an \textsf{AND}
+             goal. Its two subgoals are pushed on the top
+             stack.
+  \item[(m)] \texttt{Instantiate}($X_3$) returns an
+             \textsf{OR} goal. When this is executed,
+             another stack is pushed on top of the others.
+  \item[(n)] $X_3 \! \gets \! \textcolor{red}{1}$ is
+             executed.
+  \item[(o)] \textsc{PropagateConstraints} fails, as the
+             constraint $X_1 \neq X_3$ is violated. The top
+             stack is immediately popped.
+  \item[(p)] The no-good value is removed after $D_{X_3}
+             \!\! \gets \!\! D_{X_3} \! - \!
+             \{\textcolor{red}{1}\}$ execution.
+  \item[(q)] \texttt{Instantiate}($X_3$) is executed again
+             for the new domain.
+  \item[(r)] The new assignment $X_3 \! \gets \!
+             \textcolor{green}{2}$ is executed.
+  \item[(s)] \textsc{PropagateConstraints} now succeeds and,
+             as the top stack is empty, we proceed to the
+             ``pending'' goal \texttt{Label}($\{X_4\}$).
+             This generates
+             \textsf{AND}(\texttt{Instantiate}($X_4$),
+             \texttt{Label}($\{\}$)).
+  \item[(t)] Again, \texttt{Instantiate}($X_4$) produces an
+             \textsf{OR} goal which, in turn, forces
+             \textsc{Solve} to push another stack on top of
+             the others.
+  \item[(u)] $X_4 \! \gets \! \textcolor{red}{1}$ is
+             executed.
+  \item[(v)] The ``pending'' \texttt{Label}($\emptyset$) is
+             executed. By definition, this goal does not
+             return any other goal. This means that the top
+             stack is empty. And as there isn't any other
+             ``pending'' goal, \textsc{Solve} has reached a
+             solution and returns success!
 \end{enumerate}
 
 
