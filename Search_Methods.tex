@@ -600,7 +600,13 @@ visible in the corresponding subfigures of Figures
              \texttt{Label}($\{X_2, X_3, X_4\}$). At this
              time, the ``stack of stacks'' looks like
              Fig.~\ref{abcd}(b).
-  \item[(c)] 
+  \item[(c)] By definition, \texttt{Instantiate}($\{X_1\}$)
+             is substituted by an \textsf{OR} goal. The
+             complete expression for this goal is
+             \textsf{OR}($X_1 \! \gets \!
+             \textcolor{red}{1}$, \textsf{AND}($D_{X_1} \!\!
+             \gets \!\! D_X \! - \!
+             \{\textcolor{red}{1}\}$,\,\texttt{Instantiate}($X_1$))).
   \item[(d)] 
   \item[(e)] 
   \item[(f)] 
