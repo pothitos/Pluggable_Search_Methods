@@ -1351,13 +1351,13 @@ $\mathsf{Assignments}$ set, which is initially empty.
       \State $X \, \gets \,
               \Call{VariablesOrderHeuristic}{\mathscr{X}}$
       \State $D_{X_\mathrm{init}} \, \gets \, D_X$
-      \State $\mathsf{CoveredPiece} \, \gets \, 0$
-      \While {$\mathsf{CoveredPiece} \, \leq \,
+      \State $\mathit{CoveredPiece} \, \gets \, 0$
+      \While {$\mathit{CoveredPiece} \, \leq \,
                \mathsf{PieceToCover}$}
         \State $\mathsf{value} \, \gets \,
                 \Call{ValuesOrderHeuristic}{D_X, \mathsf{conf}}$
-        \State $\mathsf{CoveredPiece} \, \gets \,
-                \mathsf{CoveredPiece} \, + \,
+        \State $\mathit{CoveredPiece} \, \gets \,
+                \mathit{CoveredPiece} \, + \,
                 \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}}
                      {\sum_{v \in D_{X_\mathrm{init}}}
                       h_{X \gets v}^\mathsf{conf}}$
