@@ -617,14 +617,13 @@ to \ref{tuv}:
              In this case, \textsc{Solve} algorithm should
              cover three requirements.
              \begin{enumerate}
-               \item[1.] Execute the first subgoal and, of
-                         course, all the returned\slash
-                         generated goals.
-               \item[2.] Execute all the ``pending'' goals
-                         that were unsatisfied before the
+               \item[1.] Execute the first subgoal and all
+                         the returned\slash generated goals.
+               \item[2.] Execute the ``pending'' goals that
+                         were unsatisfied before the
                          \textsf{OR}-goal.
-               \item[3.] If any of the above fails, undo all
-                         the actions and execute the second
+               \item[3.] If the above fail, undo all the
+                         actions and execute the second
                          subgoal.
              \end{enumerate}
              In Fig.~\ref{a2h}(c), all three requirements
