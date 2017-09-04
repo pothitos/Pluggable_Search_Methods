@@ -219,7 +219,8 @@ assignment
 \end{equation}
 
 
-\section{A Goal-driven Search Methods' Framework}
+\section{A Goal-driven Search Methods'
+         Framework\label{framework}}
 
 Except from a way to state CSPs, a user\slash programmer
 needs an elegant way to state search methods that solve
@@ -1426,23 +1427,37 @@ $\mathsf{conf}$idence semantics in our framework.
            Example~\ref{distribution}\label{piechart}}
 \end{figure}
 
+\newcommand{\PoPS}{\textbf{\normalsize P\footnotesize
+                           O\normalsize PS}}
+\newcommand{\PopsSample}{\textbf{\normalsize P\footnotesize
+                       OPS\normalsize S\footnotesize AMPLE}}
+
+\subsection{\PopsSample{} declaration using our search
+            methods framework}
+
+Figure~\ref{PopsSampleGoals} expresses graphically the
+\textsc{PopsSample} method using our search methods
+framework (Section~\ref{framework}).
+
 \begin{figure}
   \centering
   \begin{tikzpicture}
     [level distance = 3em, sibling distance = 12em,
+     distant/.style = {sibling distance = 14em},
+     moreDistant/.style = {sibling distance = 16em},
      recursion/.style = {->, dotted, bend right}]
-    \node (Label) {\textsc{LabelPopsSample}($\mathscr{X}$)}
+    \node (Label) {\texttt{Label}($\mathscr{X}$)}
       child {node {\textsf{AND}}
-        child {node (Instantiate) {\texttt{Instantiate3}($X$)}
+        child [distant] {node (Instantiate) {\texttt{Instantiate3}($X$, $\mathit{CoveredPiece}$)}
           child {node {\textsf{OR}}
             child {node {$X \! \gets \! v$}}
             child {node {\textsf{AND}}
-              child {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
-              child {node (InstantiateChild) {\texttt{Instantiate3}($X$)}}
+              child [moreDistant] {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+              child [moreDistant] {node (InstantiateChild) {\texttt{Instantiate3}($X$, $\mathit{CoveredPiece} + \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}} {\sum_{v \in D_{X_\mathrm{init}}} h_{X \gets v}^\mathsf{conf}}$)}}
             }
           }
         }
-        child {node (LabelChild) {\textsc{LabelPopsSample}($\mathscr{X} \! - \! \{X\}$)}}
+        child [distant] {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
       };
     \path
       (LabelChild.18) edge [recursion] (Label.east)
@@ -1452,6 +1467,10 @@ $\mathsf{conf}$idence semantics in our framework.
            \textsc{PopsSample}\label{PopsSampleGoals}}
 \end{figure}
 
+One essential difference with DFS is the instantiation goal
+for each variable. \texttt{Instantiate3} takes one more
+argument, namely $\mathit{CoveredPiece}$. When this exceeds
+$\mathsf{PieceToCover}$, the goal fails.
 \begin{itemize}
   \item \texttt{Instantiate3}($X$,
                               $\mathit{CoveredPiece}$) :=
@@ -1460,15 +1479,19 @@ $\mathsf{conf}$idence semantics in our framework.
   \item \texttt{Instantiate3}($X$,
                               $\mathit{CoveredPiece}$) :=
           \textsf{failure},
-          if $\mathit{CoveredPiece} > \mathit{Breadth}$,
+          if $\mathit{CoveredPiece} >
+              \mathsf{PieceToCover}$,
   \item \texttt{Instantiate3}($X$,
                               $\mathit{CoveredPiece}$) :=
-          \textsf{OR}($X \! \gets \! v$, \\
+          \textsf{OR}($X \!\!\! \gets \!\!\! v$,
+            \textsf{AND}($D_X \!\!\!\! \gets \!\!\!\!
+                D_X \!\! - \!\! \{v\}$,
             \hspace*{\stretch{1}}
-            \textsf{AND}($D_X \!\! \gets \!\!
-                D_X \!\! - \!\! \{v\}$,\,
-              \texttt{Instantiate3}($X$,
-                $\mathit{CoveredPiece} + 1$))), otherwise.
+            \texttt{Instantiate3}($X$,
+            $\mathit{CoveredPiece} +
+            \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}}
+            {\sum_{v \in D_{X_\mathrm{init}}}
+             h_{X \gets v}^\mathsf{conf}}$))), otherwise.
 \end{itemize}
 
 \subsection{Heuristic confidence vs.\ node level}
@@ -1499,11 +1522,6 @@ instantiated, and we have a clearer picture of the problem.
 In our framework, more accuracy means more confidence,
 that's why we increase $\mathsf{conf}$ as the search method
 proceeds with the assignments.
-
-\newcommand{\PoPS}{\textbf{\normalsize P\footnotesize
-                           O\normalsize PS}}
-\newcommand{\PopsSample}{\textbf{\normalsize P\footnotesize
-                       OPS\normalsize S\footnotesize AMPLE}}
 
 \subsection{\PopsSample{} average complexity}
 
