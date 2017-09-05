@@ -1451,9 +1451,9 @@ framework (Section~\ref{framework}).
       child {node {\textsf{AND}}
         child [distant] {node (Instantiate) {\texttt{Instantiate3}($X$, $\mathit{CoveredPiece}$)}
           child {node {\textsf{OR}}
-            child {node {$X \! \gets \! v$}}
+            child {node {$X \gets \mathsf{value}$}}
             child {node {\textsf{AND}}
-              child [moreDistant] {node {$D_X \!\! \gets \!\! D_X \!\! - \!\! \{v\}$}}
+              child [moreDistant] {node {$D_X \! \gets \! D_X \! - \! \{\mathsf{value}\}$}}
               child [moreDistant] {node (InstantiateChild) {\texttt{Instantiate3}($X$, $\mathit{CoveredPiece} + \frac{h_{X \gets \mathsf{value}}^\mathsf{conf}} {\sum_{v \in D_{X_\mathrm{init}}} h_{X \gets v}^\mathsf{conf}}$)}}
             }
           }
@@ -1484,9 +1484,9 @@ $\mathsf{PieceToCover}$, the goal fails.
               \mathsf{PieceToCover}$,
   \item \texttt{Instantiate3}($X$,
                               $\mathit{CoveredPiece}$) :=
-          \textsf{OR}($X \!\!\! \gets \!\!\! v$,
-            \textsf{AND}($D_X \!\!\!\! \gets \!\!\!\!
-            D_X \!\! - \!\! \{v\}$,
+          \textsf{OR}($X \!\!\! \gets \!\!\! \mathsf{value}$,
+            \textsf{AND}($D_X \!\!\! \gets \!\!\!
+            D_X \!\! - \!\! \{\mathsf{value}\}$,
             \hspace*{\stretch{1}}
             \texttt{Instantiate3}($X$,
             $\mathit{CoveredPiece} +
