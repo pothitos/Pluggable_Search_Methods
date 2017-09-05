@@ -1117,27 +1117,6 @@ $\mathsf{Choices}$. Conclusively,
   distribution function for a random method, that is $P(i) =
   \frac{1}{5}$, $\forall \, i$.
 \end{example}
-On the other extreme, deterministic search methods
-(Section~\ref{deterministic}) always select the choice $v_i$
-that corresponds to the $h_i$ with the highest rank.
-\begin{proposition}
-  \label{probability-deterministic}
-  Formally, in deterministic search methods, if $i =
-  \arg\max_j h_j$, then $P(i) = 1$, otherwise $P(i) = 0$.
-\end{proposition}
-\begin{example}
-  The greatest heuristic value in Example~\ref{distribution}
-  is $h_2 = 5$. Hence, a deterministic search method would
-  select $v_2$ with a certain probability $P(v_2) = 1$.
-  Consequently, the rest of the probabilities are zero, as
-  in Fig.~\ref{systematic}.
-\end{example}
-If there is more than one maximum heuristic value,
-deterministic methods arbitrarily concern only one of them
-as maximum. To simplify the following equations we will make
-the assumption that there is only one maximum. Without loss
-of generality, we also assume that heuristic values are
-non-zero.
 
 \begin{figure}
   \centering
@@ -1166,6 +1145,28 @@ non-zero.
   \caption{As $\mathsf{conf}$ rises, the effect to $P(i)$ is
            greater\label{conf}}
 \end{figure}
+
+On the other extreme, deterministic search methods
+(Section~\ref{deterministic}) always select the choice $v_i$
+that corresponds to the $h_i$ with the highest rank.
+\begin{proposition}
+  \label{probability-deterministic}
+  Formally, in deterministic search methods, if $i =
+  \arg\max_j h_j$, then $P(i) = 1$, otherwise $P(i) = 0$.
+\end{proposition}
+\begin{example}
+  The greatest heuristic value in Example~\ref{distribution}
+  is $h_2 = 5$. Hence, a deterministic search method would
+  select $v_2$ with a certain probability $P(v_2) = 1$.
+  Consequently, the rest of the probabilities are zero, as
+  in Fig.~\ref{systematic}.
+\end{example}
+If there is more than one maximum heuristic value,
+deterministic methods arbitrarily concern only one of them
+as maximum. To simplify the following equations we will make
+the assumption that there is only one maximum. Without loss
+of generality, we also assume that heuristic values are
+non-zero.
 
 \subsection{Bridging the two opposites}
 
