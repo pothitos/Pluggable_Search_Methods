@@ -12,9 +12,9 @@ The original conference paper is available through the
 __This repository that you're currently viewing produces an
 [extended/revised
 article](http://di.uoa.gr/~pothitos/papers/Search_Methods.pdf)
-currently under construction.__
+of the above.__
 
-It will be submitted to IJAIT journal. Therefore, it should
+It has been submitted to IJAIT journal. Therefore, it should
 comply with IJAIT [typesetting
 instructions](http://worldscientific.com/sda/1037/ws-ijait.pdf).
 
@@ -22,4 +22,4 @@ instructions](http://worldscientific.com/sda/1037/ws-ijait.pdf).
 
 An [Open
 Research](https://gist.github.com/pothitos/ec5f4f66ddd113aea6bac4094690d72e)
-work: Collaborators welcome :smile:
+work
