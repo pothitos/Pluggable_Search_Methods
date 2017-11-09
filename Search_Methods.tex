@@ -1869,7 +1869,35 @@ applied to the document's source code at
 
 \subsection*{Review 1}
 
-TODO
+\begin{itemize}
+  \item The ``stack of stacks'' data structure along with
+        the \textsc{Solve} algorithm are actually the
+        \emph{implementation} of a framework
+        (\emph{language}) that is capable of describing
+        arbitrary search methods. In our work, the
+        presentation of both the \emph{language} and its
+        \emph{implementation} serves two objectives.
+        \begin{enumerate}
+          \item To easily define and support our proposed
+                search method (\textsc{PoPS}), along with
+                the several classic methods that it is
+                compared to. DFS is used in the first
+                examples, but the framework supports every
+                mentioned search method.
+          \item Most importantly, even if we suppose that
+                the whole framework is obvious, its
+                architecture serves the separation of the
+                CSP definition phase to the search method
+                definition phase, which still remains the
+                key goal in Constraint
+                Programming\cite{grand-challenges} and has
+                to be documented. Even if the ``stack of
+                stacks'' is implemented in many paradigms,
+                this doesn't mean that every implementation
+                is modular, extendible, documented, and
+                independent of the CSPs that are solved.
+        \end{enumerate}
+\end{itemize}
 
 \subsection*{Review 2}
 
