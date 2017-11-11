@@ -98,17 +98,17 @@
 
 \emph{Artificial Intelligence} (AI) methodologies aim to
 tackle with difficult computational and real life problems,
-such as scheduling,\cite{pinedo-scheduling} radio frequency
-assignment,\cite{radio-link} other NP-hard problems, and
-also problems stemming from various disciplines, e.g.\ 
-Bioinformatics.\cite{bioinformatics}
+such as scheduling,\cite{Pinedo2012} radio frequency
+assignment,\cite{Cabon1999} other NP-hard problems, and also
+problems stemming from various disciplines, e.g.\ 
+Bioinformatics.\cite{Barahona2011}
 
 All these Constraint Satisfaction Problems have been
 declared in our Constraint Programming solver.\cite{Naxos}
 The solution phase is completely independent to the CSP
 declaration phase, as this serves the original promise of
 Constraint Programming: \emph{The user states the problem,
-the computer solves it.}\cite{grand-challenges}
+the computer solves it.}\cite{Freuder2014}
 
 In this work, we go one step further and allow the
 user\slash programmer to state their own \emph{search
@@ -133,22 +133,22 @@ should be examined soon.
 
 This reordering cannot make the search space
 tractable---this is most probably
-impossible\cite{p-np}---but it is able to dramatically
-decrease the time needed to guide a search method toward a
-real solution. In this direction, we study heuristic
-properties, such as reliability\slash confidence, and we
-propose a generic framework in order to exploit them by
-incorporating a randomness factor into them. This work is an
-extended and revised version of a preliminary conference
+impossible\cite{Fortnow2009}---but it is able to
+dramatically decrease the time needed to guide a search
+method toward a real solution. In this direction, we study
+heuristic properties, such as reliability\slash confidence,
+and we propose a generic framework in order to exploit them
+by incorporating a randomness factor into them. This work is
+an extended and revised version of a preliminary conference
 paper.\cite{Pothitos2016-PoPS}
 
 
 \section{Preliminaries}
 
 We focus on \emph{constraint satisfaction problems}
-(CSPs)\cite{CSP} that can be faced via a plethora of
+(CSPs)\cite{Tsang2014} that can be faced via a plethora of
 available \emph{constraint programming} (CP)
-solvers.\cite{eclipse,ilog}
+solvers.\cite{ECLiPSe2017,Ilog2012}
 
 \subsection{Constraint satisfaction problems}
 
@@ -179,7 +179,7 @@ assignments into a solution.
 
 \subsection{Map-coloring problem}
 
-There exists a huge list of interesting CSPs.\cite{CSPLib}
+There exists a huge list of interesting CSPs.\cite{Gent1999}
 For example, \emph{map-coloring} is a CSP for assigning
 colors to each prefecture in a given map, so as no
 neighbouring prefectures have the same color.
@@ -233,9 +233,9 @@ keep the independence between the Constraint Programming
 stages.
 
 In related works, a lot of search methods have been
-implemented in modern solvers.\cite{Gecode} However, in our
-case we try to provide a transparent framework, so that the
-user can easily define their own methods.
+implemented in modern solvers.\cite{Gecode2017} However, in
+our case we try to provide a transparent framework, so that
+the user can easily define their own methods.
 
 \subsection{Search methods are made up of goals}
 
@@ -372,10 +372,10 @@ graphically displayed in Fig.~\ref{DFS}.
 
 Figure~\ref{IBroadening} displays the corresponding goals'
 graph for the \emph{Iterative Broadening} search
-method.\cite{ibroad} The goals' structure is similar to DFS.
-However, one basic difference is that there is one more
-level, namely \texttt{Broadening}, above the ordinary DFS
-goals.
+method.\cite{Ginsberg1992} The goals' structure is similar
+to DFS. However, one basic difference is that there is one
+more level, namely \texttt{Broadening}, above the ordinary
+DFS goals.
 \begin{itemize}
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
           \textsf{failure}, if $\mathit{Breadth} > d$,
@@ -580,7 +580,7 @@ However, as its name implies, \textsc{PropagateConstraints}
 can do more just than checking constraints: it may remove
 no-good values from the variables and enforce a kind of
 ``consistency'' between them, but this is beyond the scope
-of this paper to further analyze.\cite{AC}
+of this paper to further analyze.\cite{Chen2013}
 
 \subsubsection{\SolveNormal{} in action}
 
@@ -951,31 +951,33 @@ To our knowledge, existing search methods such as
 \emph{limited discrepancy search} (LDS) use heuristics only
 to \emph{order} the possible assignments and do not exploit
 the \emph{difference} of the one heuristic estimation to
-another, but only their \emph{rank}.\cite{lds} For example,
-the \emph{iterative broadening} method explores only a
-limited children's number for each search tree
-node.\cite{ibroad} Of course, it chooses to visit only the
-children with the highest ranks. \emph{Credit
-search}\cite{dbs} and \emph{limited assignment number}
-(LAN)\cite{lan} are other deterministic methods that also
-take into account the rank of the heuristic estimations and
-not the heuristic values themselves.
+another, but only their \emph{rank}.\cite{Prosser2011} For
+example, the \emph{iterative broadening} method explores
+only a limited children's number for each search tree
+node.\cite{Ginsberg1992} Of course, it chooses to visit only
+the children with the highest ranks. \emph{Credit
+search}\cite{Bartak2004} and \emph{limited assignment
+number} (LAN)\cite{Bartak2005} are other deterministic
+methods that also take into account the rank of the
+heuristic estimations and not the heuristic values
+themselves.
 
 Last but not least, there are also methods that make the
 assumption that \emph{the heuristic function is more
 reliable as the search tree node depth increases.} E.g.,
 \emph{depth-bounded discrepancy search} (DDS) allows to
 override a heuristic estimation, only when we have not yet
-reached a specific search tree depth.\cite{dds} Finally,
-there are some methodologies that take into account two or
-more heuristic functions and \emph{learn} as the search
-proceeds, which heuristic is the best to use.\cite{learn}
+reached a specific search tree depth.\cite{Walsh1997}
+Finally, there are some methodologies that take into account
+two or more heuristic functions and \emph{learn} as the
+search proceeds, which heuristic is the best to
+use.\cite{Xu2009}
 
 \subsubsection{Random search methods\label{random}}
 
 On the other hand, stochastic search methods completely
 ignore heuristics, as they choose to make an assignment at
-random.\cite{heuristics} For example, \emph{depth first
+random.\cite{Jafari2011} For example, \emph{depth first
 search with restarts} traverses the search tree making
 random choices, and when a specific time limit is reached,
 it re-starts from the beginning.
@@ -987,7 +989,7 @@ $\mathsf{Choices}$ ranks, or completely ignore them. In
 1996, Bresina transformed the heuristic ranks into
 \emph{probabilities} via the so-called
 \emph{heuristic-biased stochastic sampling}
-(HBSS).\cite{bresina-hbss} He provided a set of various
+(HBSS).\cite{Bresina1996} He provided a set of various
 decreasing functions $\mathsf{bias}(r)$, e.g.\ $\frac{1}{r}$
 or $e^{-r}$ etc., that take a specific integer choice rank
 $r \in \{1, 2, \ldots\}$ and return a number that
@@ -995,14 +997,14 @@ corresponds to the probability of the choice to be selected.
 Cicirello and Smith improved HBSS by introducing the
 \emph{value-biased stochastic sampling} (VBSS). The
 $\mathsf{bias}$ function now takes as argument the heuristic
-\emph{value} itself.\cite{cicirello-vbss}
+\emph{value} itself.\cite{Cicirello2005}
 
 On the other hand, Gomes et al.\ exploit the so-called
 \emph{heuristic-equivalence} to equate the choices with the
 highest heuristic values. In this way, we can exclude the
 choices with the lower heuristic values and select at random
 amongst the choices with the most prevailing
-values.\cite{equivalence}
+values.\cite{Gomes2000}
 
 
 \section{New Probabilistic Heuristics}
@@ -1222,7 +1224,7 @@ gently scales randomness.
   $P_1 (i) = \frac{h_i}{\sum_j h_j}$ is equivalent to the
   \emph{fitness proportionate selection}
   function---resembling a \emph{roulette wheel}---that is
-  used in Genetic Algorithms.\cite{roulette}}
+  used in Genetic Algorithms.\cite{Sharma2012}}
 \end{lemma}
 \begin{proof}
   We prove Definition~\ref{balanced} three requirements.
@@ -1659,13 +1661,13 @@ processes to schedule their courses. The International
 Timetabling Competition (ITC) is an attempt to unify all
 these processes. We borrowed the fourteen instances of the
 latest contest track concerning
-\emph{universities}.\cite{itc-agenda}
+\emph{universities}.\cite{McCollum2010}
 
 In these problems, we have to assign valid teaching periods
 and rooms to the curriculum lectures. The objective is to
 distribute them evenly during the week but without having
 gaps between them, if scheduled on the same day; each gap
-increases the solution cost.\cite{pothitos-ictai2012}
+increases the solution cost.\cite{Pothitos2012-Scheduling}
 
 Due to the ITC specifications, we had 333 seconds in our
 machine to solve each instance and minimize the solution
@@ -1723,7 +1725,7 @@ frequencies to every two transmitters that are close to each
 other.
 
 The Centre Electronique de l'Armement (CELAR) provides a set
-of real datasets for this NP-hard problem.\cite{radio-link}
+of real datasets for this NP-hard problem.\cite{Cabon1999}
 We chose to solve the five so-called ``MAX'' problem
 instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in
 which, generally speaking, we try to maximize the number of
@@ -1890,13 +1892,13 @@ applied to the document's source code at
                 CSP definition phase to the search method
                 definition phase, which still remains the
                 key goal in Constraint
-                Programming\cite{grand-challenges} and has
-                to be documented. Even if the ``stack of
-                stacks'' is implemented in many paradigms,
-                this doesn't mean that every implementation
-                is modular, extendible, documented, and
+                Programming\cite{Freuder2014} and has to be
+                documented. Even if the ``stack of stacks''
+                is implemented in many paradigms, this
+                doesn't mean that every implementation is
+                modular, extendible, documented, and
                 independent of the CSPs that are solved.
-        \end{enumerate}
+          \end{enumerate}
 \end{itemize}
 
 \subsection*{Review 2}
