@@ -418,348 +418,6 @@ This implements Iterative Broadening's semantics: The number
 of consecutive instantiations to the same variable cannot
 exceed $\mathit{Breadth}$.
 
-\newcommand{\SolveNormal}{{\normalsize S\footnotesize OLVE}}
-
-\newcommand{\Solve}{\textbf{\normalsize S\footnotesize
-                            OLVE}}
-
-\subsection{\Solve: An algorithm that satisfies search
-            methods' goals}
-
-In the previous sections we described a high level language
-to define search methods. This framework consists of goals
-that support recursion (goals that return another goal or
-success) and meta-goals used to combine other goals in a
-conjunctive (\textsf{AND}) or disjunctive (\textsf{OR})
-manner.
-
-This is a not only a theoretical model; it has been
-implemented in a C++ Constraint Programming \textsc{Naxos
-Solver}. DFS and Iterative Broadening have been already
-declared in \textsc{Naxos} without loosing much of the above
-expressiveness, along with many other search methods in the
-solver's repository.\cite{Naxos}
-
-The search methods' goals cannot solve by themselves any
-CSP; we need a procedure to \emph{satisfy} these goals.
-\textsc{Solve} algorithm in Figure~\ref{solve} uses an
-advanced ``stack of stacks'' data structure to store goals.
-Initially, the stack of stacks contains just a single goal,
-e.g.\ \texttt{Broadening}($1$) or
-\texttt{Label}($\mathscr{X}$) for DFS, as in
-Figure~\ref{a2h}(a).
-
-\begin{figure}
-  \centering
-  \begin{algorithmic}
-    \Function{Solve}{}
-      \While {time limit has not been reached}
-        \If {stacks.top is not empty}
-          \State $\mathit{Goal} \gets
-                  \mathrm{stacks.top.pop()}$
-        \Else
-          \State $\mathit{Goal} \gets
-                  \mathrm{stacks.top.pending}$
-          \State $\mathrm{stacks.top.pending} \gets
-                 \textrm{get}$ the next goal of the frame
-                 that ``pending'' \\ \hspace*{14em} points
-                 to \textbf{or} (if there is not such a
-                 goal) get \\ \hspace*{14em} the next
-                 ``pending'' goal of that frame
-        \EndIf
-        \If {$\mathit{Goal}$ is an AND-goal}
-          \State stacks.top.push(2\textsuperscript{nd}
-                 subgoal of $\mathit{Goal}$)
-          \State stacks.top.push(1\textsuperscript{st}
-                 subgoal of $\mathit{Goal}$)
-        \ElsIf {$\mathit{Goal}$ is an OR-goal}
-          \State stacks.top.push(2\textsuperscript{nd}
-                 subgoal of $\mathit{Goal}$)
-          \State stacks.push() \Comment Push an empty frame
-          \State stacks.top.push(1\textsuperscript{st}
-                 subgoal of $\mathit{Goal}$)
-          \State $\mathrm{stacks.top.pending} \gets
-                 \textrm{the}$ goal after the
-                 2\textsuperscript{nd} subgoal in the below
-                 frame
-        \Else
-          \State $\mathit{NextGoal} \gets
-                  \mathit{Goal}\textrm{.execute()}$
-          \If {$\Call{PropagateConstraints}{}() =
-                \mathrm{false}$}
-            \State stacks.pop()
-            \Comment Backtrack to previous frame
-            \If {stacks empty}
-              \State \Return failure
-            \EndIf
-          \ElsIf {$\mathit{NextGoal} \neq \textrm{null}$}
-            \State stacks.top.push($\mathit{NextGoal}$)
-          \ElsIf {stacks.top is empty \textbf{and}
-                  $\mathrm{stacks.top.pending} =
-                   \textrm{null}$}
-            \State \Return success
-          \EndIf
-        \EndIf
-      \EndWhile
-      \State \Return failure
-    \EndFunction
-  \end{algorithmic}
-  \caption{Goals' Satisfaction Algorithm\label{solve}}
-\end{figure}
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/abcd}
-  \includegraphics[width=\textwidth]{figures/stacks/efgh}
-  \caption{\textsc{Solve} with DFS example: $X_1$
-           instantiation and $X_2$ instantiation
-           attempt\label{a2h}}
-\end{figure}
-
-\subsubsection{The ``stack of stacks'' data structure}
-
-In order to understand the \textsc{Solve} pseudocode, we
-should look closer at the underlying data structure in
-Fig.~\ref{a2h}. Each subfigure from (a) to (v) displays a
-snapshot of the ``stack of stacks'' main data structure
-while trying to satisfy the \texttt{Label}($\mathscr{X}$)
-goal for the Thessaly-coloring problem. Here we focus on the
-data structure itself.
-\begin{itemize}
-  \item The ``stack of the stacks'' is outlined by the outer
-        borders of each subfigure.
-        \begin{itemize}
-          \item The frames of the (outer) stack are
-                connected with an \textsf{OR} relationship.
-        \end{itemize}
-  \item Each frame of the outer stack is a stack too,
-        containing goals.
-        \begin{itemize}
-          \item The goals of each (inner) stack are
-                connected with an \textsf{AND} relationship.
-        \end{itemize}
-  \item Each inner stack contains additionally a
-        \textsf{pending} pointer.
-        \begin{itemize}
-          \item It points to the first unsatisfied goal of
-                the previous inner stacks.
-        \end{itemize}
-\end{itemize}
-
-\subsubsection{\SolveNormal{} in a nutshell}
-
-We can see the ``stack of stacks'' data structure inside the
-\textsc{Solve} algorithm.
-\begin{itemize}
-  \item The outer stack corresponds to the ``stacks''
-        variable.
-  \item The ``stacks.top'' expression corresponds to the top
-        frame of the ``stacks.''
-  \item The ``stacks.top.pending'' corresponds to the
-        pointer of the top frame.
-\end{itemize}
-
-The algorithm is wrapped into a \textbf{while} loop. Each
-iteration examines another goal.
-
-Inside the loop we have two ``if'' statements. In the first
-``if,'' we select the goal that we will attempt to satisfy.
-In the second ``if,'' we check if the $\mathit{Goal}$ is a
-meta-goal and we handle properly its two subgoals. If it is
-not a meta-goal, we simply ``execute()'' it and store the
-returned value into the $\mathit{NextGoal}$ variable. A
-``null'' returned value means that the executed
-$\mathit{Goal}$ did not generate another goal to be
-satisfied.
-
-After each $\mathit{Goal}$ execution,
-\textsc{PropagateConstraints} is called. A simple
-implementation for this function would just check if every
-constraint is still valid. If even a single constraint is
-violated, \textsc{PropagateConstraints} should return false.
-However, as its name implies, \textsc{PropagateConstraints}
-can do more just than checking constraints: it may remove
-no-good values from the variables and enforce a kind of
-``consistency'' between them, but this is beyond the scope
-of this paper to further analyze.\cite{Chen2013}
-
-\subsubsection{\SolveNormal{} in action}
-
-Let's execute \textsc{Solve} to find a solution to the
-Thessaly-coloring (Problem~\ref{thessaly-coloring}) using
-the DFS method goals (Section~\ref{DFS-goals}). The
-snapshots of the ``stack of stacks'' data structure are
-visible in the corresponding subfigures of Figures \ref{a2h}
-to \ref{tuv}:
-\begin{enumerate}
-  \item[(a)] Before \textsc{Solve} begins, the first goal to
-             be satisfied should be already in the single
-             inner stack. In the case of DFS, the initial
-             goal is \texttt{Label}($\mathscr{X}$) which in
-             Thessaly-coloring is equivalent to
-             \texttt{Label}($\{X_1, X_2, X_3, X_4\}$).
-  \item[(b)] \textsc{Solve} begins and pops the
-             \texttt{Label} goal out of the inner stack and
-             executes it. By definition, \texttt{Label}
-             returns an \textsf{AND} goal. In other words,
-             \texttt{Label} is substituted by an
-             \textsf{AND} goal at the inner stack.
-
-             This \textsf{AND} goal is then popped out in
-             turn by the next \textsc{Solve} iteration, and
-             after its execution it returns its two subgoals
-             \texttt{Instantiate}($\{X_1\}$) and
-             \texttt{Label}($\{X_2, X_3, X_4\}$). At this
-             time, the ``stack of stacks'' looks like
-             Fig.~\ref{a2h}(b).
-  \item[(c)] By definition, \texttt{Instantiate}($\{X_1\}$)
-             is substituted by an \textsf{OR} goal. The
-             complete expression for this goal is
-             \textsf{OR}($X_1 \! \gets \!
-             \textcolor{red}{1}$, \textsf{AND}($D_{X_1} \!\!
-             \gets \!\! D_{X_1} \! - \!
-             \{\textcolor{red}{1}\}$,\,\texttt{Instantiate}($X_1$))).
-             In this case, \textsc{Solve} algorithm should
-             cover three requirements.
-             \begin{enumerate}
-               \item[1.] Execute the first subgoal and all
-                         the returned\slash generated goals.
-               \item[2.] Execute the ``pending'' goals that
-                         were unsatisfied before the
-                         \textsf{OR}-goal.
-               \item[3.] If the above fail, undo all the
-                         actions and execute the second
-                         subgoal.
-             \end{enumerate}
-             In Fig.~\ref{a2h}(c), all three requirements
-             have been implemented.
-             \begin{enumerate}
-               \item[1.] The first subgoal is in the top
-                         stack and will be executed in the
-                         next iteration.
-               \item[2.] The ``pending'' pointer of the top
-                         stack points to the next
-                         unsatisfied goal.
-               \item[3.] Most importantly, a new stack has
-                         been created on top of the previous
-                         inner stack. The new stack was
-                         added in order to isolate the
-                         previous inner stack. This would be
-                         useful if any of the top stack
-                         goals fails: The top stack will be
-                         popped, and the second
-                         \textsf{OR}-subgoal that is stored
-                         in the previous inner stack will be
-                         executed.
-             \end{enumerate}
-             For simplicity reasons, instead of adding the
-             whole second subgoal \textsf{AND}($D_{X_1} \!\!
-             \gets \!\! D_{X_1} \! - \!
-             \{\textcolor{red}{1}\}$,
-             \texttt{Instantiate}($X_1$)) into the bottom
-             stack in Fig.~\ref{a2h}(c), we ``unwrapped'' it
-             and added directly its two subgoals.
-  \item[(d)] $X_1 \! \gets \! \textcolor{red}{1}$ is
-             executed. This assignment does not violate any
-             constraint. This goal did not return another
-             goal, so the top stack is now empty.
-  \item[(e)] As the top stack is empty, \textsc{Solve} uses
-             its ``pending'' pointer to fetch the next goal.
-             Therefore, \texttt{Label}($\{X_2, X_3, X_4\}$)
-             is fetched and the ``pending'' pointer is moved
-             one step further, to the next goal. As there
-             aren't any more goals, the top stack
-             ``pending'' pointer is assigned the bottom
-             stack ``pending'' value, which is ``null.''
-
-             The \texttt{Label} goal is executed and returns
-             \textsf{AND}(\texttt{Instantiate}($X_2$),
-             \texttt{Label}($\{X_3, X_4\}$)), which is
-             executed in turn in the next iteration. The
-             result is depicted in Fig.~\ref{a2h}(e).
-
-\begin{figure}
-  \includegraphics[width=\textwidth]{figures/stacks/ijkl}
-  \includegraphics[width=\textwidth]{figures/stacks/mnop}
-  \caption{\textsc{Solve} with DFS example: $X_2$ successful
-           instantiation and $X_3$ instantiation
-           attempt\label{i2p}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{figures/stacks/qrs}
-  \caption{\textsc{Solve} with DFS example: $X_3$ successful
-           instantiation\label{qrs}}
-\end{figure}
-
-\begin{figure}
-  \centering
-  \includegraphics[width=0.9\textwidth]{figures/stacks/tuv}
-  \caption{\textsc{Solve} with DFS example: $X_4$
-           instantiation\label{tuv}}
-\end{figure}
-
-  \item[(f)] \texttt{Instantiate}($X_2$) is executed. As in
-             (c), this is an \textsc{OR} goal, and a new
-             stack is pushed.
-  \item[(g)] $X_2 \! \gets \! \textcolor{red}{1}$ gets
-             executed.
-  \item[(h)] The assignment makes
-             \textsc{PropagateConstraints} fail, as it
-             violates the $X_1 \neq X_2$ constraint.
-             Backtracking, i.e. popping the whole top stack,
-             is activated.
-  \item[(i)] $D_{X_2} \!\! \gets \!\! D_{X_2} \! - \!
-             \{\textcolor{red}{1}\}$ is successfuly
-             executed. This removes the ``no-good'' value.
-  \item[(j)] \texttt{Instantiate}($X_2$) is executed again.
-             However, this time the corresponding domain
-             $D_{X_2}$ does not contain the removed value
-             $\textcolor{red}{1}$. Thus, the only value left
-             to assign to $X_2$ is $\textcolor{blue}{3}$.
-  \item[(k)] $X_2 \! \gets \! \textcolor{blue}{3}$ is
-             successfully executed.
-  \item[(l)] Top stack is empty, so we fetch the ``pending''
-             goal \texttt{Label}($\{X_3, X_4\}$) and set
-             ``pending'' equal to ``null.'' The
-             \texttt{Label} goal returns an \textsf{AND}
-             goal. Its two subgoals are pushed on the top
-             stack.
-  \item[(m)] \texttt{Instantiate}($X_3$) returns an
-             \textsf{OR} goal. When this is executed,
-             another stack is pushed on top of the others.
-  \item[(n)] $X_3 \! \gets \! \textcolor{red}{1}$ is
-             executed.
-  \item[(o)] \textsc{PropagateConstraints} fails, as the
-             constraint $X_1 \neq X_3$ is violated. The top
-             stack is immediately popped.
-  \item[(p)] The no-good value is removed after $D_{X_3}
-             \!\! \gets \!\! D_{X_3} \! - \!
-             \{\textcolor{red}{1}\}$ execution.
-  \item[(q)] \texttt{Instantiate}($X_3$) is executed again
-             for the new domain.
-  \item[(r)] The new assignment $X_3 \! \gets \!
-             \textcolor{green}{2}$ is executed.
-  \item[(s)] \textsc{PropagateConstraints} now succeeds and,
-             as the top stack is empty, we proceed to the
-             ``pending'' goal \texttt{Label}($\{X_4\}$).
-             This generates
-             \textsf{AND}(\texttt{Instantiate}($X_4$),
-             \texttt{Label}($\{\}$)).
-  \item[(t)] Again, \texttt{Instantiate}($X_4$) produces an
-             \textsf{OR} goal which, in turn, forces
-             \textsc{Solve} to push another stack on top of
-             the others.
-  \item[(u)] $X_4 \! \gets \! \textcolor{red}{1}$ is
-             executed.
-  \item[(v)] The ``pending'' \texttt{Label}($\emptyset$) is
-             executed. By definition, this goal does not
-             return any other goal. This means that the top
-             stack is empty. And as there isn't any other
-             ``pending'' goal, \textsc{Solve} has reached a
-             solution and returns success!
-\end{enumerate}
-
 
 \section{Search Tree Exploration}
 
@@ -1869,6 +1527,347 @@ anonymous reviewers for their constructive comments.
 
 \bibliographystyle{ws-ijait}
 \bibliography{bibliography}
+
+
+\appendix
+
+\section{An Algorithm that Satisfies Search Methods' Goals}
+
+In Section~\ref{framework} we described a high level
+language to define search methods. This framework consists
+of goals that support recursion (goals that return another
+goal or success) and meta-goals used to combine other goals
+in a conjunctive (\textsf{AND}) or disjunctive (\textsf{OR})
+manner.
+
+This is a not only a theoretical model; it has been
+implemented in a C++ Constraint Programming \textsc{Naxos
+Solver}. DFS and Iterative Broadening have been already
+declared in \textsc{Naxos} without loosing much of the above
+expressiveness, along with many other search methods in the
+solver's repository.\cite{Naxos}
+
+The search methods' goals cannot solve by themselves any
+CSP; we need a procedure to \emph{satisfy} these goals.
+\textsc{Solve} algorithm in Figure~\ref{solve} uses an
+advanced ``stack of stacks'' data structure to store goals.
+Initially, the stack of stacks contains just a single goal,
+e.g.\ \texttt{Broadening}($1$) or
+\texttt{Label}($\mathscr{X}$) for DFS, as in
+Figure~\ref{a2h}(a).
+
+\begin{figure}
+  \centering
+  \begin{algorithmic}
+    \Function{Solve}{}
+      \While {time limit has not been reached}
+        \If {stacks.top is not empty}
+          \State $\mathit{Goal} \gets
+                  \mathrm{stacks.top.pop()}$
+        \Else
+          \State $\mathit{Goal} \gets
+                  \mathrm{stacks.top.pending}$
+          \State $\mathrm{stacks.top.pending} \gets
+                 \textrm{get}$ the next goal of the frame
+                 that ``pending'' \\ \hspace*{14em} points
+                 to \textbf{or} (if there is not such a
+                 goal) get \\ \hspace*{14em} the next
+                 ``pending'' goal of that frame
+        \EndIf
+        \If {$\mathit{Goal}$ is an AND-goal}
+          \State stacks.top.push(2\textsuperscript{nd}
+                 subgoal of $\mathit{Goal}$)
+          \State stacks.top.push(1\textsuperscript{st}
+                 subgoal of $\mathit{Goal}$)
+        \ElsIf {$\mathit{Goal}$ is an OR-goal}
+          \State stacks.top.push(2\textsuperscript{nd}
+                 subgoal of $\mathit{Goal}$)
+          \State stacks.push() \Comment Push an empty frame
+          \State stacks.top.push(1\textsuperscript{st}
+                 subgoal of $\mathit{Goal}$)
+          \State $\mathrm{stacks.top.pending} \gets
+                 \textrm{the}$ goal after the
+                 2\textsuperscript{nd} subgoal in the below
+                 frame
+        \Else
+          \State $\mathit{NextGoal} \gets
+                  \mathit{Goal}\textrm{.execute()}$
+          \If {$\Call{PropagateConstraints}{}() =
+                \mathrm{false}$}
+            \State stacks.pop()
+            \Comment Backtrack to previous frame
+            \If {stacks empty}
+              \State \Return failure
+            \EndIf
+          \ElsIf {$\mathit{NextGoal} \neq \textrm{null}$}
+            \State stacks.top.push($\mathit{NextGoal}$)
+          \ElsIf {stacks.top is empty \textbf{and}
+                  $\mathrm{stacks.top.pending} =
+                   \textrm{null}$}
+            \State \Return success
+          \EndIf
+        \EndIf
+      \EndWhile
+      \State \Return failure
+    \EndFunction
+  \end{algorithmic}
+  \caption{Goals' Satisfaction Algorithm\label{solve}}
+\end{figure}
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/stacks/abcd}
+  \includegraphics[width=\textwidth]{figures/stacks/efgh}
+  \caption{\textsc{Solve} with DFS example: $X_1$
+           instantiation and $X_2$ instantiation
+           attempt\label{a2h}}
+\end{figure}
+
+\subsection{The ``stack of stacks'' data structure}
+
+In order to understand the \textsc{Solve} pseudocode, we
+should look closer at the underlying data structure in
+Fig.~\ref{a2h}. Each subfigure from (a) to (v) displays a
+snapshot of the ``stack of stacks'' main data structure
+while trying to satisfy the \texttt{Label}($\mathscr{X}$)
+goal for the Thessaly-coloring problem. Here we focus on the
+data structure itself.
+\begin{itemize}
+  \item The ``stack of the stacks'' is outlined by the outer
+        borders of each subfigure.
+        \begin{itemize}
+          \item The frames of the (outer) stack are
+                connected with an \textsf{OR} relationship.
+        \end{itemize}
+  \item Each frame of the outer stack is a stack too,
+        containing goals.
+        \begin{itemize}
+          \item The goals of each (inner) stack are
+                connected with an \textsf{AND} relationship.
+        \end{itemize}
+  \item Each inner stack contains additionally a
+        \textsf{pending} pointer.
+        \begin{itemize}
+          \item It points to the first unsatisfied goal of
+                the previous inner stacks.
+        \end{itemize}
+\end{itemize}
+
+\newcommand{\Solve}{{\normalsize S\footnotesize OLVE}}
+
+\subsection{\Solve{} in a nutshell}
+
+We can see the ``stack of stacks'' data structure inside the
+\textsc{Solve} algorithm.
+\begin{itemize}
+  \item The outer stack corresponds to the ``stacks''
+        variable.
+  \item The ``stacks.top'' expression corresponds to the top
+        frame of the ``stacks.''
+  \item The ``stacks.top.pending'' corresponds to the
+        pointer of the top frame.
+\end{itemize}
+
+The algorithm is wrapped into a \textbf{while} loop. Each
+iteration examines another goal.
+
+Inside the loop we have two ``if'' statements. In the first
+``if,'' we select the goal that we will attempt to satisfy.
+In the second ``if,'' we check if the $\mathit{Goal}$ is a
+meta-goal and we handle properly its two subgoals. If it is
+not a meta-goal, we simply ``execute()'' it and store the
+returned value into the $\mathit{NextGoal}$ variable. A
+``null'' returned value means that the executed
+$\mathit{Goal}$ did not generate another goal to be
+satisfied.
+
+After each $\mathit{Goal}$ execution,
+\textsc{PropagateConstraints} is called. A simple
+implementation for this function would just check if every
+constraint is still valid. If even a single constraint is
+violated, \textsc{PropagateConstraints} should return false.
+However, as its name implies, \textsc{PropagateConstraints}
+can do more just than checking constraints: it may remove
+no-good values from the variables and enforce a kind of
+``consistency'' between them, but this is beyond the scope
+of this paper to further analyze.\cite{Chen2013}
+
+\subsection{\Solve{} in action}
+
+Let's execute \textsc{Solve} to find a solution to the
+Thessaly-coloring (Problem~\ref{thessaly-coloring}) using
+the DFS method goals (Section~\ref{DFS-goals}). The
+snapshots of the ``stack of stacks'' data structure are
+visible in the corresponding subfigures of Figures \ref{a2h}
+to \ref{tuv}:
+\begin{enumerate}
+  \item[(a)] Before \textsc{Solve} begins, the first goal to
+             be satisfied should be already in the single
+             inner stack. In the case of DFS, the initial
+             goal is \texttt{Label}($\mathscr{X}$) which in
+             Thessaly-coloring is equivalent to
+             \texttt{Label}($\{X_1, X_2, X_3, X_4\}$).
+  \item[(b)] \textsc{Solve} begins and pops the
+             \texttt{Label} goal out of the inner stack and
+             executes it. By definition, \texttt{Label}
+             returns an \textsf{AND} goal. In other words,
+             \texttt{Label} is substituted by an
+             \textsf{AND} goal at the inner stack.
+
+             This \textsf{AND} goal is then popped out in
+             turn by the next \textsc{Solve} iteration, and
+             after its execution it returns its two subgoals
+             \texttt{Instantiate}($\{X_1\}$) and
+             \texttt{Label}($\{X_2, X_3, X_4\}$). At this
+             time, the ``stack of stacks'' looks like
+             Fig.~\ref{a2h}(b).
+  \item[(c)] By definition, \texttt{Instantiate}($\{X_1\}$)
+             is substituted by an \textsf{OR} goal. The
+             complete expression for this goal is
+             \textsf{OR}($X_1 \! \gets \!
+             \textcolor{red}{1}$, \textsf{AND}($D_{X_1} \!\!
+             \gets \!\! D_{X_1} \! - \!
+             \{\textcolor{red}{1}\}$,\,\texttt{Instantiate}($X_1$))).
+             In this case, \textsc{Solve} algorithm should
+             cover three requirements.
+             \begin{enumerate}
+               \item[1.] Execute the first subgoal and all
+                         the returned\slash generated goals.
+               \item[2.] Execute the ``pending'' goals that
+                         were unsatisfied before the
+                         \textsf{OR}-goal.
+               \item[3.] If the above fail, undo all the
+                         actions and execute the second
+                         subgoal.
+             \end{enumerate}
+             In Fig.~\ref{a2h}(c), all three requirements
+             have been implemented.
+             \begin{enumerate}
+               \item[1.] The first subgoal is in the top
+                         stack and will be executed in the
+                         next iteration.
+               \item[2.] The ``pending'' pointer of the top
+                         stack points to the next
+                         unsatisfied goal.
+               \item[3.] Most importantly, a new stack has
+                         been created on top of the previous
+                         inner stack. The new stack was
+                         added in order to isolate the
+                         previous inner stack. This would be
+                         useful if any of the top stack
+                         goals fails: The top stack will be
+                         popped, and the second
+                         \textsf{OR}-subgoal that is stored
+                         in the previous inner stack will be
+                         executed.
+             \end{enumerate}
+             For simplicity reasons, instead of adding the
+             whole second subgoal \textsf{AND}($D_{X_1} \!\!
+             \gets \!\! D_{X_1} \! - \!
+             \{\textcolor{red}{1}\}$,
+             \texttt{Instantiate}($X_1$)) into the bottom
+             stack in Fig.~\ref{a2h}(c), we ``unwrapped'' it
+             and added directly its two subgoals.
+  \item[(d)] $X_1 \! \gets \! \textcolor{red}{1}$ is
+             executed. This assignment does not violate any
+             constraint. This goal did not return another
+             goal, so the top stack is now empty.
+  \item[(e)] As the top stack is empty, \textsc{Solve} uses
+             its ``pending'' pointer to fetch the next goal.
+             Therefore, \texttt{Label}($\{X_2, X_3, X_4\}$)
+             is fetched and the ``pending'' pointer is moved
+             one step further, to the next goal. As there
+             aren't any more goals, the top stack
+             ``pending'' pointer is assigned the bottom
+             stack ``pending'' value, which is ``null.''
+
+             The \texttt{Label} goal is executed and returns
+             \textsf{AND}(\texttt{Instantiate}($X_2$),
+             \texttt{Label}($\{X_3, X_4\}$)), which is
+             executed in turn in the next iteration. The
+             result is depicted in Fig.~\ref{a2h}(e).
+
+\begin{figure}
+  \includegraphics[width=\textwidth]{figures/stacks/ijkl}
+  \includegraphics[width=\textwidth]{figures/stacks/mnop}
+  \caption{\textsc{Solve} with DFS example: $X_2$ successful
+           instantiation and $X_3$ instantiation
+           attempt\label{i2p}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/stacks/qrs}
+  \caption{\textsc{Solve} with DFS example: $X_3$ successful
+           instantiation\label{qrs}}
+\end{figure}
+
+\begin{figure}
+  \centering
+  \includegraphics[width=0.9\textwidth]{figures/stacks/tuv}
+  \caption{\textsc{Solve} with DFS example: $X_4$
+           instantiation\label{tuv}}
+\end{figure}
+
+  \item[(f)] \texttt{Instantiate}($X_2$) is executed. As in
+             (c), this is an \textsc{OR} goal, and a new
+             stack is pushed.
+  \item[(g)] $X_2 \! \gets \! \textcolor{red}{1}$ gets
+             executed.
+  \item[(h)] The assignment makes
+             \textsc{PropagateConstraints} fail, as it
+             violates the $X_1 \neq X_2$ constraint.
+             Backtracking, i.e. popping the whole top stack,
+             is activated.
+  \item[(i)] $D_{X_2} \!\! \gets \!\! D_{X_2} \! - \!
+             \{\textcolor{red}{1}\}$ is successfuly
+             executed. This removes the ``no-good'' value.
+  \item[(j)] \texttt{Instantiate}($X_2$) is executed again.
+             However, this time the corresponding domain
+             $D_{X_2}$ does not contain the removed value
+             $\textcolor{red}{1}$. Thus, the only value left
+             to assign to $X_2$ is $\textcolor{blue}{3}$.
+  \item[(k)] $X_2 \! \gets \! \textcolor{blue}{3}$ is
+             successfully executed.
+  \item[(l)] Top stack is empty, so we fetch the ``pending''
+             goal \texttt{Label}($\{X_3, X_4\}$) and set
+             ``pending'' equal to ``null.'' The
+             \texttt{Label} goal returns an \textsf{AND}
+             goal. Its two subgoals are pushed on the top
+             stack.
+  \item[(m)] \texttt{Instantiate}($X_3$) returns an
+             \textsf{OR} goal. When this is executed,
+             another stack is pushed on top of the others.
+  \item[(n)] $X_3 \! \gets \! \textcolor{red}{1}$ is
+             executed.
+  \item[(o)] \textsc{PropagateConstraints} fails, as the
+             constraint $X_1 \neq X_3$ is violated. The top
+             stack is immediately popped.
+  \item[(p)] The no-good value is removed after $D_{X_3}
+             \!\! \gets \!\! D_{X_3} \! - \!
+             \{\textcolor{red}{1}\}$ execution.
+  \item[(q)] \texttt{Instantiate}($X_3$) is executed again
+             for the new domain.
+  \item[(r)] The new assignment $X_3 \! \gets \!
+             \textcolor{green}{2}$ is executed.
+  \item[(s)] \textsc{PropagateConstraints} now succeeds and,
+             as the top stack is empty, we proceed to the
+             ``pending'' goal \texttt{Label}($\{X_4\}$).
+             This generates
+             \textsf{AND}(\texttt{Instantiate}($X_4$),
+             \texttt{Label}($\{\}$)).
+  \item[(t)] Again, \texttt{Instantiate}($X_4$) produces an
+             \textsf{OR} goal which, in turn, forces
+             \textsc{Solve} to push another stack on top of
+             the others.
+  \item[(u)] $X_4 \! \gets \! \textcolor{red}{1}$ is
+             executed.
+  \item[(v)] The ``pending'' \texttt{Label}($\emptyset$) is
+             executed. By definition, this goal does not
+             return any other goal. This means that the top
+             stack is empty. And as there isn't any other
+             ``pending'' goal, \textsc{Solve} has reached a
+             solution and returns success!
+\end{enumerate}
 
 \clearpage
 
