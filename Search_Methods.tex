@@ -1844,6 +1844,21 @@ supports a whole grid of strategies, by concurrently
 invoking \textsc{PopsSample} with several
 $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
 
+Constraint Programming consists of the CSP \emph{definition}
+and \emph{search} phases. A crucial goal in this area is to
+make these two phases as independent as possible from each
+other.\cite{Freuder2014} The presented search methods
+interface was one step into making the search phase more
+transparent. But the search phase doesn't include only the
+search method; it includes also mechanisms that check if the
+constraints are violated and enforces a kind of consistency
+between the domains of the variables that are connected via
+constraints.\cite{Chen2013}
+
+Therefore, in the next years, it would be also important to
+modularize the consistency enforcement part of the search
+phase, as we did in this work for the search methods.
+
 
 \section*{Acknowledgments}
 
