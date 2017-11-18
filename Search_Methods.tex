@@ -555,6 +555,16 @@ goals hierarchy.
         extended into two branches that represent the two
         alternative choices.
 \end{itemize}
+In this work, we consider only sequential search methods.
+Nevertheless, the presented search methods framework
+naturally supports distributed search methods too. We can
+simply distribute a search tree when we encounter an
+\textsf{OR} goal. The left and right branches of selected
+\textsf{OR} nodes can be explored concurrently to reduce the
+total tree exploration time. There are many different
+approaches regarding which \textsf{OR} nodes should be
+selected in order to split their two
+sub-trees.\cite{Regin2014,Pothitos2016-CPMR}
 
 \subsection{Heuristic estimation as a real number}
 
