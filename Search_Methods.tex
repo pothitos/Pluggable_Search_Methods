@@ -221,6 +221,35 @@ assignment
   X_4 \gets \textcolor{red}{1} \} \, .
 \end{equation}
 
+\subsection{Constrained optimization}
+
+A variation of Constraint Satisfaction Problems (CSPs) are
+the so-called \emph{Constrained Optimization Problems}
+(COPs). A COP consists of variables, domains, and
+constraints, just like any CSP, but there are two
+differences.
+\begin{itemize}
+  \item A COP also consists of an \emph{objective function}
+        which maps any assignment\slash solution to a
+        number, which is called the \emph{cost} of the
+        solution.
+  \item The target while solving a COP isn't just to find a
+        solution, but to find a \emph{best} solution, i.e.\ 
+        a solution with a minimum cost.
+\end{itemize}
+COPs can be solved like CSPs, using a \emph{branch and
+bound} strategy: When a solution is found, its cost is
+recorded, and a new constraint is added to guarantee that
+the next solution cost will have a smaller cost than the
+recorded one. This is repeated until all candidate solutions
+have been examined.
+
+In relation to CSP solving, the only additional requirement
+of the above COP solving procedure is adding dynamically a
+new constraint while searching. This makes it compatible
+with plain CSP search methods, so this work covers both CSPs
+and COPs as a whole.
+
 
 \section{A Goal-driven Search Methods'
          Framework\label{framework}}
