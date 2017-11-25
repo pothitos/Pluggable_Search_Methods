@@ -216,9 +216,9 @@ The solution in Fig.~\ref{map-colored} is represented by the
 assignment
 \begin{equation}
   \label{solution}
-  \{ X_1 \gets \textcolor{red}{1}, \, X_2 \gets
+  \{X_1 \gets \textcolor{red}{1}, \, X_2 \gets
   \textcolor{blue}{3}, \, X_3 \gets \textcolor{green}{2}, \,
-  X_4 \gets \textcolor{red}{1} \} \, .
+  X_4 \gets \textcolor{red}{1}\} \, .
 \end{equation}
 
 \subsection{Constrained optimization}
@@ -610,8 +610,8 @@ that it will eventually guide us toward a solution.
 \end{definition}
 \begin{example}
   In Fig.~\ref{pruned-tree} uppermost right node, there are
-  two alternative assignments in $\mathsf{Choices} = \{ X_2
-  \gets 1, \, X_2 \gets 3 \}$. One heuristic function may
+  two alternative assignments in $\mathsf{Choices} = \{X_2
+  \gets 1, \, X_2 \gets 3\}$. One heuristic function may
   provide the estimations, e.g.\ $h_{X_2 \gets 1} = 0.7$ and
   $h_{X_2 \gets 3} = 2.8$; that is, the assignment $X_2
   \gets 3$ is more promising.
@@ -760,8 +760,8 @@ determinism.
 %\begin{example}
 %  Take the three vectors of Example~\ref{vector}. The
 %  maximum secondary heuristic estimation is $\max h_{x_2} =
-%  \max \{ 4, 5, 9 \} = 9$. The maximum tertiary heuristic
-%  estimation is $\max h_{x_3} = \max \{ 8, 3, 6 \} = 8$.
+%  \max \{4, 5, 9\} = 9$. The maximum tertiary heuristic
+%  estimation is $\max h_{x_3} = \max \{8, 3, 6\} = 8$.
 %  Consequently, by applying Definition~\ref{linearization},
 %  $b_3 = 1$, $b_2 = b_3 ( \max h_{x_3} + 1 ) = 1 (8 + 1) =
 %  9$, and $b_1 = b_2 ( \max h_{x_2} + 1 ) = 9 (9 + 1) = 90$.
@@ -808,7 +808,7 @@ $\mathsf{Choices}$. Conclusively,
 \end{proposition}
 \begin{example}
   \label{distribution}
-  Say that $\mathsf{Choices} = \{ v_1, v_2, \ldots, v_5 \}$.
+  Say that $\mathsf{Choices} = \{v_1, v_2, \ldots, v_5\}$.
   Every $v_i$ denotes a possible assignment. Furthermore, in
   a specific search tree node we can make five different
   assignments, and their corresponding heuristic estimations
@@ -1115,8 +1115,8 @@ explores all the $D_X$ set values.
   Figure~\ref{piechart} demonstrates the heuristics pie for
   the Example~\ref{distribution}: Each $h_i$ corresponds to
   a value $v_i$ in $D_X$. In this case, a
-  \textsc{PopsSample}$(0.5,1)$ invocation would explore half
-  the pie. E.g., the choices that correspond to the
+  \textsc{PopsSample}$(0.5, 1)$ invocation would explore
+  half the pie. E.g., the choices that correspond to the
   heuristics $h_1^1 + h_2^1 + h_3^1$ or $h_2^1 + h_5^1$ make
   half the pie and more.
 \end{example}
