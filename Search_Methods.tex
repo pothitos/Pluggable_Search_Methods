@@ -1115,7 +1115,7 @@ explores all the $D_X$ set values.
   Figure~\ref{piechart} demonstrates the heuristics pie for
   the Example~\ref{distribution}: Each $h_i$ corresponds to
   a value $v_i$ in $D_X$. In this case, a
-  \textsc{PopsSample}$(0.5, 1)$ invocation would explore
+  \textsc{PopsSample}($0.5, 1$) invocation would explore
   half the pie. E.g., the choices that correspond to the
   heuristics $h_1^1 + h_2^1 + h_3^1$ or $h_2^1 + h_5^1$ make
   half the pie and more.
@@ -1234,12 +1234,12 @@ distribution.
 \begin{lemma}
   Let $n$ be the constrained variables number and let $d$ be
   the average domain size. Then, the average complexity of a
-  \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
+  \textsc{PopsSample}($\mathsf{PieceToCover},\mathsf{conf}$)
   call is $O(d^n \cdot \mathsf{PieceToCover}^n)$.
 \end{lemma}
 \begin{proof}
   An initial
-  \textsc{PopsSample}$(\mathsf{PieceToCover},\mathsf{conf})$
+  \textsc{PopsSample}($\mathsf{PieceToCover},\mathsf{conf}$)
   call, iterates through the values of, let's say, the first
   variable $X_1$. If the heuristic function numbers for the
   values in $D_{X_1}$ are uniformly distributed, the
@@ -1262,7 +1262,7 @@ distribution.
   $O(\mathsf{PieceToCover}^n \cdot d^n)$ for the initial
   call.
 \end{proof}
-We can observe that \textsc{PopsSample}$(1,\mathsf{conf})$
+We can observe that \textsc{PopsSample}($1,\mathsf{conf}$)
 is equivalent to a complete search space exploration, which
 has an $O(d^n)$ time complexity.
 
