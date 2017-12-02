@@ -1208,6 +1208,37 @@ we have less unassigned variables.
            Example~\ref{distribution}\label{piechart}}
 \end{figure}
 
+\begin{example}
+  We will consider the above Example~\ref{heuristics-pie}
+  for a \textsc{PopsSample}($0.5, 2$) call, i.e.\ for
+  $\mathsf{conf} = 2$.
+
+  According to Lemma~\ref{exponential}, the probalilities
+  for $\mathsf{conf} = 2$ are computed as $P_2(i) =
+  \frac{h_i^2}{\sum_j h_j^2}$. For example, $P_2(1) =
+  \frac{h_1^2}{\sum_j h_j^2} = \frac{1^2}{1^2 + 5^2 + 2^2 +
+  4^2 + 3^2} = 0.02$. The other probabilities are $P_2(2) =
+  0.45$, $P_2(3) = 0.07$, $P_2(4) = 0.29$, and $P_2(5) =
+  0.16$. Thus, the pie is redistributed as in
+  Figure~\ref{piechart2}.
+
+  While $\mathsf{conf}$-idence increases, the value $v_2$
+  which had initially the greatest heuristic evaluation
+  $h_2$ is even more likely to be selected, as $P(2)$
+  increases too. In other words, we get closer to total
+  determinism and closer to complete confidence in the
+  highest heuristic evaluation: In total determinism (in
+  systematic search) $v_2$ would have been always selected
+  with a certain probability $1$.
+\end{example}
+
+\begin{figure}
+  \centering
+  \input{figures/piechart2}
+  \caption{The previous heuristics-probabilities pie chart
+           when $\mathsf{conf} = 2$\label{piechart2}}
+\end{figure}
+
 \newcommand{\PoPS}{\textbf{\normalsize P\footnotesize
                            O\normalsize PS}}
 \newcommand{\PopsSample}{\textbf{\normalsize P\footnotesize
