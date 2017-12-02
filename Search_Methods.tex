@@ -1120,7 +1120,85 @@ explores all the $D_X$ set values.
   half the pie. E.g., the choices that correspond to the
   heuristics $P(1) + P(2) + P(3)$ or $P(2) + P(5)$ make half
   the pie and more.
+
+  A more detailed step by step explanation follows.
+  \begin{itemize}
+    \item We are inside the \textbf{while} loop of a
+          \textsc{PopsSample}($0.5, 1$) call.
+    \item $\mathit{CoveredPiece}$ is initially $0$; the loop
+          stops when $\mathit{CoveredPiece}$ exceeds $0.5$.
+    \item \textsc{ValuesOrderHeuristic}($D_X, 1$) is called.
+    \item According to Example~\ref{distribution}, this
+          function will return a value out of $\{v_1, v_2,
+          v_3, v_4, v_5\}$.
+    \item Each value $v_i$ has been evaluated with an
+          heuristic value $h_i$.
+    \item Most specifically, $h_1 = 1$, $h_2 = 5$, $h_3 =
+          2$, $h_4 = 4$, and $h_5 = 3$.
+    \item The probability that $v_i$ is selected by
+          \textsc{ValuesOrderHeuristic} is $P(i)$, which is
+          calculated using the above evaluations together
+          with Lemma~\ref{exponential}.
+    \item Thus, the respective probabilities are $P(1) =
+          0.07$, $P(2) = 0.33$, $P(3) = 0.13$, $P(4) =
+          0.27$, and $P(5) = 0.20$.
+    \item Again, all the above are \emph{probabilities}
+          ($P(i)$) of the event that a specific value
+          ($v_i$) will be selected. Therefore, every value
+          can be selected in each iteration.
+    \item Suppose that $v_5$ is selected at the first
+          iteration with $P(5) = 0.20$.
+    \item This probability is also used to increase the
+          current $\mathit{CoveredPiece}$, which becomes
+          $0.20$ too.
+    \item $X$ is assigned $v_5$.
+  \end{itemize}
+  After the assignment, \textsc{PopsSample}($0.5, 1 +
+  \frac{99}{|\mathscr{X}|}$) is called. Please note the
+  slight incease of the $\mathsf{conf}$ value. This
+  recursive call will choose another variable out of
+  $\mathscr{X}$ and enter the \textbf{while} loop again.
+  This loop will try to assign a value to the new variable
+  from its domain. If the attempts fail, we continue back to
+  the first \textbf{while} loop, which was described in the
+  above bullets.
+  \begin{itemize}
+    \item The assignment of $v_5$ to $X$ is undone, $v_5$ is
+          removed from the domain, and another iteration
+          begins.
+    \item We proceed to the second iteration, as the
+          $\mathsf{PieceToCover}$ ($0.5$) is still greater
+          than the $\mathit{CoveredPiece}$ ($0.2$).
+    \item Let's say that $v_2$ is then chosen by
+          \textsc{ValuesOrderHeuristic} with a $P(2) = 0.33$
+          probability.
+    \item $\mathit{CoveredPiece}$ now equals $0.20 + 0.33 =
+          0.53$.
+  \end{itemize}
+  Again, \textsc{PopsSample}($0.5, 1 +
+  \frac{99}{|\mathscr{X}|}$) is called. If the attempts to
+  instantiate the next variable fail, we are back to the
+  first \textbf{while} loop:
+  \begin{itemize}
+    \item The assignment of $v_2$ to $X$ is undone.
+    \item We proceed to the third iteration.
+    \item However, $\mathit{CoveredPiece}$ ($0.53$) is now
+          greater than $\mathsf{PieceToCover}$ ($0.5$).
+    \item More than half of the pie of the choices for $X$
+          has been already explored; no other alternatives
+          are examined.
+    \item The rest of the values $v_1$, $v_3$, $v_4$ are
+          left unused\slash unexplored. This makes
+          \textsc{PopsSample} an \emph{incomplete} search
+          method, as it may override a solution (which
+          involves for example these values) for the sake of
+          speed.
+  \end{itemize}
 \end{example}
+It's worth noting that while more variables get
+instantiated, the $\mathsf{conf}$ value gradually increases.
+Besides, heuristic estimations tend to be more reliable when
+we have less unassigned variables.
 
 \begin{figure}
   \centering
