@@ -1501,16 +1501,22 @@ becomes more random.
 \end{figure}
 
 It was expected that for high $\mathsf{conf}$ values the
-results would be more stable, as the search process
+results would be more constant, as the search process
 approximates the default depth-first-search (DFS). For the
 marginal low values, e.g.\ $\mathsf{conf} = 0$, search is
 completely stochastic and the results are worse on overage,
 as we have higher solution costs. However, the evaluations
 for intermediate $\mathsf{conf}$ values, e.g.\ 
-$\mathsf{conf} \approx 20$, are more promising, but the
-automatic selection of the best $\mathsf{conf}$ is an open
-question here; in the last sections, \textsc{PoPS} finds
-automatically the best $\mathsf{conf}$ values.
+$\mathsf{conf} \approx 20$, are more promising. Remember
+that an intermediate $\mathsf{conf}$ value favors the
+selection which corresponds to the best heuristic
+evaluation, \emph{but} it also gives room to other
+selections (the ``outsiders'') as their probabilities are
+not zero.
+
+The automatic selection of the best $\mathsf{conf}$ is an
+open question here; in the last sections, \textsc{PoPS}
+finds automatically the best $\mathsf{conf}$ values.
 
 In practice, as shown in Fig.\ \ref{costsA} and
 \ref{costsB}, a $\mathsf{conf}$ value around $100$ actually
@@ -1519,8 +1525,8 @@ same solutions for $\mathsf{conf} \geq 100$.
 
 It is worth to mention that in Fig.~\ref{costsB} the only
 solution found for the \textsf{Let0405-1} instance, depicted
-with an asterisk~\textcolor{blue}{$*$}, was for
-$\mathsf{conf} = 10$.
+with an asterisk~\textcolor{blue}{$*$}, was for an
+intermediate $\mathsf{conf} = 10$.
 
 \subsection{Radio link frequency assignment}
 
@@ -1544,7 +1550,9 @@ costs found so far in Fig.~\ref{CELAR} for several
 $\mathsf{conf}$ values. Approximately the same as in course
 scheduling, the lowest solution costs occur around
 $\mathsf{conf} \approx 10$, which gives better results on
-average than the marginal $\mathsf{conf}$ values.
+average than the marginal $\mathsf{conf}$ values. This means
+that we achieve best results when the confidence to our
+heuristic is neither too high nor very low.
 
 \begin{figure}
   \centering
