@@ -1209,6 +1209,7 @@ we have less unassigned variables.
 \end{figure}
 
 \begin{example}
+  \label{heuristics-pie2}
   We will consider the above Example~\ref{heuristics-pie}
   for a \textsc{PopsSample}($0.5, 2$) call, i.e.\ for
   $\mathsf{conf} = 2$.
@@ -2062,14 +2063,18 @@ applied to the document's source code at
                 independent of the CSPs that are solved.
           \end{enumerate}
   \item We made a more thorough presentation of
-        Example~\ref{heuristics-pie}~\commit{379c}.
+        Example~\ref{heuristics-pie}~\commit{379c}. In order
+        to stress what lies between total randomness and
+        total determinism, we added
+        Example~\ref{heuristics-pie2}~\commit{bcf8}.
 \end{itemize}
 
 \subsection*{Review 2}
 
 \begin{itemize}
   \item We enriched Example~\ref{heuristics-pie} with more
-        details about the heuristics' pie~\commit{379c}.
+        details about the heuristics' pie~\commit{379c}. We
+        added one more example after this~\commit{bcf8}.
   \item The pure algorithmic part of Section~\ref{framework}
         was moved to the Appendix. Nevertheless, we kept the
         search method framework demonstration and figures in
