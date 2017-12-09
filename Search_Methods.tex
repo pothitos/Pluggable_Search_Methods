@@ -1383,10 +1383,10 @@ Finding the best $\mathsf{conf}$ is the motivation behind
 \textsc{PoPS}. Unfortunately, we do not know a priori which
 $\mathsf{conf}$ is the best parameter for
 \textsc{PopsSample}. However, we can find it by trial and
-error. In Fig.~\ref{pops}, the \textsc{PoPS} function
-invokes \textsc{PopsSample} for $\mathsf{SamplesNum}$
-different $\mathsf{conf}_i$ values, including the marginal
-values $0$ and $100$.
+error. In Fig.~\ref{PoPS-algorithm}, the \textsc{PoPS}
+function invokes \textsc{PopsSample} for
+$\mathsf{SamplesNum}$ different $\mathsf{conf}_i$ values,
+including the marginal values $0$ and $100$.
 
 \begin{figure}
   \centering
@@ -1415,7 +1415,7 @@ values $0$ and $100$.
     \EndFunction
   \end{algorithmic}
   \caption{Piece of Pie Search ({\normalfont\textsc{PoPS}})
-           Method\label{pops}}
+           Method\label{PoPS-algorithm}}
 \end{figure}
 
 Each different $\mathsf{conf}_i$ is used in turn. Initially,
