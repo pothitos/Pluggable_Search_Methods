@@ -253,7 +253,7 @@ and COPs as a whole.
 
 
 \section{A Goal-driven Search Methods'
-         Framework\label{framework}}
+         Framework\label{search-framework}}
 
 Except from a way to state CSPs, a user\slash programmer
 needs an elegant way to state search methods that solve
@@ -1252,7 +1252,7 @@ we have less unassigned variables.
 
 Figure~\ref{PopsSampleGoals} expresses graphically the
 \textsc{PopsSample} method using our search methods
-framework (Section~\ref{framework}).
+framework (Section~\ref{search-framework}).
 
 \begin{figure}
   \centering
@@ -1692,7 +1692,7 @@ anonymous reviewers for their constructive comments.
 \section{An Algorithm that Satisfies Search Methods'
          Goals\label{framework-algorithm}}
 
-In Section~\ref{framework} we described a high level
+In Section~\ref{search-framework} we described a high level
 language to define search methods. This framework consists
 of goals that support recursion (goals that return another
 goal or success) and meta-goals used to combine other goals
@@ -2093,11 +2093,12 @@ applied to the document's source code at
   \item We enriched Example~\ref{heuristics-pie} with more
         details about the heuristics' pie~\commit{379c}. We
         added one more example after this~\commit{bcf8}.
-  \item The pure algorithmic part of Section~\ref{framework}
-        was moved to the Appendix. Nevertheless, we kept the
-        search method framework demonstration and figures in
-        their initial position, to support the
-        \textsc{PopsSample} illustration that follows.
+  \item The pure algorithmic part of
+        Section~\ref{search-framework} was moved to the
+        Appendix. Nevertheless, we kept the search method
+        framework demonstration and figures in their initial
+        position, to support the \textsc{PopsSample}
+        illustration that follows.
 \end{itemize}
 
 \subsection*{Review 3}
