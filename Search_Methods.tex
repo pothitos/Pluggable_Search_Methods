@@ -105,17 +105,24 @@ Bioinformatics.\cite{Barahona2011}
 
 All these Constraint Satisfaction Problems or Constrained
 Optimization Problems have been declared in our Constraint
-Programming solver.\cite{Naxos} The solution phase is
-completely independent to the CSP declaration phase, as this
-serves the original promise of Constraint Programming:
-\emph{The user states the problem, the computer solves
-it.}\cite{Freuder2014}
+Programming \textsc{Naxos Solver}.\cite{Naxos} In such
+solvers, the solution phase is completely independent to the
+CSP declaration phase, as this serves the original promise
+of Constraint Programming: \emph{The user states the
+problem, the computer solves it.}\cite{Freuder2014}
 
 In this work, we go one step further and allow the
 user\slash programmer to state their own \emph{search
 methods} that can apply to any CSP. We found a framework
 where the user can compose their search methods out of
 conjunctive and disjunctive goals.
+
+\textsc{Naxos Solver} is a C++ constraint programming
+library. We implemented on top of it our search methods'
+framework, but the framework can be adopted by other solvers
+too. Our goal is not to compare \textsc{Naxos} against other
+solvers, but to use it as an open source ground\slash
+environment for this work's contributions.
 
 However, naive search methods explore the whole candidate
 solutions spectrum, in order to find a real solution. The
