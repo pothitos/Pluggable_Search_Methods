@@ -1107,6 +1107,23 @@ $\mathsf{Assignments}$ set, which is initially empty.
   \centering
   \begin{algorithmic}
     \Function{PopsSample}{$\mathsf{PieceToCover}, \mathsf{conf}$}
+      \State \textbf{local variables:}
+      \State \quad $\mathsf{Assignments}$: set with all the
+             assignments made until this call
+      \State \quad $\mathscr{X}$: set with all the
+             constrained variables
+      \State \quad $X$: constrained variable that is going
+             to be instantiated
+      \State \quad $\mathsf{value}$: value that is going to
+             be assigned
+      \State \quad $h_{X \gets v}$: heuristic value for the
+             assignment $X \gets v$
+      \State \quad $D_{X_\mathrm{init}}$: initial domain of
+             $X$, before any assignment was made
+      \State \quad $D_X$: current domain of $X$
+      \State \quad $\mathit{CoveredPiece}$: current covered
+             proportion of the pie
+      \State
       \If {$\mathsf{Assignments}$ violate any constraint}
         \State \Return failure
       \ElsIf {$\mathsf{Assignments}$ include every variable}
@@ -1452,6 +1469,21 @@ including the marginal values $0$ and $100$.
   \centering
   \begin{algorithmic}
     \Function{PoPS}{}
+      \State \textbf{local variables:}
+      \State \quad $\mathsf{SamplesNum}$: how many different
+             $\mathsf{conf}$ values are initially employed
+      \State \quad $\mathsf{conf}_i$: array with all the
+             initially employed $\mathsf{conf}$ values
+      \State \quad $\mathsf{Sample}_i$: a boolean array;
+             if its $i$\textsuperscript{th} element is
+             false, the corresponding
+      \State \qquad \qquad \quad $\mathsf{conf}_i$ value is
+             currently ignored
+      \State \quad $\mathsf{Cover}_i$: corresponding ``piece
+             to cover'' argument for \Call{PopsSample}{} call
+      \State \quad $d$: average domain size of the
+             constrained variables
+      \State
       \For {$i$ \textbf{from} $1$ \textbf{to} $\mathsf{SamplesNum}$}
         \State $\mathsf{Sample}_i$ is activated
         \State $\mathsf{Cover}_i \, \gets \, 0$
@@ -1778,6 +1810,13 @@ Figure~\ref{a2h}(a).
   \centering
   \begin{algorithmic}
     \Function{Solve}{}
+      \State \textbf{local variables:}
+      \State \quad stacks: the ``stack of stacks'' instance
+      \State \quad $\mathit{Goal}$: current goal that has to
+                   be satisfied
+      \State \quad $\mathit{NextGoal}$: generated goal by
+                   current goal's execution
+      \State
       \While {time limit has not been reached}
         \If {stacks.top is not empty}
           \State $\mathit{Goal} \gets
