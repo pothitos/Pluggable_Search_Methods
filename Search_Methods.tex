@@ -612,7 +612,7 @@ pruned as no-goods.
 \end{figure}
 
 Each path from the root (i.e.\ the uppermost node)
-represents an \emph{assignment.} If the path from the root
+represents an \emph{assignment}. If the path from the root
 ends up into a leaf (lowest node), we have a \emph{complete}
 assignment. E.g., the dotted path in Fig.~\ref{pruned-tree}
 is an alternative form of the solution assignment in
@@ -682,7 +682,7 @@ solution or not. Being a prediction, it implies an inherent
 
 \subsection{Heuristics exploitation in related work}
 
-In \emph{constructive search,} one can build a solution
+In \emph{constructive search}, one can build a solution
 either with a deterministic\slash systematic search method
 or by making one-by-one random assignments. Do these methods
 exploit heuristics and how?
@@ -769,8 +769,8 @@ determinism.
 %  A \emph{heuristic vector} $\mathbf{h} \in \mathbb{R}^n$
 %  consists of multiple heuristic estimations. If $\mathbf{h}
 %  = [h_{x_1} \; h_{x_2} \; \cdots \; h_{x_n}]$, the
-%  $h_{x_1}$ is the \emph{primary heuristic estimation,}
-%  $h_{x_2}$ is the \emph{secondary heuristic estimation,}
+%  $h_{x_1}$ is the \emph{primary heuristic estimation},
+%  $h_{x_2}$ is the \emph{secondary heuristic estimation},
 %  and $h_{x_n}$ is the \emph{$n$-ary heuristic estimation}
 %  for the same choice.
 %\end{definition}
@@ -837,7 +837,7 @@ solution; they are not a strict quality rank.
 \begin{definition}
   \label{hdf}
   A function $P: \mathsf{Choices} \to [0 \, , 1]\,,$ namely
-  a \emph{heuristic distribution function,} maps each
+  a \emph{heuristic distribution function}, maps each
   available choice to a corresponding probability, i.e.\ 
   $P(i)$.
 \end{definition}
@@ -924,7 +924,7 @@ distribution function (Definition~\ref{hdf}) in order to
 compromise random and deterministic methods. We introduce a
 parameter $\mathsf{conf} \in \mathbb{R}^+$, that signifies
 how much the heuristic estimations will be taken into
-account; it is the heuristic's \emph{confidence.} This
+account; it is the heuristic's \emph{confidence}. This
 $\mathsf{conf}$idence pararameter is the basis to define the
 condition when a heuristic distribution function is
 ``balanced.''
