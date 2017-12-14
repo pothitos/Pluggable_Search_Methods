@@ -647,6 +647,7 @@ A heuristic function maps every possible choice in the
 search tree to a number that corresponds to the estimation
 that it will eventually guide us toward a solution.
 \begin{definition}
+  \label{heuristic-function}
   For a specific search tree node, let $\mathsf{Choices}$ be
   the set with the alternative assignments that one may
   follow. The \emph{heuristic function} $h_i$ maps each
@@ -655,6 +656,7 @@ that it will eventually guide us toward a solution.
   \mathbb{R}^+$.
 \end{definition}
 \begin{example}
+  \label{heuristic-function-example}
   In Fig.~\ref{pruned-tree} uppermost right node, there are
   two alternative assignments in $\mathsf{Choices} = \{X_2
   \gets 1, \, X_2 \gets 3\}$. One heuristic function may
@@ -841,6 +843,10 @@ solution; they are not a strict quality rank.
   available choice to a corresponding probability, i.e.\ 
   $P(i)$.
 \end{definition}
+As in Definition~\ref{heuristic-function} and the
+Example~\ref{heuristic-function-example} that follows it,
+$\mathsf{Choices}$ may include all the possible\slash
+candidate assignments to a constrained variable.
 \begin{property}
   It should hold that $\sum_i P(i) = 1$, as $P$ denotes a
   probability for each $i \in \mathsf{Choices}$.
