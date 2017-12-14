@@ -682,6 +682,15 @@ whether a specific assignment will ultimately guide us to a
 solution or not. Being a prediction, it implies an inherent
 \emph{reliability\slash confidence} level.
 
+In the above definition, we excluded negative values as the
+heuristic function's output. A negative heuristic evaluation
+could probably mean ``don't make this choice at all.'' But
+heuristics are normally used to favour one choice over
+another and not to prune a choice. In any case, if we had a
+function $h$ with $\min h < 0$, we could transform it into
+$h' = h + |\min h|$ to make it comply with the above
+definition.
+
 \subsection{Heuristics exploitation in related work}
 
 In \emph{constructive search}, one can build a solution
