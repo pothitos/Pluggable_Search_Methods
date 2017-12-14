@@ -305,9 +305,12 @@ the search methods should be ``CSP-agnostic'' in order to
 keep the independence between Constraint Programming stages.
 
 In related works, a lot of search methods have been
-implemented in modern solvers.\cite{Gecode2017} However, in
-our case we try to provide a transparent framework, so that
-the user can easily define their own methods.
+implemented ``out of the box'' in modern
+solvers.\cite{Gecode2017} This means, at least to our
+knowledge, that the implemented search methods are coupled
+with the existing solvers. Nevertheless, our contribution is
+to introduce an extensible framework, so that the user can
+easily define their own ``custom'' search methods.
 
 \subsection{Search methods are made up of goals}
 
