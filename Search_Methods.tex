@@ -846,11 +846,11 @@ solution; they are not a strict quality rank.
 Regarding random search methods (Section~\ref{random}), the
 probability is distributed uniformly along the
 $\mathsf{Choices}$. Conclusively,
-\begin{proposition}
+\begin{property}
   \label{probability-random}
   The heuristic distribution for a random method is always
   $P(i) = \frac{1}{|\mathsf{Choices}|}$, $\forall \, i$.
-\end{proposition}
+\end{property}
 \begin{example}
   \label{distribution}
   Say that $\mathsf{Choices} = \{v_1, v_2, \ldots, v_5\}$.
@@ -896,11 +896,11 @@ $\mathsf{Choices}$. Conclusively,
 On the other extreme, deterministic search methods
 (Section~\ref{deterministic}) always select the choice $v_i$
 that corresponds to the $h_i$ with the highest rank.
-\begin{proposition}
+\begin{property}
   \label{probability-deterministic}
   Formally, in deterministic search methods, if $i =
   \arg\max_j h_j$, then $P(i) = 1$, otherwise $P(i) = 0$.
-\end{proposition}
+\end{property}
 \begin{example}
   The greatest heuristic value in Example~\ref{distribution}
   is $h_2 = 5$. Hence, a deterministic search method would
@@ -948,9 +948,8 @@ condition when a heuristic distribution function is
 \end{definition}
 Intuitively, $\mathsf{conf}$ is the link between random and
 deterministic search methods, as the above definition covers
-both Proposition~\ref{probability-random} when
-$\mathsf{conf} \to 0$ and
-Proposition~\ref{probability-deterministic} when
+both Property~\ref{probability-random} when $\mathsf{conf}
+\to 0$ and Property~\ref{probability-deterministic} when
 $\mathsf{conf} \to \infty$. In other words, $\mathsf{conf}$
 is the position along the random-deterministic axis.
 
