@@ -1785,12 +1785,12 @@ Figure~\ref{a2h}(a).
         \Else
           \State $\mathit{Goal} \gets
                   \mathrm{stacks.top.pending}$
-          \State $\mathrm{stacks.top.pending} \gets
-                 \textrm{get}$ the next goal of the frame
-                 that ``pending'' \\ \hspace*{14em} points
-                 to \textbf{or} (if there is not such a
-                 goal) get \\ \hspace*{14em} the next
-                 ``pending'' goal of that frame
+          \State $\mathrm{stacks.top.pending} \gets$
+                 get the next goal of the frame that
+                 ``pending'' \\ \hspace*{14em} points to
+                 \textbf{or} (if there is not such a goal)
+                 get \\ \hspace*{14em} the next ``pending''
+                 goal of that frame
         \EndIf
         \If {$\mathit{Goal}$ is an AND-goal}
           \State stacks.top.push(2\textsuperscript{nd}
@@ -1803,13 +1803,12 @@ Figure~\ref{a2h}(a).
           \State stacks.push() \Comment Push an empty frame
           \State stacks.top.push(1\textsuperscript{st}
                  subgoal of $\mathit{Goal}$)
-          \State $\mathrm{stacks.top.pending} \gets
-                 \textrm{the}$ goal after the
-                 2\textsuperscript{nd} subgoal in the below
-                 frame
+          \State $\mathrm{stacks.top.pending} \gets$
+                 the goal after the 2\textsuperscript{nd}
+                 subgoal in the below frame
         \Else
           \State $\mathit{NextGoal} \gets
-                  \mathit{Goal}\textrm{.execute()}$
+                  \mathit{Goal}$.execute()
           \If {$\Call{PropagateConstraints}{}() =
                 \mathrm{false}$}
             \State stacks.pop()
