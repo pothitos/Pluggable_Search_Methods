@@ -1544,15 +1544,6 @@ with an Intel dual-core E6750 processor clocked at 2.66\,GHz
 with 2\,GB of memory and a Xubuntu Linux 12.04 operating
 system.
 
-For the following first three subsections, our
-$\mathsf{conf}$idence framework was used to randomize only
-the \emph{variables ordering heuristic} (minimum remaining
-values and degree used for tie breaking), whereas in the
-last subsection, which refers to \textsc{PoPS}, the
-randomization affects only the \textsc{ValuesOrderHeuristic}
-(least constraining value), called by \textsc{PopsSample}
-inside \textsc{PoPS}.
-
 \subsection{University course scheduling\label{ITC}}
 
 Automated timetabling is nowadays a crucial application, as
@@ -1568,6 +1559,9 @@ and rooms to the curriculum lectures. The objective is to
 distribute them evenly during the week but without having
 gaps between them, if scheduled on the same day; each gap
 increases the solution cost.\cite{Pothitos2012-Scheduling}
+As \emph{variables ordering heuristic}, we used minimum
+remaining values and degree for tie breaking, and we
+randomized it using the function in Lemma~\ref{exponential}.
 
 Due to the ITC specifications, we had 333 seconds in our
 machine to solve each instance and minimize the solution
@@ -1634,7 +1628,11 @@ of real datasets for this NP-hard problem.\cite{Cabon1999}
 We chose to solve the five so-called ``MAX'' problem
 instances, namely \textsf{SCEN06}--\textsf{SCEN10}, in
 which, generally speaking, we try to maximize the number of
-the satisfied soft constraints.
+the satisfied soft constraints. Similarly to the above
+course scheduling experiments, as \emph{variables ordering
+heuristic} we used minimum remaining values and degree for
+tie breaking, and we randomized it using the function in
+Lemma~\ref{exponential}.
 
 For each of these instances, we had 15 minutes to explore
 the search space. We recorded the best (lowest) solution
@@ -1696,8 +1694,12 @@ $50$, $75$, and $100$, by setting $\mathsf{SamplesNum}$
 equal to $5$. In this way, \textsc{PoPS} constructed
 solutions with lower costs than the other methods, except
 for the fifth instance, as illustrated in
-Table~\ref{PopsItc}. The time limit for all the methods was
-set to 15 minutes.
+Table~\ref{PopsItc}.
+
+In this section, we used least constraining value as
+\textsc{ValuesOrderHeuristic}, and we randomized it using
+the function in Lemma~\ref{exponential}. The time limit for
+all the methods was set to 15 minutes.
 
 \begin{table}
   \tbl{Solution costs for fourteen ITC
