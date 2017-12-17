@@ -1430,12 +1430,13 @@ increased by $k \cdot \frac{100 -
 \textsc{PopsSample} will become equal to the marginal value
 $100$.
 
-In the deepest node levels, heuristics are usually more
-accurate, because even more variables have been
-instantiated, and we have a clearer picture of the problem.
-In our framework, more accuracy means more confidence,
-that's why we increase $\mathsf{conf}$ as the search method
-proceeds with the assignments.
+The following is not guaranteed, but in the deepest node
+levels, heuristics are \emph{usually} more accurate, because
+more variables have been instantiated, and we have a clearer
+picture of the problem. In our framework, more accuracy
+means more confidence, that's why we increase
+$\mathsf{conf}$ as the search method proceeds with the
+assignments.
 
 \subsection{\PopsSample{} average complexity}
 
