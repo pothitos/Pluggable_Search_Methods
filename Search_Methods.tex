@@ -1297,6 +1297,18 @@ explores all the $D_X$ set values.
           speed.
   \end{itemize}
 \end{example}
+
+Again, LDS is an incomplete search method too; at each
+search tree node it may explore only a limited \emph{number}
+of the available choices. The difference with our method is
+that we may explore a limited \emph{proportion} of the
+heuristics pie of choices, which makes our method more
+``heuristics-aware.'' This means that the number of the
+explored choices by our method in a specific node may vary,
+depending on how the heuristics pie is distributed to the
+choices. On the other hand, LDS explores a fixed number of
+choices, independently of the heuristics pie distribution.
+
 It's worth noting that while more variables get
 instantiated, the $\mathsf{conf}$ value gradually increases.
 Besides, heuristic estimations tend to be more reliable when
