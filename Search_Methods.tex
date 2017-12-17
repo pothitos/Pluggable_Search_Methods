@@ -1687,15 +1687,17 @@ comparisons easily.
 In the above sections, it was not easy to figure out which
 is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$
 combination. That is why we employed \textsc{PoPS} to solve
-the fourteen course timetabling instances. As described in
-Section~\ref{sampling}, \textsc{PoPS} uses several
-$\mathsf{conf}$ values and favours the most fruitful ones.
-We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$, $50$,
-$75$, and $100$, by setting $\mathsf{SamplesNum}$ equal to
-$5$. In this way, \textsc{PoPS} constructed solutions with
-lower costs than the other methods, except for the fifth
-instance, as illustrated in Table~\ref{PopsItc}. The time
-limit for all the methods was set to 15 minutes.
+the fourteen course timetabling instances.
+
+As described in Section~\ref{sampling}, \textsc{PoPS} uses
+several $\mathsf{conf}$ values and favours the most fruitful
+ones. We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$,
+$50$, $75$, and $100$, by setting $\mathsf{SamplesNum}$
+equal to $5$. In this way, \textsc{PoPS} constructed
+solutions with lower costs than the other methods, except
+for the fifth instance, as illustrated in
+Table~\ref{PopsItc}. The time limit for all the methods was
+set to 15 minutes.
 
 \begin{table}
   \tbl{Solution costs for fourteen ITC
