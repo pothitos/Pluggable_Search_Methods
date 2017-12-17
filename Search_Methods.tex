@@ -1298,6 +1298,13 @@ explores all the $D_X$ set values.
   \end{itemize}
 \end{example}
 
+\begin{figure}
+  \centering
+  \input{figures/piechart}
+  \caption{The heuristics-probabilities pie chart for
+           Example~\ref{distribution}\label{piechart}}
+\end{figure}
+
 Again, LDS is an incomplete search method too; at each
 search tree node it may explore only a limited \emph{number}
 of the available choices. The difference with our method is
@@ -1313,13 +1320,6 @@ It's worth noting that while more variables get
 instantiated, the $\mathsf{conf}$ value gradually increases.
 Besides, heuristic estimations tend to be more reliable when
 we have less unassigned variables.
-
-\begin{figure}
-  \centering
-  \input{figures/piechart}
-  \caption{The heuristics-probabilities pie chart for
-           Example~\ref{distribution}\label{piechart}}
-\end{figure}
 
 \begin{example}
   \label{heuristics-pie2}
