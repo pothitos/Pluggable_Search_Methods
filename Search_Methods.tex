@@ -751,9 +751,51 @@ search with restarts} traverses the search tree making
 random choices, and when a specific time limit is reached,
 it re-starts from the beginning.
 
+\subsubsection{Local search methods}
+
+The aforementioned search methods belong to
+\emph{constructive search}, as they build a solution from
+scratch, step by step, by assigning a value to a variable
+each time.
+
+On the other hand, there are non-systematic indirect search
+methods, also known as \emph{local search} methods, which
+assemble a \emph{candidate} solution, and then try to fix it
+by eliminating conflicting sets of variables and
+constraints. Local search iteratively tries to \emph{repair}
+the candidate solution, in order to satisfy the constraints
+a posteriori.\cite{Hoos2006}
+
+\emph{Stochastic local search} makes a random repair action
+in each step. There are many other local search variants.
+
+\paragraph{Hill climbing.}
+
+A well-known variant is \emph{hill climbing}, also known as
+\emph{iterative improvement}. In each step, it changes only
+one variable assignment (1-exchange). Normally, we make the
+change which will reduce the violated constraints number as
+much as possible.\cite{Cohen1994}
+
+\paragraph{Simulated annealing.}
+
+The above practice is prone to be trapped into \emph{local
+minima}. This means that we can end up in a candidate
+solution that cannot be improved by modifying only one
+assignment any more. In this case, we have to escape the
+current local minimum by making a random step.
+
+\emph{Simulated annealing} methodology permits random steps
+to skip local minima while a parameter called
+\emph{temperature} is high; as time passes by and
+temperature drops, the method becomes less tolerant in
+random steps, especially if their evaluation is
+poor.\cite{Kirkpatrick1983} In this work we attempt to bring
+this (local search) approach in constructive search methods.
+
 \subsubsection{Heuristics and probabilities}
 
-Thus, the well-known search methods either use heuristics as
+Constructive search methods either use heuristics as
 $\mathsf{Choices}$ ranks, or completely ignore them. In
 1996, Bresina transformed the heuristic ranks into
 \emph{probabilities} via the so-called
@@ -780,10 +822,10 @@ prevailing values.
          Heuristics\label{probabilistic-heuristics}}
 
 Our contribution lies in the mathematical foundation of a
-framework that covers the above heuristic categories. In
-contrast to existing methodologies, we leverage on the
-\emph{smooth} transition from the total randomness to
-determinism.
+framework that covers both deterministic and random
+heuristics in constructive search. In contrast to existing
+methodologies, we leverage on the \emph{smooth} transition
+from the total randomness to determinism.
 
 %\subsection{Heuristics linearization}
 %
