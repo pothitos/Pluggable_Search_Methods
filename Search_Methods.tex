@@ -240,7 +240,7 @@ assignments into a solution.
 There exists a huge list of interesting CSPs.\cite{Gent1999}
 For example, \emph{map-coloring} is a CSP for assigning
 colors to each prefecture in a given map, so as no
-neighbouring prefectures have the same color.
+neighboring prefectures have the same color.
 Figure~\ref{map-colored} illustrates a map of the Greek
 region ``Thessaly,'' containing four prefectures; the colors
 in the figure form an indicative solution.
@@ -513,7 +513,7 @@ exceed $\mathit{Breadth}$.
 A \emph{search tree} is a descriptive way to depict every
 possible assignment in a CSP, such as map-coloring.
 Figure~\ref{pruned-tree} displays the search tree for the
-Thessaly-coloring problem. The struck out nodes have been
+Thessaly-coloring problem. The struck-out nodes have been
 pruned as no-goods.
 
 \begin{figure}
@@ -679,9 +679,9 @@ that it will eventually guide us toward a solution.
   \gets 3$ is more promising.
 \end{example}
 The above example is almost ideal, as the heuristic function
-$h$ favours the assignment $X_2 \gets 3$ over $X_2 \gets 1$.
+$h$ favors the assignment $X_2 \gets 3$ over $X_2 \gets 1$.
 Besides, the latter leads to a dead end, as its two
-descendants are struck out in Fig.~\ref{pruned-tree},
+descendants are struck-out in Fig.~\ref{pruned-tree},
 because they violate the constraints.
 
 Unfortunately, this is not always the case, i.e.\ the
@@ -699,7 +699,7 @@ solution or not. Being a prediction, it implies an inherent
 In the above definition, we excluded negative values as the
 heuristic function's output. A negative heuristic evaluation
 could probably mean ``don't make this choice at all.'' But
-heuristics are normally used to favour one choice over
+heuristics are normally used to favor one choice over
 another and not to prune a choice. In any case, if we had a
 function $h$ with $\min h < 0$, we could transform it into
 $h' = h + |\min h|$ to make it comply with the above
@@ -956,7 +956,7 @@ $\mathsf{Choices}$. Conclusively,
 \begin{figure}
   \centering
   \input{figures/systematic}
-  \caption{Systematic search favours the highest
+  \caption{Systematic search favors the highest
            $h_i$\label{systematic}}
 \end{figure}
 
@@ -984,9 +984,9 @@ that corresponds to the $h_i$ with the highest rank.
 \end{example}
 If there is more than one maximum heuristic value,
 deterministic methods arbitrarily concern only one of them
-as maximum. To simplify the following equations we will make
-the assumption that there is only one maximum. Without loss
-of generality, we also assume that heuristic values are
+as maximum. To simplify the following equations, we will
+assume that there is only one maximum. Without loss of
+generality, we also assume that heuristic values are
 non-zero.
 
 \subsection{Bridging the two opposites}
@@ -997,7 +997,7 @@ compromise random and deterministic methods. We introduce a
 parameter $\mathsf{conf} \in \mathbb{R}^+$, that signifies
 how much the heuristic estimations will be taken into
 account; it is the heuristic's \emph{confidence}. This
-$\mathsf{conf}$idence pararameter is the basis to define the
+$\mathsf{conf}$idence parameter is the basis to define the
 condition when a heuristic distribution function is
 ``balanced.''
 \begin{definition}
@@ -1276,7 +1276,7 @@ explores all the $D_X$ set values.
     \item According to Example~\ref{distribution}, this
           function will return a value out of $\{v_1, v_2,
           v_3, v_4, v_5\}$.
-    \item Each value $v_i$ has been evaluated with an
+    \item Each value $v_i$ has been evaluated with a
           heuristic value $h_i$.
     \item Most specifically, $h_1 = 1$, $h_2 = 5$, $h_3 =
           2$, $h_4 = 4$, and $h_5 = 3$.
@@ -1300,7 +1300,7 @@ explores all the $D_X$ set values.
   \end{itemize}
   After the assignment, \textsc{PopsSample}($0.5, 1 +
   \frac{99}{|\mathscr{X}|}$) is called. Please note the
-  slight incease of the $\mathsf{conf}$ value. This
+  slight increase of the $\mathsf{conf}$ value. This
   recursive call will choose another variable out of
   $\mathscr{X}$ and enter the \textbf{while} loop again.
   This loop will try to assign a value to the new variable
@@ -1349,15 +1349,16 @@ explores all the $D_X$ set values.
 \end{figure}
 
 Again, LDS is an incomplete search method too; at each
-search tree node it may explore only a limited \emph{number}
-of the available choices. The difference with our method is
-that we may explore a limited \emph{proportion} of the
-heuristics pie of choices, which makes our method more
-``heuristics-aware.'' This means that the number of the
-explored choices by our method in a specific node may vary,
-depending on how the heuristics pie is distributed to the
-choices. On the other hand, LDS explores a fixed number of
-choices, independently of the heuristics pie distribution.
+search tree node, it may explore only a limited
+\emph{number} of the available choices. The difference with
+our method is that we may explore a limited
+\emph{proportion} of the heuristics pie of choices, which
+makes our method more ``heuristics-aware.'' This means that
+the number of the explored choices by our method in a
+specific node may vary, depending on how the heuristics pie
+is distributed to the choices. On the other hand, LDS
+explores a fixed number of choices, independently of the
+heuristics pie distribution.
 
 It's worth noting that while more variables get
 instantiated, the $\mathsf{conf}$ value gradually increases.
@@ -1370,7 +1371,7 @@ we have less unassigned variables.
   for a \textsc{PopsSample}($0.5, 2$) call, i.e.\ for
   $\mathsf{conf} = 2$.
 
-  According to Lemma~\ref{exponential}, the probalilities
+  According to Lemma~\ref{exponential}, the probabilities
   for $\mathsf{conf} = 2$ are computed as $P_2(i) =
   \frac{h_i^2}{\sum_j h_j^2}$. For example, $P_2(1) =
   \frac{h_1^2}{\sum_j h_j^2} = \frac{1^2}{1^2 + 5^2 + 2^2 +
@@ -1553,7 +1554,7 @@ including the marginal values $0$ and $100$.
              $\mathsf{conf}$ values are initially employed
       \State \quad $\mathsf{conf}_i$: array with all the
              initially employed $\mathsf{conf}$ values
-      \State \quad $\mathsf{Sample}_i$: a boolean array;
+      \State \quad $\mathsf{Sample}_i$: a Boolean array;
              if its $i$\textsuperscript{th} element is
              false, the corresponding
       \State \qquad \qquad \quad $\mathsf{conf}_i$ value is
@@ -1753,7 +1754,7 @@ timetable is produced.
            ITC instance\label{ITC1}}
 \end{figure}
 
-In the same graphs we include some of the well-known search
+In the same graphs, we include some of the well-known search
 methods results, such as DFS, LDS, and Iterative Broadening,
 implemented in the same solver, with only their best
 solution cost depicted as a plane grid, in order to make
@@ -1767,7 +1768,7 @@ combination. That is why we employed \textsc{PoPS} to solve
 the fourteen course timetabling instances.
 
 As described in Section~\ref{sampling}, \textsc{PoPS} uses
-several $\mathsf{conf}$ values and favours the most fruitful
+several $\mathsf{conf}$ values and favors the most fruitful
 ones. We used five $\mathsf{conf}$ samples, i.e.\ $0$, $25$,
 $50$, $75$, and $100$, by setting $\mathsf{SamplesNum}$
 equal to $5$. In this way, \textsc{PoPS} constructed
@@ -1865,7 +1866,7 @@ anonymous reviewers for their constructive comments.
 \section{An Algorithm that Satisfies Search Methods'
          Goals\label{framework-algorithm}}
 
-In Section~\ref{search-framework} we described a high level
+In Section~\ref{search-framework} we described a high-level
 language to define search methods. This framework consists
 of goals that support recursion (goals that return another
 goal or success) and meta-goals used to combine other goals
@@ -1875,7 +1876,7 @@ manner.
 This is a not only a theoretical model; it has been
 implemented in a C++ Constraint Programming \textsc{Naxos
 Solver}. DFS and Iterative Broadening have been already
-declared in \textsc{Naxos} without loosing much of the above
+declared in \textsc{Naxos} without losing much of the above
 expressiveness, along with many other search methods in the
 solver's repository.\cite{Naxos}
 
@@ -2157,7 +2158,7 @@ to \ref{tuv}:
              Backtracking, i.e. popping the whole top stack,
              is activated.
   \item[(i)] $D_{X_2} \!\! \gets \!\! D_{X_2} \! - \!
-             \{\textcolor{red}{1}\}$ is successfuly
+             \{\textcolor{red}{1}\}$ is successfully
              executed. This removes the ``no-good'' value.
   \item[(j)] \texttt{Instantiate}($X_2$) is executed again.
              However, this time the corresponding domain
@@ -2343,7 +2344,7 @@ applied to the document's source code at
         course scheduling~\commit{69d9}.
   \item A paragraph of contents was added~\commit{96a1}.
   \item Other solvers do solve a correctly defined CSP. We
-        made a small rephrasing to be more clear with
+        made a small rephrasing to be clearer with
         this~\commit{474e}.
   \item All the (sub)sections consist of at least two
         paragraphs. Some sections, e.g.\ 
