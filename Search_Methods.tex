@@ -73,7 +73,7 @@
   arbitrary \emph{Constraint Satisfaction Problems} (CSPs).
   The user just declares their CSP, and it can be solved
   using a portfolio of search methods already in place.
-  Except from the pluggable search methods framework for any
+  Apart from the pluggable search methods framework for any
   CSP, we also introduce pluggable \emph{heuristics} for our
   search methods. We found an efficient stochastic
   heuristics' paradigm that smoothly combines randomness
@@ -97,16 +97,16 @@
 \section{Introduction}
 
 \emph{Artificial Intelligence} (AI) methodologies aim to
-tackle with difficult computational and real life problems,
-such as scheduling,\cite{Pinedo2012,Malik2008} radio
-frequency assignment,\cite{Cabon1999} other NP-hard
-problems, and also problems stemming from various
-disciplines, e.g.\ Bioinformatics.\cite{Barahona2011}
+tackle difficult computational and real life problems, such
+as scheduling,\cite{Pinedo2012,Malik2008} radio frequency
+assignment,\cite{Cabon1999} other NP-hard problems, and also
+problems stemming from various disciplines, e.g.\
+Bioinformatics.\cite{Barahona2011}
 
 All these Constraint Satisfaction Problems or Constrained
 Optimization Problems have been declared in our Constraint
 Programming \textsc{Naxos Solver}.\cite{Naxos} In such
-solvers, the solution phase is completely independent to the
+solvers, the solution phase is completely independent of the
 CSP declaration phase, as this serves the original promise
 of Constraint Programming: \emph{The user states the
 problem, the computer solves it.}\cite{Freuder2014}
@@ -147,7 +147,7 @@ problem instance parameters, and, unavoidably, an iteration
 through every candidate solution becomes infeasible as the
 problem scales.
 
-\emph{Heuristics} role in this situation is to change the
+\emph{Heuristics'} role in this situation is to change the
 order of the candidate solutions, so as to favor the
 ``promising'' ones. In other words, heuristics make an
 estimation of the possibility of an incomplete or candidate
@@ -251,7 +251,7 @@ in the figure form an indicative solution.
   Typically, \emph{``Thessaly-coloring''} is a CSP with:
   \begin{romanlist}
     \item Four constrained variables: $X_1$, $X_2$, $X_3$,
-          $X_4$. Each one of them contains the prefecture
+          $X_4$. Each one of them represents a prefecture
           color.
     \item The corresponding domains are $D_{X_1} = D_{X_3} =
           \{1, 2\}$ and $D_{X_2} = D_{X_4} = \{1, 3\}$.
@@ -282,13 +282,18 @@ the so-called \emph{Constrained Optimization Problems}
 constraints, just like any CSP, but there are two
 differences.
 \begin{itemize}
-  \item A COP also consists of an \emph{objective function}
+  \item A COP also requires an \emph{objective function}
         which maps any assignment\slash solution to a
         number, which is called the \emph{cost} of the
         solution.
   \item The target while solving a COP isn't just to find a
         solution, but to find a \emph{best} solution, i.e.\ 
-        a solution with a minimum cost.
+        a solution with a minimum cost.\footnote{There is
+        also a COP variation which requires to find the
+        solution with the \emph{maximum} cost. However, for
+        simplicity reasons, we will not focus on it, as it
+        can be easily transformed into a COP with a
+        minimization objective.}
 \end{itemize}
 COPs can be solved like CSPs, using a \emph{branch and
 bound} strategy: When a solution is found, its cost is
@@ -315,7 +320,7 @@ of constrained variables, e.g.\ $\{1, 2, 3\}$.
 \section{A Goal-driven Search Methods'
          Framework\label{search-framework}}
 
-Except from a way to state CSPs, a user\slash programmer
+Apart from a way to state CSPs, a user\slash programmer
 needs an elegant way to state search methods that solve
 them. The CSPs should be ``search-methods-agnostic,'' while
 the search methods should be ``CSP-agnostic'' in order to
@@ -333,7 +338,7 @@ easily define their own ``custom'' search methods.
 
 Every constructive search method is built up of goals. Each
 goal executes an operation, e.g.\ an assignment of a value
-to a constrained variable. Optionally, one goal returns
+to a constrained variable. Otherwise, one goal returns
 another goal to be executed. The goal returned can be a
 \emph{meta}-goal, that is a goal that refers to another two
 goals. There are two meta-goal kinds:
@@ -359,8 +364,8 @@ proceeds to the next unassigned variable and makes another
 assignment, etc.
 
 If every variable is assigned a value and no constraint is
-violated, the assignments set consists a \emph{solution}. In
-any case, if there is a constraint violated, the last
+violated, the assignments set comprises a \emph{solution}.
+In any case, if there is a constraint violated, the last
 assignment to a variable is undone and we try to assign
 another value from its domain. If all the alternative values
 are exhausted, we \emph{backtrack} to the previous variable
@@ -434,7 +439,7 @@ graphically displayed in Fig.~\ref{DFS}.
      recursion/.style = {->, dotted, bend right}]
     \node (Broadening) {\texttt{Broadening}($\mathit{Breadth}$)}
       child {node {\textsf{OR}}
-        child {node (Label) {\texttt{Label}($\mathscr{X}$)}
+        child {node (Label) {\texttt{Label2}($\mathscr{X}$)}
           child {node {\textsf{AND}}
             child [moreDistant] {node {$\mathit{CurrentBreadth} \! \gets \! 0$}}
             child [moreDistant] {node (Instantiate) {\texttt{Instantiate2}($X$, $\mathit{CurrentBreadth}$)}
@@ -446,7 +451,7 @@ graphically displayed in Fig.~\ref{DFS}.
                 }
               }
             }
-            child [moreDistant] {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
+            child [moreDistant] {node (LabelChild) {\texttt{Label2}($\mathscr{X} \! - \! \{X\}$)}}
           }
         }
         child {node (BroadeningChild) {\texttt{Broadening}($\mathit{Breadth} + 1$)}}
@@ -472,7 +477,7 @@ DFS goals.
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
           \textsf{failure}, if $\mathit{Breadth} > d$,
   \item \texttt{Broadening}($\mathit{Breadth}$) :=
-          \textsf{AND}(\texttt{Label}($\mathscr{X}$),
+          \textsf{OR}(\texttt{Label2}($\mathscr{X}$),
             \texttt{Broadening}($\mathit{Breadth} + 1$)),
         otherwise.
 \end{itemize}
@@ -669,7 +674,7 @@ that it will eventually guide us toward a solution.
   the set with the alternative assignments that one may
   follow. The \emph{heuristic function} $h_i$ maps each
   alternative assignment $i \in \mathsf{Choices}$ to a
-  positive number or zero, i.e.\ $h: \mathsf{Choices} \to
+  positive number, i.e.\ $h: \mathsf{Choices} \to
   \mathbb{R}^+$.
 \end{definition}
 \begin{example}
@@ -742,7 +747,7 @@ override a heuristic estimation, only when we have not yet
 reached a specific search tree depth.\cite{Walsh1997}
 Finally, there are some methodologies that take into account
 two or more heuristic functions and \emph{learn} as the
-search proceeds, which heuristic is the best to
+search proceeds which heuristic is the best to
 use.\cite{Xu2009}
 
 \subsubsection{Random search methods\label{random}}
@@ -752,7 +757,7 @@ ignore heuristics, as they choose to make an assignment at
 random.\cite{Jafari2011} For example, \emph{depth first
 search with restarts} traverses the search tree making
 random choices, and when a specific time limit is reached,
-it re-starts from the beginning.
+it restarts from the beginning.
 
 \subsubsection{Local search methods}
 
@@ -1170,12 +1175,19 @@ framework, we built the new constructive search method
 Figure~\ref{PopsSample} describes \textsc{PopsSample}, which
 is the \textsc{PoPS} core. It is called inside \textsc{PoPS}
 in order to solve a CSP by providing a complete and valid
-$\mathsf{Assignments}$ set, which is initially empty.
+$\mathsf{Assignments}$ set, which is initially empty. From
+now on, we consider that the value $\mathsf{conf} = 100$
+represents infinity.
 
 \begin{figure}
   \centering
   \begin{algorithmic}
     \Function{PopsSample}{$\mathsf{PieceToCover}, \mathsf{conf}$}
+      \State \textbf{arguments:}
+      \State \quad $\mathsf{PieceToCover}$: The proportion
+             of the heuristics' pie to be explored
+      \State \quad $\mathsf{conf}$: A ``confidence'' value
+             between $0$ and $100$
       \State \textbf{local variables:}
       \State \quad $\mathsf{Assignments}$: set with all the
              assignments made until this call
@@ -1375,12 +1387,12 @@ we have less unassigned variables.
   $\mathsf{conf} = 2$.
 
   According to Lemma~\ref{exponential}, the probabilities
-  for $\mathsf{conf} = 2$ are computed as $P_2(i) =
-  \frac{h_i^2}{\sum_j h_j^2}$. For example, $P_2(1) =
+  for $\mathsf{conf} = 2$ are computed as $P(i) =
+  \frac{h_i^2}{\sum_j h_j^2}$. For example, $P(1) =
   \frac{h_1^2}{\sum_j h_j^2} = \frac{1^2}{1^2 + 5^2 + 2^2 +
-  4^2 + 3^2} = 0.02$. The other probabilities are $P_2(2) =
-  0.45$, $P_2(3) = 0.07$, $P_2(4) = 0.29$, and $P_2(5) =
-  0.16$. Thus, the pie is redistributed as in
+  4^2 + 3^2} = 0.02$. The other probabilities are $P(2) =
+  0.45$, $P(3) = 0.07$, $P(4) = 0.29$, and $P(5) = 0.16$.
+  Thus, the pie is redistributed as in
   Figure~\ref{piechart2}.
 
   While $\mathsf{conf}$-idence increases, the value $v_2$
@@ -1419,7 +1431,7 @@ framework (Section~\ref{search-framework}).
      distant/.style = {sibling distance = 14em},
      moreDistant/.style = {sibling distance = 16em},
      recursion/.style = {->, dotted, bend right}]
-    \node (Label) {\texttt{Label}($\mathscr{X}$)}
+    \node (Label) {\texttt{Label3}($\mathscr{X}$)}
       child {node {\textsf{AND}}
         child [distant] {node (Instantiate) {\texttt{Instantiate3}($X$, $\mathit{CoveredPiece}$)}
           child {node {\textsf{OR}}
@@ -1430,7 +1442,7 @@ framework (Section~\ref{search-framework}).
             }
           }
         }
-        child [distant] {node (LabelChild) {\texttt{Label}($\mathscr{X} \! - \! \{X\}$)}}
+        child [distant] {node (LabelChild) {\texttt{Label3}($\mathscr{X} \! - \! \{X\}$)}}
       };
     \path
       (LabelChild.18) edge [recursion] (Label.east)
@@ -1486,8 +1498,7 @@ For a specific depth $k$ the $\mathsf{conf}$ value is
 increased by $k \cdot \frac{100 -
 \mathsf{conf}}{|\mathscr{X}|}$. Finally, when $k =
 |\mathscr{X}|$, the $\mathsf{conf}$ argument of
-\textsc{PopsSample} will become equal to the marginal value
-$100$.
+\textsc{PopsSample} will become equal to the value $100$.
 
 The following is not guaranteed, but in the deepest node
 levels, heuristics are \emph{usually} more accurate, because
@@ -1546,7 +1557,7 @@ $\mathsf{conf}$ is the best parameter for
 error. In Fig.~\ref{PoPS-algorithm}, the \textsc{PoPS}
 function invokes \textsc{PopsSample} for
 $\mathsf{SamplesNum}$ different $\mathsf{conf}_i$ values,
-including the marginal values $0$ and $100$.
+including the values $0$ and $100$.
 
 \begin{figure}
   \centering
@@ -1627,10 +1638,18 @@ with an Intel dual-core E6750 processor clocked at 2.66\,GHz
 with 2\,GB of memory and a Xubuntu Linux 12.04 operating
 system.
 
+In the following three subsections (\ref{ITC}, \ref{RLFA},
+\ref{PopsSample-experiments}) the experiments are repeated
+for different $\mathsf{conf}$ values, as we do not use
+\textsc{PoPS}. On the other hand, in the last
+subsection~\ref{PoPS-experiments}, \textsc{PoPS}
+automatically chooses by itself the employed $\mathsf{conf}$
+values.
+
 \subsection{University course scheduling\label{ITC}}
 
 Automated timetabling is nowadays a crucial application, as
-many educational institutes still use ad hoc manual
+many educational institutions still use ad hoc manual
 processes to schedule their courses. The International
 Timetabling Competition (ITC) is an attempt to unify all
 these processes. We borrowed the fourteen instances of the
@@ -1673,7 +1692,7 @@ It was expected that for high $\mathsf{conf}$ values the
 results would be more constant, as the search process
 approximates the default depth-first-search (DFS). For the
 marginal low values, e.g.\ $\mathsf{conf} = 0$, search is
-completely stochastic and the results are worse on overage,
+completely stochastic and the results are worse on average,
 as we have higher solution costs. However, the evaluations
 for intermediate $\mathsf{conf}$ values, e.g.\ 
 $\mathsf{conf} \approx 20$, are more promising. Remember
@@ -1684,8 +1703,9 @@ selections (the ``outsiders'') as their probabilities are
 not zero.
 
 The automatic selection of the best $\mathsf{conf}$ is an
-open question here; in the last sections, \textsc{PoPS}
-finds automatically the best $\mathsf{conf}$ values.
+open question here; in Section~\ref{PoPS-experiments},
+\textsc{PoPS} finds automatically the best $\mathsf{conf}$
+values.
 
 In practice, as shown in Fig.\ \ref{costsA} and
 \ref{costsB}, a $\mathsf{conf}$ value around $100$ actually
@@ -1697,7 +1717,7 @@ solution found for the \textsf{Let0405-1} instance, depicted
 with an asterisk~\textcolor{blue}{$*$}, was for an
 intermediate $\mathsf{conf} = 10$.
 
-\subsection{Radio link frequency assignment}
+\subsection{Radio link frequency assignment\label{RLFA}}
 
 Another important real problem is the frequency assignment,
 in which we have to assign a frequency to each radio
@@ -1734,7 +1754,8 @@ heuristic is neither too high nor very low.
            cost\label{CELAR}}
 \end{figure}
 
-\subsection{\PopsSample{} during hard optimization}
+\subsection{\PopsSample{} during hard
+            optimization\label{PopsSample-experiments}}
 
 The $\mathsf{conf}$ parameter can refine any search method
 that adopts our heuristic framework. The \textsc{PopsSample}
@@ -1763,7 +1784,8 @@ implemented in the same solver, with only their best
 solution cost depicted as a plane grid, in order to make
 comparisons easily.
 
-\subsection{\PoPS{} vs.\ other search methods}
+\subsection{\PoPS{} vs.\ other search
+            methods\label{PoPS-experiments}}
 
 In the above sections, it was not easy to figure out which
 is the best $\mathsf{PieceToCover}$ and $\mathsf{conf}$
@@ -1814,7 +1836,7 @@ all the methods was set to 15 minutes.
 
 The initial contribution of this work is the provision of an
 interface that everyone can use to define their search
-methods. Except from easing the declaration of custom search
+methods. Apart from easing the declaration of custom search
 methods, we elaborated on the algorithm behind the scenes
 supporting our interface in an open source solver.
 
@@ -1832,14 +1854,14 @@ that can outperform other methodologies. In general, our
 proposed framework gives the opportunity to exploit ``on the
 fly'' whichever heuristic confidence fluctuations occur.
 
-In future, it will be challenging to parallelize it, as it
-supports a whole grid of strategies, by concurrently
+In the future, it will be challenging to parallelize it, as
+it supports a whole grid of strategies, by concurrently
 invoking \textsc{PopsSample} with several
 $\mathsf{PieceToCover}$ and $\mathsf{conf}$ arguments.
 
 Constraint Programming consists of the CSP \emph{definition}
 and \emph{search} phases. A crucial goal in this area is to
-make these two phases as independent as possible from each
+make these two phases as independent as possible of each
 other.\cite{Freuder2014} The presented search methods
 interface was one step into making the search phase more
 transparent. But the search phase doesn't include only the
