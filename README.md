@@ -1,4 +1,4 @@
-# Building Search Methods with Self-confidence in a Constraint Programming Library [![Build Status](https://travis-ci.org/pothitos/Search_Methods.svg?branch=master)](https://travis-ci.org/pothitos/Search_Methods)
+# Building Search Methods with Self-Confidence in a Constraint Programming Library [![Build Status](https://travis-ci.org/pothitos/Search_Methods.svg?branch=master)](https://travis-ci.org/pothitos/Search_Methods)
 
 The original conference paper is available through the
 [authors'](http://di.uoa.gr/~pothitos)
